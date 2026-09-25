@@ -50,7 +50,21 @@ with sync_playwright() as p:
     pg.on('pageerror', lambda e: errs.append(str(e)))
     pg.goto('file://' + tmp)
     o = pg.evaluate('src=>window.__T(src)', '(' + JS + ')')
+    telas = pg.evaluate('src=>window.__T(src)', "(function(){return RECEITAS.map(function(r){abrir(r);return document.getElementById('rec-out').innerText.replace(/\\s+/g,' ')})})")
     b.close()
+# cada receita pronta tem que mostrar as gramas e o preparo do arquivo da Tatiana
+import re
+md = open(os.path.join(os.path.dirname(AQUI), 'Receitas-autorais-100g.md'), encoding='utf-8').read()
+difs = []
+for n, bloco in enumerate(re.split(r'\n## \d+\. ', md)[1:16]):
+    tela = telas[n]
+    for g, nome in re.findall(r'^- (\d+) g de ([^\n(*]+)', bloco, re.M):
+        if not re.search(r'(^|\D)' + g + r' g', tela): difs.append('receita %d: %s g de %s' % (n + 1, g, nome.strip()))
+    prep = re.search(r'\*\*Preparo:\*\* (.*)', bloco)
+    if prep and 'igual à receita' not in prep.group(1):
+        for frase in re.split(r'(?<=\.) ', prep.group(1)):
+            if frase.strip() and frase.strip() not in tela: difs.append('receita %d, preparo: %s' % (n + 1, frase.strip()))
+o['swapErr'] += difs
 print('Monte a sua ganache: %d combinações, %d com erro' % (o['monte'], len(o['monteErr'])))
 for e in o['monteErr'][:20]: print('   ', e)
 print('Receitas prontas: %d telas, %d com erro' % (o['recN'], len(o['swapErr'])))

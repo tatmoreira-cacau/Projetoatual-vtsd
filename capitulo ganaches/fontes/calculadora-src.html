@@ -90,6 +90,7 @@ select,input[type=number]{font:inherit;font-size:16px;padding:10px 12px;border-r
 .ingr li.feito::before{background:var(--ouro2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' fill='none' stroke='%2316243E' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/80% no-repeat;border-color:var(--ouro2)}
 .ingr li.feito span:not(.sw){opacity:.5;text-decoration:line-through}
 .ingr .sw{width:10px;height:10px;border-radius:50%}
+.ingr .med{display:block;font-size:12px;color:var(--muted);font-weight:500;margin-top:1px}
 .ingr .g{font-weight:700;white-space:nowrap;color:var(--ouro2)}
 .total{font-size:14px;color:var(--muted)}
 .dica-marcar{font-size:12px;color:var(--muted);margin:0}
@@ -350,23 +351,63 @@ var FAMILIAS = {
   caramelo:{n:'Caramelo', aTestar:1}
 };
 
-// Receitas prontas (por 100 g de chocolate). testada:false = ainda em teste pela Tatiana
+// Receitas prontas (por 100 g de chocolate), iguais a Receitas-autorais-100g.md.
+// itens: [ingrediente, gramas, medida da Tatiana (opcional)] · prep: preparo dela · notas: dica, variações, validade
 var RECEITAS = [
- {id:1, foto:'1', nome:'Ganache de Bico Meio Amargo com Laranja', tipo:'meio', origem:'nacional', tex:'cremosa', uso:'Ponto de bico', itens:[['creme30',65],['glucose',4],['rasplaranja',2]]},
- {id:2, foto:'2', nome:'Ganache de Bico ao Leite com Canela', tipo:'leite', origem:'nacional', tex:'cremosa', uso:'Ponto de bico', itens:[['creme30',43],['glucose',4],['canela',1]]},
- {id:3, foto:'3', nome:'Ganache de Bico Branca com Baunilha', tipo:'branco', origem:'nacional', tex:'cremosa', uso:'Ponto de bico', itens:[['creme30',30],['glucose',4],['baunilha',2]]},
- {id:4, foto:'4', nome:'Recheio de Coco Tostado com Limão', tipo:'branco', origem:'nacional', tex:'cremosa', uso:'Recheio de casca e bombom', itens:[['creme30',50],['leitecoco',22],['coco',35],['rasplimao',1]]},
- {id:5, foto:'5', nome:'Recheio Cremoso de Queijo com Goiabada', tipo:'branco', origem:'nacional', tex:'cremosa', uso:'Recheio de casca', itens:[['creamcheese',30],['goiabada',40],['biscoito',10],['rasplimao',1]]},
- {id:6, foto:'6', nome:'Trufa de Limão com Alecrim', tipo:'branco', origem:'nacional', tex:'cremosa', uso:'Trufa ou recheio de casca', itens:[['creme30',19],['limao',13],['manteiga',10],['glucose',6],['rasplimao',1],['alecrim',0.5]]},
- {id:7, foto:'7', nome:'Trufa de Chá Preto com Laranja', tipo:'branco', origem:'nacional', tex:'cremosa', uso:'Trufa de modelar', itens:[['creme30',20],['manteiga',5],['glucose',3],['chapreto',2],['rasplaranja',1]]},
- {id:8, foto:'8', nome:'Recheio de Bombom ao Leite com Licor de Café', tipo:'leite', origem:'nacional', tex:'cremosa', uso:'Recheio de bombom', itens:[['creme30',65],['licorcafe',6]]},
- {id:9, foto:'9', nome:'Recheio de Bombom de Avelã', tipo:'branco', origem:'importado', tex:'cremosa', uso:'Bombom moldado', itens:[['creme30',81],['glucose',10],['mcacau',5],['pastaavela',18]]},
- {id:10, foto:'10', nome:'Recheio de Cajá com Cachaça e Limão', tipo:'branco', origem:'importado', tex:'cremosa', uso:'Bombom moldado', itens:[['caja',43],['cachaca',5],['manteiga',15],['glucose',6],['rasplimao',1]]},
- {id:11, foto:'11', nome:'Recheio de Maracujá com Hortelã', tipo:'branco', origem:'importado', tex:'cremosa', uso:'Trufa oca ou casca', itens:[['creme30',14],['maracuja',20],['manteiga',7],['glucose',5],['hortela',1]]},
- {id:12, foto:'12', nome:'Recheio de Bombom de Mate Tostado', tipo:'branco', origem:'importado', tex:'cremosa', uso:'Bombom moldado', itens:[['agua',15],['mate',4],['creme30',49],['glucose',5],['invertido',4],['manteiga',8]]},
- {id:13, foto:'13', nome:'Trufa Meio Amargo com Café', tipo:'meio', origem:'importado', tex:'cremosa', uso:'Trufa', itens:[['creme30',46],['glucose',12],['manteiga',12],['cafe',2]]},
- {id:14, foto:'14', nome:'Trufa ao Leite com Cardamomo', tipo:'leite', origem:'importado', tex:'cremosa', uso:'Trufa', itens:[['creme30',40],['cardamomo',0.5]]},
- {id:15, foto:'15', nome:'Ganache de Caramelo com Flor de Sal', tipo:'leite', origem:'importado', tex:'cremosa', uso:'Recheio de barra e bombom', itens:[['acucar',32],['creme30',94],['manteiga',10],['flordesal',1],['baunilha',1]]}
+ {id:1, foto:'1', nome:'Ganache de Bico Meio Amargo com Laranja', tipo:'meio', origem:'nacional', tex:'cremosa', uso:'Ponto de bico',
+  itens:[['creme30',65],['glucose',4],['rasplaranja',2,'raspas de ½ laranja']],
+  prep:['Aqueça o creme com as raspas até começar a ferver, desligue, tampe e deixe 5 minutos.','Derreta o chocolate (até 45 °C).','Despeje o creme quente em 3 vezes, mexendo do centro para fora até ficar brilhante.','Junte a glucose e passe o mixer.','Deixe firmar mexendo de vez em quando até o ponto de bico.']},
+ {id:2, foto:'2', nome:'Ganache de Bico ao Leite com Canela', tipo:'leite', origem:'nacional', tex:'cremosa', uso:'Ponto de bico',
+  itens:[['creme30',43],['glucose',4],['canela',1,'1 pau (na infusão) ou 1 g de canela em pó']],
+  prep:['Aqueça o creme com a canela até começar a ferver, desligue, tampe e deixe 5 minutos.','Derreta o chocolate (até 45 °C).','Despeje o creme quente em 3 vezes, mexendo do centro para fora até ficar brilhante.','Junte a glucose e passe o mixer. Se usar canela em pó, junte com a glucose.','Deixe firmar mexendo de vez em quando até o ponto de bico.']},
+ {id:3, foto:'3', nome:'Ganache de Bico Branca com Baunilha', tipo:'branco', origem:'nacional', tex:'cremosa', uso:'Ponto de bico',
+  itens:[['creme30',30],['glucose',4],['baunilha',2]],
+  prep:['Aqueça o creme até começar a ferver.','Derreta o chocolate (até 45 °C).','Despeje o creme quente em 3 vezes, mexendo do centro para fora até ficar brilhante.','Junte a glucose e passe o mixer.','A baunilha e o corante entram no final.','Deixe firmar mexendo de vez em quando até o ponto de bico.'],
+  notas:[['','Corante:','em gel ou líquido, se quiser colorir.'],['','Dica:','chocolate branco de barra de supermercado costuma ser mais mole. Use 10% a mais de chocolate.']]},
+ {id:4, foto:'4', nome:'Recheio de Coco Tostado com Limão', tipo:'branco', origem:'nacional', tex:'cremosa', uso:'Recheio de casca e bombom',
+  itens:[['creme30',50,'a confirmar: a receita original não dizia o % do creme'],['leitecoco',22],['coco',35,'levemente tostado'],['rasplimao',1,'raspas de ½ limão']],
+  prep:['Toste o coco em frigideira seca, mexendo, até dourar de leve.','Faça a ganache com o creme quente (como na receita 1).','Junte o leite de coco, o coco e as raspas.','Deixe descansar 10 minutos para o coco hidratar e recheie as cascas.'],
+  notas:[['','Variações:','doce de leite com nozes, amendoim torrado, abóbora em compota. No lugar do leite de coco, suco concentrado de maracujá.']]},
+ {id:5, foto:'5', nome:'Recheio Cremoso de Queijo com Goiabada', tipo:'branco', origem:'nacional', tex:'cremosa', uso:'Recheio de casca',
+  itens:[['creamcheese',30],['goiabada',40],['biscoito',10],['rasplimao',1,'raspas de ½ limão']],
+  prep:['Misture bem o cream cheese, a goiabada, o biscoito e as raspas.','Derreta o chocolate, junte a mistura aos poucos e mexa até ficar liso.','Não precisa temperar.'],
+  notas:[['','Variações:','geleia de frutas vermelhas, damasco ou maracujá no lugar da goiabada.']]},
+ {id:6, foto:'6', nome:'Trufa de Limão com Alecrim', tipo:'branco', origem:'nacional', tex:'cremosa', uso:'Trufa ou recheio de casca',
+  itens:[['creme30',19],['limao',13],['manteiga',10],['glucose',6],['rasplimao',1,'raspas de ½ limão'],['alecrim',0.5,'1 raminho pequeno']],
+  prep:['Aqueça o creme com o alecrim, desligue, tampe e deixe esfriar. Tire o alecrim.','Junte a manteiga, a glucose, o suco e as raspas.','Derreta o chocolate e misture tudo até ficar liso.','Leve à geladeira até firmar, boleie e banhe.'],
+  notas:[['','Variações:','hortelã ou chá preto no lugar do alecrim; limão siciliano ou tahiti.']]},
+ {id:7, foto:'7', nome:'Trufa de Chá Preto com Laranja', tipo:'branco', origem:'nacional', tex:'cremosa', uso:'Trufa de modelar',
+  itens:[['creme30',20,'a confirmar: a receita original não dizia o % do creme'],['manteiga',5],['glucose',3,'é o que ajuda a modelar'],['chapreto',2,'1 sachê'],['rasplaranja',1,'raspas de ¼ de laranja']],
+  prep:['Aqueça o creme com o chá, tampe e deixe esfriar. Coe.','Junte a manteiga, a glucose e as raspas.','Verta sobre o chocolate derretido e misture.','Deixe firmar cerca de 1 hora e modele (ótima para envolver physalis).'],
+  notas:[['','Dica:','com chocolate branco de barra, use 10% a mais de chocolate.']]},
+ {id:8, foto:'8', nome:'Recheio de Bombom ao Leite com Licor de Café', tipo:'leite', origem:'nacional', tex:'cremosa', uso:'Recheio de bombom',
+  itens:[['creme30',65],['licorcafe',6]],
+  prep:['Faça a ganache com o creme quente.','Junte o licor quando estiver a ~35 °C.','Deixe firmar 1 hora em temperatura ambiente e recheie as casquinhas (fica ótimo com cereja).']},
+ {id:9, foto:'9', nome:'Recheio de Bombom de Avelã', tipo:'branco', origem:'importado', tex:'cremosa', uso:'Bombom moldado',
+  itens:[['creme30',81],['glucose',10],['mcacau',5],['pastaavela',18]],
+  prep:['Aqueça o creme com a glucose.','Coloque numa jarra o chocolate, a manteiga de cacau e a pasta.','Despeje o creme quente e passe o mixer até ficar liso.','Recheie as casquinhas a ~30 °C e feche depois de firmar.'],
+  notas:[['','Chocolate:','branco ou ao leite.'],['','Variações:','pistache, amendoim ou castanha no lugar da avelã.']]},
+ {id:10, foto:'10', nome:'Recheio de Cajá com Cachaça e Limão', tipo:'branco', origem:'importado', tex:'cremosa', uso:'Bombom moldado',
+  itens:[['caja',43],['cachaca',5],['manteiga',15],['glucose',6],['rasplimao',1,'raspas de ½ limão']],
+  prep:['Aqueça a polpa com a glucose.','Despeje sobre o chocolate em 3 vezes, mexendo.','Junte a manteiga, a cachaça e as raspas e passe o mixer.','Recheie as casquinhas. Funciona melhor em ambiente fresco (18 a 21 °C).'],
+  notas:[['','Variações:','cajá → maracujá, cupuaçu ou manga.']]},
+ {id:11, foto:'11', nome:'Recheio de Maracujá com Hortelã', tipo:'branco', origem:'importado', tex:'cremosa', uso:'Trufa oca ou casca',
+  itens:[['creme30',14,'a confirmar: a receita original não dizia o % do creme'],['maracuja',20],['manteiga',7],['glucose',5],['hortela',1,'6 folhas']],
+  prep:['Derreta o chocolate (até 40 °C).','Aqueça a polpa com a glucose e o creme.','Junte ao chocolate e misture.','Adicione a manteiga e a hortelã bem picada e passe o mixer.','Recheie a ~28 °C.'],
+  notas:[['','Validade:','7 dias, embalado e na geladeira.']]},
+ {id:12, foto:'12', nome:'Recheio de Bombom de Mate Tostado', tipo:'branco', origem:'importado', tex:'cremosa', uso:'Bombom moldado',
+  itens:[['agua',15],['mate',4],['creme30',49],['glucose',5],['invertido',4],['manteiga',8]],
+  prep:['Ferva a água, junte o mate, tampe e deixe 5 minutos.','Junte o creme, a glucose e o invertido e ferva de novo.','Despeje sobre o chocolate, junte a manteiga e passe o mixer.','Descanse 12 horas antes de rechear.'],
+  notas:[['','Validade:','15 dias em temperatura ambiente (até 25 °C).']]},
+ {id:13, foto:'13', nome:'Trufa Meio Amargo com Café', tipo:'meio', origem:'importado', tex:'cremosa', uso:'Trufa',
+  itens:[['creme30',46],['glucose',12],['manteiga',12],['cafe',2]],
+  prep:['Aqueça o creme com a glucose e dissolva o café.','Faça a ganache em 3 vezes, junte a manteiga e passe o mixer.','Leve à geladeira até firmar e boleie.']},
+ {id:14, foto:'14', nome:'Trufa ao Leite com Cardamomo', tipo:'leite', origem:'importado', tex:'cremosa', uso:'Trufa',
+  itens:[['creme30',40],['cardamomo',0.5,'2 bagas amassadas (na infusão)']],
+  prep:['Aqueça o creme com o cardamomo, tampe 5 minutos e coe.','Aqueça de novo e faça a ganache em 3 vezes.','Firme na geladeira e boleie.']},
+ {id:15, foto:'15', nome:'Ganache de Caramelo com Flor de Sal', tipo:'leite', origem:'importado', tex:'cremosa', uso:'Recheio de barra e bombom',
+  itens:[['acucar',32],['creme30',94,'morno'],['manteiga',10,'a confirmar: a receita original não dizia a quantidade'],['flordesal',1],['baunilha',1]],
+  prep:['Derreta o açúcar em fogo baixo até ficar cor de âmbar.','Junte o creme morno aos poucos (cuidado com o vapor) e mexa até dissolver.','Despeje sobre o chocolate, junte a manteiga e a baunilha e passe o mixer até ficar brilhante.','Quando esfriar, junte a flor de sal.','Cubra com filme encostado e descanse pelo menos 8 horas.']}
 ];
 
 /* ===================== fim dos dados ===================== */
@@ -485,8 +526,9 @@ function pontoTxt(tex){
 }
 
 /* ---------- avisos ---------- */
-function avisos(tipo,origem,tex,itens,extra){
+function avisos(tipo,origem,tex,itens,extra,proprio){
   var a=[];
+  if(proprio){ (proprio.notas||[]).concat(extra||[]).forEach(function(e){a.push(e)}); a.push(['ok','Teste primeiro:','faça uma porção pequena antes da receita inteira.']); return '<div class="alerts">'+a.map(function(x){return '<div class="alert '+x[0]+'"><b>'+x[1]+'</b> '+x[2]+'</div>'}).join('')+'</div>'; }
   if(origem==='fracionada') a.push(['bad','Falsa Ganache:','cobertura fracionada não é chocolate. Serve só para blindagem, sem manteiga. Guarde o bolo fora da geladeira, com recheio que aguente temperatura ambiente.']);
   if(itens.some(function(x){return ING[x[0]].enzima})) a.push(['','Abacaxi e kiwi:','ferva a polpa antes. Crus, eles talham o creme.']);
   else if(itens.some(function(x){return ING[x[0]].acida})) a.push(['','Fruta ácida:','aqueça separada do creme e junte aos poucos, senão o creme pode talhar.']);
@@ -497,12 +539,12 @@ function avisos(tipo,origem,tex,itens,extra){
 }
 
 /* ---------- desenho do resultado ---------- */
-function resultado(titulo,sub,tipo,origem,tex,itens,peso,extras,isFalsa,swapsHtml,fotoId){
+function resultado(titulo,sub,tipo,origem,tex,itens,peso,extras,isFalsa,swapsHtml,fotoId,proprio){
   var choc=100, tot=choc; itens.forEach(function(it){tot+=it[1]});
   var k=peso?peso/tot:1;
   var chocNome=(origem==='fracionada'?'Cobertura fracionada ':'Chocolate ')+TIPOS[tipo].n.toLowerCase()+(origem==='fracionada'?'':' '+ORIGENS[origem].toLowerCase());
   var li='<li><span class="sw" style="background:var(--i-choc)"></span><span>'+esc(chocNome)+'</span><span class="g">'+fmtG(choc*k)+' g</span></li>';
-  itens.forEach(function(it){ li+='<li><span class="sw" style="background:var('+FATIAS.filter(function(f){return f[0]===fatiaDe(it[0])})[0][2]+')"></span><span>'+esc(ING[it[0]].n)+'</span><span class="g">'+fmtG(it[1]*k)+' g</span></li>'; });
+  itens.forEach(function(it){ li+='<li><span class="sw" style="background:var('+FATIAS.filter(function(f){return f[0]===fatiaDe(it[0])})[0][2]+')"></span><span>'+esc(ING[it[0]].n)+(it[2]?'<small class="med">'+esc(it[2])+(Math.abs(k-1)>0.01?' (para cada 100 g de chocolate)':'')+'</small>':'')+'</span><span class="g">'+fmtG(it[1]*k)+' g</span></li>'; });
   var h='<div class="result">';
   if(fotoId){
     h+='<div class="rec-hero" style="--cor-tipo:var('+TIPOS[tipo].cor+')">'+(foto(fotoId,'',titulo)||'<span class="ilu">'+ILU[tex]+'</span>')+'<div class="tt"><div><span class="tag">'+TEXTURAS[tex].n+'</span></div><h2>'+esc(titulo)+'</h2></div></div>';
@@ -512,8 +554,8 @@ function resultado(titulo,sub,tipo,origem,tex,itens,peso,extras,isFalsa,swapsHtm
   }
   h+='<div class="res-top">'+pizza(choc,itens)+'<div><ul class="ingr">'+li+'</ul><p class="total">Rende cerca de '+Math.round(tot*k)+' g.</p><p class="dica-marcar">Toque no ingrediente para marcar o que já separou.</p></div></div>';
   if(swapsHtml) h+=swapsHtml;
-  h+='<div><h3>Como fazer</h3><ol class="steps">'+preparo(tipo,tex,itens,isFalsa).map(function(s){return '<li>'+esc(s)+'</li>'}).join('')+'</ol></div>';
-  h+=avisos(tipo,origem,tex,itens,extras);
+  h+='<div><h3>Como fazer</h3><ol class="steps">'+(proprio?proprio.prep:preparo(tipo,tex,itens,isFalsa)).map(function(s){return '<li>'+esc(s)+'</li>'}).join('')+'</ol></div>';
+  h+=avisos(tipo,origem,tex,itens,extras,proprio);
   h+='<div class="actions noprint"><button class="btn" type="button" data-print>Imprimir ou salvar em PDF</button></div></div>';
   return h;
 }
@@ -591,7 +633,7 @@ function drawMenu(){
   });
 }
 function abrir(r){
-  M.rec={base:r, tipo:r.tipo, origem:r.origem, itens:r.itens.map(function(x){return [x[0],x[1]]}), peso:null, msg:null};
+  M.rec={base:r, tipo:r.tipo, origem:r.origem, itens:r.itens.map(function(x){return x.slice()}), peso:null, msg:null};
   show('rec'); drawRec(); window.scrollTo(0,0);
 }
 function trocarChocolate(tipo,origem){
@@ -607,7 +649,7 @@ function trocarItem(i,novo){
   if(novo==='__tirar'){ R.itens.splice(i,1); return; }
   var a=ING[it[0]], b=ING[novo];
   if(a.w&&b.w) it[1]=it[1]*a.w/b.w; // mantém a mesma água
-  it[0]=novo;
+  it[0]=novo; it.length=2; // a medida da Tatiana era do ingrediente antigo
 }
 function drawRec(){
   var R=M.rec, sw='<div class="swaps-wrap noprint"><h3>Não tem algum ingrediente? Troque aqui</h3><div class="swaps">';
@@ -622,7 +664,11 @@ function drawRec(){
   var extra=[]; if(R.msg) extra.unshift(['bad','Atenção:',R.msg]);
   var mudou = R.tipo!==R.base.tipo||R.origem!==R.base.origem||JSON.stringify(R.itens)!==JSON.stringify(R.base.itens);
   if(mudou) extra.push(['','Receita recalculada:','mantive a mesma quantidade de água para o ponto continuar igual.']);
-  $('rec-out').innerHTML=resultado(R.base.nome,R.base.uso,R.tipo,R.origem,R.base.tex,R.itens,R.peso,extra,false,sw,R.base.foto);
+  // preparo da Tatiana enquanto os ingredientes e o tipo de chocolate forem os dela; se trocar, o preparo é montado pela calculadora
+  var ids=function(l){return l.map(function(x){return x[0]}).join()};
+  var dela=R.base.prep&&R.tipo===R.base.tipo&&ids(R.itens)===ids(R.base.itens);
+  if(R.base.prep&&!dela) extra.push(['','Modo de preparo refeito:','como você trocou ingredientes, o passo a passo foi montado pela calculadora. Volte à receita original para ver o preparo da autora.']);
+  $('rec-out').innerHTML=resultado(R.base.nome,R.base.uso,R.tipo,R.origem,R.base.tex,R.itens,R.peso,extra,false,sw,R.base.foto,dela?{prep:R.base.prep,notas:R.base.notas}:null);
   $('rc-tipo').addEventListener('change',function(){trocarChocolate(this.value,R.origem);drawRec();});
   $('rc-orig').addEventListener('change',function(){trocarChocolate(R.tipo,this.value);drawRec();});
   Array.prototype.forEach.call(document.querySelectorAll('#rec-out select[data-i]'),function(s){s.addEventListener('change',function(){trocarItem(+s.dataset.i,s.value);drawRec();});});
