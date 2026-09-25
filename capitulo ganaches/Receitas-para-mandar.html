@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Receitas para mandar</title>
+<style>
+:root{--bg:#FBF3F0;--card:#fff;--ink:#2B1A12;--muted:#7A5F55;--line:#EAD9D2;--cocoa:#5A3526;--pink:#B8506C;--pinks:#F6DDE4}
+@media (prefers-color-scheme:dark){:root{--bg:#1C1210;--card:#271A16;--ink:#F4E6E0;--muted:#BFA197;--line:#3E2A24;--cocoa:#E3C2B2;--pink:#EC8FA8;--pinks:#4A2531}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:17px;line-height:1.4}
+.wrap{max-width:560px;margin:0 auto;padding:20px 16px 40px}
+h1{font-size:24px;margin:0 0 4px;color:var(--cocoa)}
+.sub{color:var(--muted);font-size:14px;margin:0 0 6px}
+.tip{background:var(--pinks);border-radius:12px;padding:10px 12px;font-size:14px;margin:12px 0 4px}
+.count{font-size:14px;color:var(--muted);margin:8px 0 0}
+h2{font-size:15px;text-transform:uppercase;letter-spacing:.08em;color:var(--pink);margin:22px 0 8px}
+ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+label{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer}
+input{width:22px;height:22px;accent-color:var(--cocoa);flex:none}
+.n{font-weight:700;min-width:1.8em;color:var(--cocoa)}
+.f{font-size:12px;font-weight:700;color:var(--pink);margin-left:auto;white-space:nowrap}
+input:checked ~ .t{text-decoration:line-through;color:var(--muted)}
+footer{margin-top:24px;font-size:12px;color:var(--muted);text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Receitas para mandar</h1>
+  <p class="sub">Calculadora · Faça a Sua Própria Ganache</p>
+  <div class="tip">Em cada receita: <b>marca do chocolate</b> e <b>% do creme de leite</b> (17, 20 ou 35). Toque na receita para marcar como enviada.<br><b>Firme</b> = trufa, bombom cortado, blindagem · <b>Cremosa</b> = recheio de bolo, bombom recheado · <b>Cobertura</b> = drip, calda. Fracionada: só blindagem, sem manteiga.</div>
+  <p class="count" id="count"></p>
+  <div id="list"></div>
+  <footer>Volume 3 · Tatiana Duarte Moreira</footer>
+</div>
+<script>
+(function(){
+  var grupos=[
+    ['Prioridade 1',[['Meio amargo',0],['Ao leite',0],['Branco',0],['Fracionada meio amargo',1],['Fracionada ao leite',1]]],
+    ['Prioridade 2',[['Amargo',0],['Blend',0],['Fracionada amargo',1],['Fracionada blend',1]]],
+    ['Prioridade 3',[['Caramelo',0],['Ruby',0]]]
+  ];
+  var TEX=['Firme','Cremosa','Cobertura'];
+  var feitos={}; try{feitos=JSON.parse(localStorage.getItem('receitas-enviadas-v2')||'{}')}catch(e){}
+  var n=0, html='';
+  grupos.forEach(function(g){
+    html+='<h2>'+g[0]+'</h2><ol>';
+    g[1].forEach(function(c){
+      var choc=c[0], falsa=c[1]===1, tx=falsa?['Blindagem']:TEX;
+      tx.forEach(function(t){
+        n++;
+        html+='<li><label><input type="checkbox" id="r'+n+'" data-n="'+n+'"'+(feitos[n]?' checked':'')+'><span class="n">'+n+'.</span><span class="t">'+choc+' · '+t+'</span>'+(falsa?'<span class="f">FALSA</span>':'')+'</label></li>';
+      });
+    });
+    html+='</ol>';
+  });
+  document.getElementById('list').innerHTML=html;
+  function conta(){
+    var c=Object.keys(feitos).filter(function(k){return feitos[k]}).length;
+    document.getElementById('count').textContent=c+' de '+n+' enviadas';
+  }
+  document.getElementById('list').addEventListener('change',function(e){
+    if(!e.target.dataset.n) return;
+    feitos[e.target.dataset.n]=e.target.checked;
+    try{localStorage.setItem('receitas-enviadas-v2',JSON.stringify(feitos))}catch(err){}
+    conta();
+  });
+  conta();
+})();
+</script>
+</body>
+</html>

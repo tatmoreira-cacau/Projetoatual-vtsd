@@ -1,0 +1,653 @@
+<title>Faça a Sua Própria Ganache</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Montserrat:wght@400;500;600;700&display=swap">
+<style>
+/* Tema escuro com as cores do ebook: azul-marinho de fundo, vinho nos botões, ouro nos detalhes, creme no texto, rosa nos ícones */
+:root{
+  color-scheme:dark;
+  --creme:#F8F5F0; --vinho:#8C3A3B; --vinho2:#A5494A; --ouro:#B0863A; --ouro2:#D4A24E; --marinho:#16243E; --marinho2:#22365A; --rosa:#D98B95; --rosa-soft:#F5E1E4;
+  --bg:#0E1626; --surface:#16243E; --surface2:#1D2E4D; --surface3:#253963; --ink:#F3ECE2; --muted:#AFA79C; --line:rgba(212,162,78,.18); --line2:rgba(243,236,226,.10);
+  --titulo:#F3E3C9;
+  --warn:#E7C27A; --warn-soft:rgba(212,162,78,.12); --bad:#F0A3AD; --bad-soft:rgba(140,58,59,.35); --ok-soft:rgba(169,192,169,.12); --ok:#BFD3BF;
+  --i-choc:#7A4A36; --i-liq:#D98B95; --i-mant:#D4A24E; --i-gli:#9FB3C8; --i-sab:#A9C0A9;
+  --t-amargo:#2B150D; --t-meio:#4A2A1C; --t-blend:#6B3F2A; --t-leite:#9A6444; --t-branco:#EDE0CC; --t-caramelo:#C98B4B; --t-ruby:#C4607A;
+  --stroke:#16243E;
+  --abas:64px;
+}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{background:var(--bg);color:var(--ink);font-family:Montserrat,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.55;min-height:100vh;
+  background-image:radial-gradient(120% 60% at 50% -10%,rgba(212,162,78,.10),transparent 60%),radial-gradient(80% 50% at 100% 100%,rgba(140,58,59,.18),transparent 70%);background-attachment:fixed}
+.appbar{position:sticky;top:0;z-index:5;background:rgba(14,22,38,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+.appbar-in{max-width:520px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:10px}
+.appbar .logo{width:34px;height:34px;border-radius:10px;background:rgba(212,162,78,.08);display:grid;place-items:center;border:1px solid rgba(212,162,78,.4)}
+.appbar b{font-family:"Playfair Display",Georgia,serif;font-weight:600;font-size:18px;color:var(--titulo)}
+.wrap{max-width:520px;margin:0 auto;padding-inline:16px;padding-block:18px calc(var(--abas) + 36px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:18px}
+h1,h2,h3{font-family:"Playfair Display",Georgia,serif;font-weight:600;text-wrap:balance;margin:0;color:var(--titulo)}
+h1{font-size:clamp(30px,8.5vw,40px);line-height:1.1}
+h2{font-size:25px}
+h3{font-size:18px}
+.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--ouro2);font-weight:700}
+.lede{color:var(--muted);margin:8px 0 0}
+.apoio{font-family:"Playfair Display",Georgia,serif;font-style:italic;color:var(--ouro2);font-size:17px}
+button{font:inherit;cursor:pointer}
+button:focus-visible,select:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--ouro2);outline-offset:2px}
+.back{align-self:flex-start;background:none;border:none;color:var(--ouro2);font-weight:600;padding:4px 0}
+
+/* início */
+.hero{background:linear-gradient(160deg,var(--marinho2),var(--marinho));border:1px solid var(--line);border-radius:24px;padding:26px 20px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;color:#fff;box-shadow:0 18px 40px rgba(0,0,0,.35);overflow:hidden}
+.hero h1{color:#fff}
+.hero .lede{color:#D8DEE8}
+.hero .whisk{width:88px;height:88px;border-radius:24px;background:rgba(255,255,255,.06);border:1px solid rgba(212,162,78,.45);display:grid;place-items:center}
+#capa{align-self:stretch;margin:-26px -20px 6px;position:relative}
+#capa:empty{display:none}
+#capa img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover}
+#capa::after{content:"";position:absolute;inset:auto 0 0 0;height:45%;background:linear-gradient(transparent,var(--marinho2))}
+.home{display:flex;flex-direction:column;gap:12px}
+.big{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px;text-align:left;display:grid;grid-template-columns:52px 1fr auto;gap:14px;align-items:center;color:var(--ink);box-shadow:0 10px 24px rgba(0,0,0,.25)}
+.big:hover{border-color:var(--ouro2)}
+.big.main{background:linear-gradient(135deg,var(--vinho2),var(--vinho));border-color:rgba(212,162,78,.5)}
+.big.main b,.big.main span{color:#fff}
+.big .ic{width:52px;height:52px;border-radius:14px;background:var(--rosa-soft);color:var(--vinho);display:grid;place-items:center}
+.big.main .ic{background:rgba(255,255,255,.14);color:#fff}
+.big b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:600;font-size:21px;color:var(--titulo);line-height:1.15}
+.big span{display:block;color:var(--muted);font-size:14px}
+.big .go{font-size:26px;font-weight:700;color:var(--ouro2)}
+
+/* perguntas: tudo numa tela, passos numerados */
+.q{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.q h3{display:flex;gap:10px;align-items:flex-start;font-size:17px}
+.q h3 .n{flex:none;width:26px;height:26px;border-radius:50%;background:var(--ouro2);color:var(--marinho);font-family:Montserrat,system-ui,sans-serif;font-size:13px;font-weight:800;display:grid;place-items:center;margin-top:1px}
+.q h3 small{display:block;font-family:Montserrat,system-ui,sans-serif;font-size:13px;color:var(--muted);margin-top:2px;font-weight:400}
+.opts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.opts.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.opts button{border:1px solid var(--line2);background:var(--surface2);color:var(--ink);padding:10px 6px;border-radius:12px;font-size:14px;display:flex;align-items:center;justify-content:center;gap:6px;text-align:center;line-height:1.2;min-height:44px}
+.opts button:hover{border-color:var(--ouro)}
+.opts button[aria-pressed="true"]{background:linear-gradient(135deg,var(--vinho2),var(--vinho));border-color:var(--ouro2);color:#fff;font-weight:700;box-shadow:0 0 0 1px rgba(212,162,78,.35),0 6px 16px rgba(140,58,59,.35)}
+.opts button:disabled{opacity:.3;cursor:not-allowed}
+.opts .dot{width:12px;height:12px;border-radius:50%;border:1px solid rgba(255,255,255,.25);flex:none}
+.opts.tex button{flex-direction:column;padding:6px 6px 10px;gap:6px}
+.opts.tex .ti{width:100%;aspect-ratio:1;border-radius:10px;overflow:hidden;background:var(--rosa-soft);display:grid;place-items:center}
+.opts.tex .ti svg{width:66%;height:auto}
+.opts.tex .ti img{width:100%;height:100%;object-fit:cover}
+.opts.tex b{font-size:14px}
+.tex-uso{font-size:13px;color:var(--muted);margin:0}
+.tex-uso b{color:var(--ouro2);font-weight:600}
+select,input[type=number]{font:inherit;font-size:16px;padding:10px 12px;border-radius:12px;border:1px solid var(--line2);background:var(--surface2);color:var(--ink);max-width:100%}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+#q-escolha select{width:100%}
+
+/* resultado */
+.result{background:var(--surface);border:1px solid rgba(212,162,78,.45);border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:14px;box-shadow:0 16px 36px rgba(0,0,0,.35)}
+.result.blocked{border-color:var(--vinho2)}
+.res-top{display:grid;grid-template-columns:130px 1fr;gap:16px;align-items:center}
+@media (max-width:420px){.res-top{grid-template-columns:1fr;justify-items:center}}
+.res-top svg{width:100%;max-width:130px;height:auto}
+.ingr{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;width:100%}
+.ingr li{display:grid;grid-template-columns:22px 10px 1fr auto;gap:10px;align-items:center;font-variant-numeric:tabular-nums;background:var(--surface2);border-radius:12px;padding:9px 12px;cursor:pointer;user-select:none}
+.ingr li::before{content:"";width:18px;height:18px;border-radius:50%;border:2px solid var(--muted)}
+.ingr li.feito::before{background:var(--ouro2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' fill='none' stroke='%2316243E' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/80% no-repeat;border-color:var(--ouro2)}
+.ingr li.feito span:not(.sw){opacity:.5;text-decoration:line-through}
+.ingr .sw{width:10px;height:10px;border-radius:50%}
+.ingr .g{font-weight:700;white-space:nowrap;color:var(--ouro2)}
+.total{font-size:14px;color:var(--muted)}
+.dica-marcar{font-size:12px;color:var(--muted);margin:0}
+.steps{margin:0;padding-left:0;list-style:none;counter-reset:p;display:flex;flex-direction:column;gap:10px}
+.steps li{counter-increment:p;display:grid;grid-template-columns:28px 1fr;gap:10px}
+.steps li::before{content:counter(p);width:26px;height:26px;border-radius:50%;background:var(--vinho);border:1px solid var(--ouro2);color:#fff;font-weight:700;font-size:13px;display:grid;place-items:center}
+.alerts{display:flex;flex-direction:column;gap:8px}
+.alert{border-radius:12px;padding:10px 12px;font-size:14px;background:var(--warn-soft);color:var(--ink);border:1px solid rgba(212,162,78,.2)}
+.alert b{color:var(--warn)}
+.alert.bad{background:var(--bad-soft);border-color:rgba(240,163,173,.25)}
+.alert.bad b{color:var(--bad)}
+.alert.ok{background:var(--ok-soft);border-color:rgba(169,192,169,.2)}
+.alert.ok b{color:var(--ok)}
+.actions{display:flex;flex-wrap:wrap;gap:10px}
+.btn{border:1px solid var(--ouro2);background:linear-gradient(135deg,var(--vinho2),var(--vinho));color:#fff;padding:12px 16px;border-radius:12px;font-weight:700}
+.btn.ghost{background:transparent;color:var(--ouro2);border:1px solid var(--line)}
+
+/* receita: foto grande com o nome por cima */
+.rec-hero{position:relative;margin:-16px -16px 0;border-radius:20px 20px 0 0;overflow:hidden;aspect-ratio:4/3;background:linear-gradient(160deg,var(--cor-tipo,#4A2A1C),var(--marinho))}
+.rec-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.rec-hero .ilu{position:absolute;inset:0;display:grid;place-items:center;padding-bottom:22%}
+.rec-hero .ilu svg{width:40%;height:auto}
+.rec-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(14,22,38,.55) 60%,var(--surface) 100%)}
+.rec-hero .tt{position:absolute;left:16px;right:16px;bottom:10px;z-index:1;display:flex;flex-direction:column;gap:6px}
+.rec-hero h2{font-size:28px;line-height:1.1;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.5)}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));text-align:center;border-block:1px solid var(--line);padding:10px 0}
+.stats div{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:12px;color:var(--muted);line-height:1.25}
+.stats div+div{border-left:1px solid var(--line)}
+.stats svg{width:22px;height:22px;color:var(--ouro2)}
+.stats b{color:var(--ink);font-size:13px;font-weight:600}
+
+/* ilustrações dos 4 ingredientes */
+.quatro{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.quatro div{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:10px;display:grid;grid-template-columns:48px 1fr;gap:10px;align-items:center}
+.quatro svg{width:48px;height:48px}
+.quatro b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:600;color:var(--titulo);font-size:16px;line-height:1.1}
+.quatro span{font-size:12px;color:var(--muted);line-height:1.3;display:block}
+
+/* cardápio */
+.menu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.rc{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;text-align:left;padding:0;display:flex;flex-direction:column;color:var(--ink);box-shadow:0 10px 22px rgba(0,0,0,.3)}
+.rc:hover{border-color:var(--ouro2)}
+.rc .band{aspect-ratio:4/3;display:flex;align-items:flex-end;padding:8px 10px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#FFF6F2;background-size:cover;background-position:center;position:relative}
+.rc .band img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.rc .band .ilu{position:absolute;inset:0;display:grid;place-items:center;opacity:.95}
+.rc .band .ilu svg{width:58%;height:auto}
+.rc .band .lbl{position:relative;z-index:1;background:rgba(14,22,38,.78);border:1px solid rgba(212,162,78,.4);color:var(--ouro2);padding:3px 8px;border-radius:999px}
+.rc .bd{padding:10px;display:flex;flex-direction:column;gap:3px}
+.rc b{font-family:"Playfair Display",Georgia,serif;font-weight:600;font-size:16px;color:var(--titulo);line-height:1.2}
+.rc span{font-size:12px;color:var(--muted)}
+.filters{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:8px;scrollbar-width:none;margin-inline:-16px;padding-inline:16px}
+.filters button{flex:none;padding:8px 14px;border-radius:999px;min-height:auto}
+
+/* trocas */
+.swaps{display:flex;flex-direction:column;gap:8px}
+.sw-row{display:grid;grid-template-columns:1fr;gap:6px;background:var(--surface2);border-radius:12px;padding:10px}
+.sw-row span{font-size:14px;color:var(--muted)}
+.sw-row select{font-size:14px;width:100%;background:var(--surface3)}
+.tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:rgba(212,162,78,.14);border:1px solid rgba(212,162,78,.35);color:var(--ouro2)}
+
+/* guia */
+.matriz{width:100%;border-collapse:separate;border-spacing:0;font-size:14px;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;font-variant-numeric:tabular-nums}
+.matriz th,.matriz td{padding:10px 6px;text-align:center;border-bottom:1px solid var(--line2)}
+.matriz tr:last-child th,.matriz tr:last-child td{border-bottom:none}
+.matriz thead th{background:var(--surface2);font-size:12px;color:var(--ouro2);font-weight:700}
+.matriz tbody th{text-align:left;padding-left:12px;font-weight:600;font-size:13px}
+.matriz td b{color:var(--titulo);font-size:15px}
+.acc{display:flex;flex-direction:column;gap:8px}
+.acc details{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.acc summary{list-style:none;padding:13px 14px;display:grid;grid-template-columns:28px 1fr 16px;gap:10px;align-items:center;cursor:pointer;font-weight:600;font-size:15px}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary .ic{width:28px;height:28px;border-radius:8px;background:var(--bad-soft);display:grid;place-items:center;font-size:15px}
+.acc summary::after{content:"›";color:var(--ouro2);font-size:22px;transition:transform .2s;text-align:center}
+.acc details[open] summary::after{transform:rotate(90deg)}
+.acc .bdy{padding:0 14px 14px 52px;font-size:14px;color:var(--ink);display:flex;flex-direction:column;gap:8px}
+.acc .bdy p{margin:0}
+.acc .bdy b{color:var(--ouro2)}
+
+/* barra de abas embaixo */
+.abas{position:fixed;left:0;right:0;bottom:0;z-index:6;background:rgba(14,22,38,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+.abas-in{max-width:520px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);height:var(--abas)}
+.abas button{background:none;border:none;color:var(--muted);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px;font-weight:600;position:relative}
+.abas svg{width:22px;height:22px}
+.abas button[aria-current="page"]{color:var(--ouro2)}
+.abas button[aria-current="page"]::before{content:"";position:absolute;top:0;left:30%;right:30%;height:3px;border-radius:0 0 3px 3px;background:var(--ouro2)}
+footer{color:var(--muted);font-size:12px;text-align:center;border-top:1px solid var(--line);padding-top:16px}
+@media print{
+  :root{--bg:#fff;--surface:#fff;--surface2:#F4EEE8;--ink:#2B2320;--muted:#6F625A;--titulo:#8C3A3B;--line:#E8DFD4;--ouro2:#8C3A3B;--stroke:#fff}
+  .noprint,.back,.actions,.swaps-wrap,footer,.appbar,.abas,.dica-marcar{display:none!important}
+  body,html{background:#fff!important}
+  .wrap{padding-bottom:0}
+  .result{border:none;box-shadow:none}
+  .rec-hero{aspect-ratio:auto;height:7cm;margin:0;border-radius:12px}
+  .rec-hero::after{background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.6))}
+}
+</style>
+
+<div class="appbar noprint"><div class="appbar-in"><button class="logo" type="button" data-go="home" aria-label="Início" style="padding:0"><svg width="22" height="22" viewBox="0 0 64 64" fill="none" stroke="#D4A24E" stroke-width="2.6" stroke-linecap="round"><path d="M32 6c-9 0-14 12-14 22s6 16 14 16 14-6 14-16S41 6 32 6z"/><path d="M32 6c-4 0-6 12-6 22s2 16 6 16 6-6 6-16-2-22-6-22z"/><rect x="28.5" y="44" width="7" height="15" rx="3.5" fill="#D4A24E"/></svg></button><b>Faça a Sua Própria Ganache</b></div></div>
+<div class="wrap">
+
+  <!-- INÍCIO -->
+  <section id="v-home" style="display:flex;flex-direction:column;gap:22px">
+    <header class="hero">
+      <div id="capa"></div>
+      <div class="whisk" id="whisk"><svg width="54" height="54" viewBox="0 0 64 64" fill="none" stroke="#D4A24E" stroke-width="2.6" stroke-linecap="round"><path d="M32 6c-9 0-14 12-14 22s6 16 14 16 14-6 14-16S41 6 32 6z"/><path d="M32 6c-4 0-6 12-6 22s2 16 6 16 6-6 6-16-2-22-6-22z"/><rect x="28.5" y="44" width="7" height="15" rx="3.5" fill="#D4A24E"/></svg></div>
+      <div class="eyebrow">Volume 3 · Calculadora</div>
+      <h1>Faça a Sua Própria Ganache</h1>
+      <p class="lede">Vamos fazer essa ganache? Me diga o que você tem na mão e o que quer fazer. Eu faço a conta.</p>
+    </header>
+    <div class="home">
+      <button class="big main" id="go-build" type="button"><span class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 11h16a8 8 0 0 1-16 0z"/><path d="M12 3v5M9 5l3-2 3 2"/></svg></span><span><b>Monte a sua ganache</b><span>Escolha a textura, o chocolate e o sabor. Eu faço a receita.</span></span><span class="go">›</span></button>
+      <button class="big" id="go-menu" type="button"><span class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/><path d="M9 7h6M9 11h6"/></svg></span><span><b>Receitas prontas</b><span>15 ideias para usar como estão ou trocar o que você não tem.</span></span><span class="go">›</span></button>
+    </div>
+    <div><div class="eyebrow">Os 4 ingredientes</div><h3 style="margin-top:4px">Toda ganache é feita destes</h3></div>
+    <div class="quatro" id="quatro"></div>
+    <div class="alert ok"><b>Lembre:</b> a calculadora não tem paladar. Ela encurta o caminho, mas o teste na bancada é seu. Faça sempre uma porção pequena primeiro.</div>
+  </section>
+
+  <!-- MONTE A SUA GANACHE -->
+  <section id="v-build" hidden style="display:flex;flex-direction:column;gap:14px">
+    <h2>Monte a sua ganache</h2>
+    <div class="q"><h3><span class="n">1</span><span>Qual textura você quer?</span></h3><div class="opts tex" id="q-tex"></div><p class="tex-uso" id="q-tex-uso"></p></div>
+    <div class="q"><h3><span class="n">2</span><span>Qual chocolate você vai usar?<small>O tipo e a origem mudam a receita, porque a lei brasileira e a europeia são diferentes.</small></span></h3><div class="opts" id="q-tipo"></div><div class="opts" id="q-orig"></div></div>
+    <div class="q"><h3><span class="n">3</span><span>Qual creme de leite você tem?</span></h3><div class="opts" id="q-creme"></div></div>
+    <div class="q"><h3><span class="n">4</span><span>Qual sabor?</span></h3><div class="opts two" id="q-fam"></div><div class="row" id="q-escolha"></div></div>
+    <div class="q"><h3><span class="n">5</span><span>Quanto quer fazer?</span></h3><div class="row"><input type="number" id="q-peso" min="100" max="10000" step="50" value="500" aria-label="Peso final em gramas"> <span>gramas de ganache</span></div></div>
+    <div id="build-out"></div>
+  </section>
+
+  <!-- RECEITAS PRONTAS -->
+  <section id="v-menu" hidden style="display:flex;flex-direction:column;gap:14px">
+    <h2>Receitas prontas</h2>
+    <p class="lede" style="margin:0">Toque numa receita. Lá dentro você muda o peso, o chocolate e troca qualquer ingrediente.</p>
+    <div class="filters opts" id="m-filtro"></div>
+    <div class="menu" id="m-list"></div>
+  </section>
+
+  <!-- RECEITA -->
+  <section id="v-rec" hidden style="display:flex;flex-direction:column;gap:14px">
+    <button class="back" data-go="menu" type="button">← Receitas</button>
+    <div id="rec-out"></div>
+  </section>
+
+  <!-- GUIA -->
+  <section id="v-guia" hidden style="display:flex;flex-direction:column;gap:16px">
+    <div><div class="eyebrow">Guia</div><h2 style="margin-top:4px">Proporções e como consertar</h2></div>
+    <div class="q">
+      <h3><span class="n">1</span><span>Quanto chocolate para cada 1 g de creme<small>Com creme de leite fresco 35%. Os mesmos números da tabela Ganache Perfeita.</small></span></h3>
+      <div class="opts" id="g-orig"></div>
+      <div id="g-matriz"></div>
+      <p class="tex-uso">Cobertura fracionada (Falsa Ganache): só <b>blindagem</b>, 5 : 1, sem manteiga. Branca fracionada: ainda sem receita segura.</p>
+    </div>
+    <div class="q">
+      <h3><span class="n">2</span><span>Deu errado? Veja como consertar</span></h3>
+      <div class="acc" id="g-acc"></div>
+    </div>
+  </section>
+
+  <footer>Ferramenta do Volume 3 · Faça a Sua Própria Ganache · Tatiana Duarte Moreira</footer>
+</div>
+
+<nav class="abas noprint" aria-label="Menu">
+  <div class="abas-in">
+    <button type="button" data-go="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>Início</button>
+    <button type="button" data-go="build"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h2M12 11h2M16 11h0M8 15h2M12 15h2M8 18h2M12 18h2M16 15v3"/></svg>Monte</button>
+    <button type="button" data-go="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/><path d="M9 7h6M9 11h6"/></svg>Receitas</button>
+    <button type="button" data-go="guia"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6"/><path d="M12 17.5h0"/></svg>Guia</button>
+  </div>
+</nav>
+
+<script>
+(function(){
+/* ===================== DADOS: edite aqui ===================== */
+
+// Tipos de chocolate
+var TIPOS = {
+  amargo:{n:'Amargo', cor:'--t-amargo'}, meio:{n:'Meio amargo', cor:'--t-meio'}, blend:{n:'Blend', cor:'--t-blend'},
+  leite:{n:'Ao leite', cor:'--t-leite'}, branco:{n:'Branco', cor:'--t-branco', claro:1}, caramelo:{n:'Caramelo', cor:'--t-caramelo'}, ruby:{n:'Ruby', cor:'--t-ruby'}
+};
+var ORIGENS = {nacional:'Nacional', importado:'Importado', fracionada:'Cobertura fracionada'};
+
+// Texturas
+var TEXTURAS = {
+  cremosa:  {n:'Cremosa',   usos:'Bombom recheado, trufa, recheio de bolo', ic:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="13" r="7"/><path d="M8 11c2-2 6-2 8 0M9 15c2 1 4 1 6 0"/></svg>'},
+  estrutura:{n:'Estrutura', usos:'Tira de sustentação, blindagem de bolo', ic:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="4" y="6" width="16" height="13" rx="1.5"/><path d="M4 10.5h16M4 15h16"/></svg>'},
+  cobertura:{n:'Cobertura', usos:'Drip cake, calda, decoração', ic:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16v10H4z"/><path d="M4 9v3a1.5 1.5 0 0 0 3 0v-1a1.5 1.5 0 0 0 3 0v3a1.5 1.5 0 0 0 3 0v-2a1.5 1.5 0 0 0 3 0v1a1.5 1.5 0 0 0 3 0V9"/></svg>'}
+};
+
+// Gordura que dá firmeza: manteiga de cacau + gordura vegetal (% no chocolate). null = não existe.
+var FIRME = {
+  importado:{amargo:42, meio:37, blend:33.5, leite:30, branco:29.5, caramelo:35.4, ruby:30},
+  nacional: {amargo:38, meio:26, blend:26.5, leite:27, branco:28,   caramelo:null, ruby:null}
+};
+
+// Gramas de chocolate importado para 1 g de creme fresco 35% (tabela Ganache Perfeita)
+var PROPORCAO = {
+  amargo:{cremosa:1.6, estrutura:2.0, cobertura:0.9},
+  meio:  {cremosa:2.0, estrutura:2.5, cobertura:1.0},
+  leite: {cremosa:2.5, estrutura:3.1, cobertura:1.5},
+  branco:{cremosa:3.2, estrutura:4.0, cobertura:2.5}
+};
+PROPORCAO.blend={}; PROPORCAO.caramelo={}; PROPORCAO.ruby={};
+Object.keys(PROPORCAO.meio).forEach(function(u){
+  PROPORCAO.blend[u]=(PROPORCAO.meio[u]+PROPORCAO.leite[u])/2;
+  PROPORCAO.caramelo[u]=PROPORCAO.branco[u]*29.5/35.4;
+  PROPORCAO.ruby[u]=PROPORCAO.leite[u];
+});
+// Manteiga e glucose em % do total da ganache [manteiga, glucose]
+var EXTRAS = {cremosa:[5,5], estrutura:[0,3], cobertura:[0,5]};
+
+// Falsa Ganache (cobertura fracionada): só blindagem, sem manteiga
+var FALSA = {tipos:['amargo','meio','blend'], creme:20}; // 100 g de cobertura : 20 g de creme (5 : 1)
+
+// Ingredientes. w = parte de água (0 a 1): só os líquidos têm. ⚠️ valores estimados (tabelas de composição)
+var ING = {
+  creme35:{n:'Creme de leite fresco 35%',cat:'creme',w:.58}, creme30:{n:'Creme de leite 30%',cat:'creme',w:.63},
+  creme25:{n:'Creme de leite 25%',cat:'creme',w:.68}, creme20:{n:'Creme de leite de caixinha 20%',cat:'creme',w:.73},
+  creme17:{n:'Creme de leite de caixinha 17%',cat:'creme',w:.76},
+  limao:{n:'Suco de limão',cat:'fruta',w:.91,acida:1}, maracuja:{n:'Polpa de maracujá',cat:'fruta',w:.85,acida:1},
+  abacaxi:{n:'Polpa de abacaxi',cat:'fruta',w:.86,acida:1,enzima:1}, morango:{n:'Polpa de morango',cat:'fruta',w:.91},
+  manga:{n:'Polpa de manga',cat:'fruta',w:.83}, caja:{n:'Polpa de cajá',cat:'fruta',w:.88,acida:1},
+  cupuacu:{n:'Polpa de cupuaçu',cat:'fruta',w:.86,acida:1}, laranja:{n:'Suco de laranja',cat:'fruta',w:.88,acida:1},
+  framboesa:{n:'Polpa de framboesa',cat:'fruta',w:.86,acida:1}, goiaba:{n:'Polpa de goiaba',cat:'fruta',w:.86},
+  kiwi:{n:'Polpa de kiwi',cat:'fruta',w:.84,acida:1,enzima:1},
+  cachaca:{n:'Cachaça',cat:'alcool',w:.6}, rum:{n:'Rum',cat:'alcool',w:.6}, conhaque:{n:'Conhaque',cat:'alcool',w:.6},
+  licorcafe:{n:'Licor de café',cat:'alcool',w:.55}, licorlaranja:{n:'Licor de laranja',cat:'alcool',w:.55},
+  agua:{n:'Água',cat:'agua',w:1}, leitecoco:{n:'Leite de coco',cat:'leitecoco',w:.7},
+  creamcheese:{n:'Cream cheese',cat:'queijo',w:.55},
+  goiabada:{n:'Goiabada cremosa',cat:'geleia',w:.30}, geleiavermelha:{n:'Geleia de frutas vermelhas',cat:'geleia',w:.33},
+  geleiadamasco:{n:'Geleia de damasco',cat:'geleia',w:.33}, geleiamaracuja:{n:'Geleia de maracujá',cat:'geleia',w:.33},
+  chapreto:{n:'Chá preto',cat:'cha'}, earlgrey:{n:'Chá Earl Grey',cat:'cha'}, mate:{n:'Chá mate tostado',cat:'cha'},
+  hibisco:{n:'Hibisco seco',cat:'cha'}, camomila:{n:'Camomila',cat:'cha'},
+  alecrim:{n:'Alecrim fresco',cat:'erva'}, hortela:{n:'Hortelã fresca',cat:'erva'}, manjericao:{n:'Manjericão fresco',cat:'erva'}, lavanda:{n:'Lavanda seca',cat:'erva'},
+  rasplimao:{n:'Raspas de limão',cat:'raspas'}, rasplaranja:{n:'Raspas de laranja',cat:'raspas'},
+  canela:{n:'Canela em pau',cat:'especiaria'}, cardamomo:{n:'Cardamomo',cat:'especiaria'}, cravo:{n:'Cravo',cat:'especiaria'},
+  cafe:{n:'Café solúvel',cat:'final'}, baunilha:{n:'Extrato de baunilha',cat:'final'}, flordesal:{n:'Flor de sal',cat:'final'},
+  pastaavela:{n:'Pasta saborizante de avelã',cat:'pasta'}, pastapistache:{n:'Pasta saborizante de pistache',cat:'pasta'},
+  pastaamendoim:{n:'Pasta de amendoim',cat:'pasta'}, pastamaracuja:{n:'Pasta saborizante de maracujá',cat:'pasta'},
+  coco:{n:'Coco ralado seco tostado',cat:'seco'}, nozes:{n:'Nozes picadas',cat:'seco'}, amendoim:{n:'Amendoim torrado picado',cat:'seco'},
+  biscoito:{n:'Biscoito de maisena triturado',cat:'seco'},
+  manteiga:{n:'Manteiga sem sal',cat:'manteiga'}, mcacau:{n:'Manteiga de cacau',cat:'manteiga'},
+  glucose:{n:'Glucose',cat:'acucar'}, invertido:{n:'Açúcar invertido',cat:'acucar'}, acucar:{n:'Açúcar (para o caramelo)',cat:'acucar'}
+};
+// Grupos de troca: um ingrediente só troca por outro do mesmo grupo
+var GRUPOS = {creme:['creme'], fruta:['fruta'], alcool:['alcool'], infusao:['cha','erva','raspas','especiaria'], final:['final'],
+  pasta:['pasta'], seco:['seco'], geleia:['geleia'], queijo:['queijo'], agua:['agua'], leitecoco:['leitecoco'], manteiga:['manteiga'], acucar:['acucar']};
+var PODE_TIRAR = ['cha','erva','raspas','especiaria','final','seco','alcool','manteiga'];
+
+// Sabores do "Monte a sua ganache": quantidade por 100 g de chocolate
+var FAMILIAS = {
+  classica:{n:'Clássica (só chocolate)'},
+  fruta:{n:'Fruta', lista:['maracuja','limao','abacaxi','morango','manga','caja','cupuacu','laranja','framboesa','goiaba'], parteAgua:.5},
+  infusao:{n:'Chá, erva ou especiaria', lista:['earlgrey','chapreto','mate','hibisco','camomila','alecrim','hortela','manjericao','lavanda','canela','cardamomo','rasplimao','rasplaranja'], g:{cha:2,erva:1,especiaria:1,raspas:2}},
+  alcool:{n:'Licor ou destilado', lista:['licorcafe','licorlaranja','rum','cachaca','conhaque'], g:6},
+  pasta:{n:'Pasta saborizante', lista:['pastapistache','pastaavela','pastaamendoim','pastamaracuja'], g:18, aTestar:1},
+  coco:{n:'Coco', aTestar:1},
+  caramelo:{n:'Caramelo', aTestar:1}
+};
+
+// Receitas prontas (por 100 g de chocolate). testada:false = ainda em teste pela Tatiana
+var RECEITAS = [
+ {id:1, foto:'1', nome:'Ganache de Bico Meio Amargo com Laranja', tipo:'meio', origem:'nacional', tex:'cremosa', uso:'Ponto de bico', itens:[['creme30',65],['glucose',4],['rasplaranja',2]]},
+ {id:2, foto:'2', nome:'Ganache de Bico ao Leite com Canela', tipo:'leite', origem:'nacional', tex:'cremosa', uso:'Ponto de bico', itens:[['creme30',43],['glucose',4],['canela',1]]},
+ {id:3, foto:'3', nome:'Ganache de Bico Branca com Baunilha', tipo:'branco', origem:'nacional', tex:'cremosa', uso:'Ponto de bico', itens:[['creme30',30],['glucose',4],['baunilha',2]]},
+ {id:4, foto:'4', nome:'Recheio de Coco Tostado com Limão', tipo:'branco', origem:'nacional', tex:'cremosa', uso:'Recheio de casca e bombom', itens:[['creme30',50],['leitecoco',22],['coco',35],['rasplimao',1]]},
+ {id:5, foto:'5', nome:'Recheio Cremoso de Queijo com Goiabada', tipo:'branco', origem:'nacional', tex:'cremosa', uso:'Recheio de casca', itens:[['creamcheese',30],['goiabada',40],['biscoito',10],['rasplimao',1]]},
+ {id:6, foto:'6', nome:'Trufa de Limão com Alecrim', tipo:'branco', origem:'nacional', tex:'cremosa', uso:'Trufa ou recheio de casca', itens:[['creme30',19],['limao',13],['manteiga',10],['glucose',6],['rasplimao',1],['alecrim',0.5]]},
+ {id:7, foto:'7', nome:'Trufa de Chá Preto com Laranja', tipo:'branco', origem:'nacional', tex:'cremosa', uso:'Trufa de modelar', itens:[['creme30',20],['manteiga',5],['glucose',3],['chapreto',2],['rasplaranja',1]]},
+ {id:8, foto:'8', nome:'Recheio de Bombom ao Leite com Licor de Café', tipo:'leite', origem:'nacional', tex:'cremosa', uso:'Recheio de bombom', itens:[['creme30',65],['licorcafe',6]]},
+ {id:9, foto:'9', nome:'Recheio de Bombom de Avelã', tipo:'branco', origem:'importado', tex:'cremosa', uso:'Bombom moldado', itens:[['creme30',81],['glucose',10],['mcacau',5],['pastaavela',18]]},
+ {id:10, foto:'10', nome:'Recheio de Cajá com Cachaça e Limão', tipo:'branco', origem:'importado', tex:'cremosa', uso:'Bombom moldado', itens:[['caja',43],['cachaca',5],['manteiga',15],['glucose',6],['rasplimao',1]]},
+ {id:11, foto:'11', nome:'Recheio de Maracujá com Hortelã', tipo:'branco', origem:'importado', tex:'cremosa', uso:'Trufa oca ou casca', itens:[['creme30',14],['maracuja',20],['manteiga',7],['glucose',5],['hortela',1]]},
+ {id:12, foto:'12', nome:'Recheio de Bombom de Mate Tostado', tipo:'branco', origem:'importado', tex:'cremosa', uso:'Bombom moldado', itens:[['agua',15],['mate',4],['creme30',49],['glucose',5],['invertido',4],['manteiga',8]]},
+ {id:13, foto:'13', nome:'Trufa Meio Amargo com Café', tipo:'meio', origem:'importado', tex:'cremosa', uso:'Trufa', itens:[['creme30',46],['glucose',12],['manteiga',12],['cafe',2]]},
+ {id:14, foto:'14', nome:'Trufa ao Leite com Cardamomo', tipo:'leite', origem:'importado', tex:'cremosa', uso:'Trufa', itens:[['creme30',40],['cardamomo',0.5]]},
+ {id:15, foto:'15', nome:'Ganache de Caramelo com Flor de Sal', tipo:'leite', origem:'importado', tex:'cremosa', uso:'Recheio de barra e bombom', itens:[['acucar',32],['creme30',94],['manteiga',10],['flordesal',1],['baunilha',1]]}
+];
+
+/* ===================== fim dos dados ===================== */
+
+// Fotos: o montar.py preenche sozinho com as fotos da pasta fotos-receitas (capa, 1 a 15, cremosa, estrutura, cobertura).
+var FOTOS = {};
+
+// Ilustrações (desenho simples, sem foto): os 4 ingredientes e as 3 texturas
+var ILU = {
+  chocolate:'<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="15" y="6" width="34" height="52" rx="4" fill="#5A3A2C"/><g fill="#6E4838"><rect x="19" y="10" width="12" height="10" rx="2"/><rect x="33" y="10" width="12" height="10" rx="2"/><rect x="19" y="22" width="12" height="10" rx="2"/><rect x="33" y="22" width="12" height="10" rx="2"/></g><path d="M15 36h34v18a4 4 0 0 1-4 4H19a4 4 0 0 1-4-4z" fill="#D98B95"/><rect x="15" y="36" width="34" height="4" fill="#D4A24E"/></svg>',
+  liquido:'<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M20 10h22l6 4-4 4v32a6 6 0 0 1-6 6H26a6 6 0 0 1-6-6z" fill="#FFFFFF" stroke="#D98B95" stroke-width="2.2" stroke-linejoin="round"/><path d="M21 30h22v20a5 5 0 0 1-5 5H26a5 5 0 0 1-5-5z" fill="#D98B95"/><path d="M43 18c4 0 7 3 7 8s-3 8-7 8" fill="none" stroke="#D98B95" stroke-width="2.2"/></svg>',
+  manteiga:'<svg viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="50" rx="27" ry="7" fill="#E8DFD4"/><path d="M10 32l26-8 18 6-26 8z" fill="#F3D98C"/><path d="M10 32l18 6v12l-18-6z" fill="#C8963E"/><path d="M28 38l26-8v12l-26 8z" fill="#D4A24E"/></svg>',
+  glucose:'<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="16" y="8" width="32" height="8" rx="3" fill="#D4A24E"/><path d="M18 16h28v34a6 6 0 0 1-6 6H24a6 6 0 0 1-6-6z" fill="#9FB3C8"/><path d="M22 22v26" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" opacity=".6"/><rect x="24" y="30" width="16" height="12" rx="2" fill="#F8F5F0"/></svg>',
+  cremosa:'<svg viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="56" rx="22" ry="3.5" fill="#E8DFD4"/><path d="M7 28h50c0 15-11 26-25 26S7 43 7 28z" fill="#FFFFFF" stroke="#D98B95" stroke-width="2.2"/><ellipse cx="32" cy="28" rx="25" ry="6.5" fill="#5A3A2C"/><path d="M16 28c5-3 11-3 16-1s10 2 14-1" stroke="#80563F" stroke-width="2.4" fill="none" stroke-linecap="round"/><path d="M50 4L38 27" stroke="#D4A24E" stroke-width="4.5" stroke-linecap="round"/><ellipse cx="37" cy="29" rx="5" ry="3" fill="#D4A24E" transform="rotate(-62 37 29)"/></svg>',
+  estrutura:'<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="8" y="16" width="48" height="40" rx="4" fill="#4A2A1C"/><rect x="12" y="20" width="40" height="32" rx="2" fill="#F4E4C8"/><rect x="12" y="28" width="40" height="5" fill="#8C3A3B"/><rect x="12" y="40" width="40" height="5" fill="#8C3A3B"/><path d="M13 18h10" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity=".45"/></svg>',
+  cobertura:'<svg viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="56" rx="28" ry="4" fill="#E8DFD4"/><rect x="10" y="20" width="44" height="34" rx="3" fill="#F5E1E4"/><path d="M10 20h44v8c0 3-4 3-4 0v4c0 3-5 3-5 0v-6c0 3-4 3-4 0v10c0 3-5 3-5 0v-8c0 3-4 3-4 0v4c0 3-5 3-5 0v-6c0 3-4 3-4 0v8c0 3-5 3-5 0v-10c0 3-4 3-4 0z" fill="#5A3A2C"/><circle cx="32" cy="15" r="4" fill="#8C3A3B"/></svg>'
+};
+var ICS = {
+  uso:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11h16a8 8 0 0 1-16 0z"/><path d="M12 3v5M9 5l3-2 3 2"/></svg>',
+  peso:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l2 12H4z"/><circle cx="12" cy="5" r="2"/></svg>',
+  choc:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M6 9h12M6 15h12M12 3v18"/></svg>'
+};
+// "Deu errado?" (texto a revisar com a Tatiana; base: Fase 2, item 2.4)
+var CONSERTOS = [
+  ['💧','Talhou: ficou oleosa ou granulada','<p>A gordura se separou do líquido. As causas mais comuns: <b>pouco líquido</b> para o chocolate, líquido jogado <b>de uma vez</b>, ou a ganache <b>quente demais</b> (acima de uns 45 °C) ou <b>fria demais</b> (abaixo de 30 °C) na hora de misturar.</p><p><b>Como salvar:</b> deixe a ganache a uns 35 °C, junte 1 a 2 colheres de creme ou leite morno e passe o mixer até voltar o brilho.</p>'],
+  ['🔁','Não voltou nem com o mixer','<p><b>Recomece aos poucos:</b> coloque 1 a 2 colheres de líquido morno (35 °C) numa tigela limpa. Vá juntando uns 20% da ganache talhada, pouco a pouco, mexendo até ficar lisa e elástica. Depois junte o resto em partes.</p>'],
+  ['🍋','Talhou com fruta ou licor','<p>Fruta ácida pode cortar o creme, e o álcool desmancha a mistura. <b>Na próxima:</b> aqueça a fruta separada e junte aos poucos. O licor entra <b>no fim</b>, com a ganache a uns 35 °C.</p><p><b>Para salvar agora:</b> mixer e um pouco de creme morno.</p>'],
+  ['🥄','Ficou mole demais','<p>Líquido demais para o chocolate, ou gordura do leite demais (creme muito gordo, muita manteiga). Antes de mexer, espere a ganache <b>firmar em lugar fresco</b> (16 a 18 °C) por algumas horas: ela endurece com o tempo.</p><p><b>Na próxima:</b> confira a proporção aqui na calculadora. Com cobertura fracionada, <b>nunca use manteiga</b>: é ela que deixa mole.</p>'],
+  ['🌪️','Empelotou ao bater (ganache batida)','<p>Bateu demais ou o creme não estava bem frio. <b>Na próxima:</b> ganache bem gelada e bater devagar, parando assim que der o ponto.</p><p><b>Para salvar:</b> aqueça uma parte, misture com o resto e bata de novo, com cuidado.</p>'],
+  ['🌡️','Ficou grossa e sem brilho','<p>Esfriou antes de misturar direito. <b>Como salvar:</b> aqueça de leve (banho-maria ou micro-ondas em pulsos curtos) até uns 35 °C e passe o mixer.</p>']
+];
+var G={origem:'nacional'};
+function fmtR(r){ return (Math.round(r*10)/10).toString().replace('.',','); }
+function drawGuia(){
+  var o=$('g-orig'); o.innerHTML=''; o.className='opts two';
+  ['nacional','importado'].forEach(function(k){ var b=document.createElement('button'); b.type='button'; b.textContent=ORIGENS[k]; b.setAttribute('aria-pressed',G.origem===k?'true':'false'); b.addEventListener('click',function(){G.origem=k;drawGuia();}); o.appendChild(b); });
+  var tipos=['meio','leite','branco'], h='<table class="matriz"><thead><tr><th></th>'+tipos.map(function(t){return '<th>'+TIPOS[t].n+'</th>'}).join('')+'</tr></thead><tbody>';
+  Object.keys(TEXTURAS).forEach(function(tx){
+    h+='<tr><th>'+TEXTURAS[tx].n+'</th>'+tipos.map(function(t){ var r=PROPORCAO[t][tx]*FIRME.importado[t]/FIRME[G.origem][t]; return '<td><b>'+fmtR(r)+'</b> : 1</td>'; }).join('')+'</tr>';
+  });
+  $('g-matriz').innerHTML=h+'</tbody></table>';
+  if(!$('g-acc').children.length) $('g-acc').innerHTML=CONSERTOS.map(function(c){return '<details><summary><span class="ic">'+c[0]+'</span><span>'+c[1]+'</span></summary><div class="bdy">'+c[2]+'</div></details>'}).join('');
+}
+function foto(id,cls,alt){ return FOTOS[id] ? '<img'+(cls?' class="'+cls+'"':'')+' src="'+FOTOS[id]+'" alt="'+esc(alt||'')+'" loading="lazy">' : ''; }
+
+var $=function(id){return document.getElementById(id)};
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function grupoDe(cat){for(var g in GRUPOS){if(GRUPOS[g].indexOf(cat)>=0) return g;} return null;}
+function existe(tipo,origem){ if(origem==='fracionada') return FALSA.tipos.indexOf(tipo)>=0; return FIRME[origem][tipo]!=null; }
+// chocolate por grama de ÁGUA para tipo/origem/textura (mesma régua da tabela Ganache Perfeita)
+function W(tipo,origem,tex){ return PROPORCAO[tipo][tex]*FIRME.importado[tipo]/FIRME[origem][tipo]/0.58; }
+function agua(itens){ var a=0; itens.forEach(function(it){ var i=ING[it[0]]; if(i.w) a+=it[1]*i.w; }); return a; }
+function fmtG(g){ return g<3 ? (Math.round(g*10)/10).toString().replace('.',',') : Math.round(g).toString(); }
+
+/* ---------- pizza ---------- */
+var FATIAS=[['choc','Chocolate','--i-choc'],['liq','Líquidos','--i-liq'],['mant','Manteiga','--i-mant'],['acu','Glucose e açúcar','--i-gli'],['sab','Sabor','--i-sab']];
+function fatiaDe(id){ var c=ING[id].cat; if(ING[id].w) return 'liq'; if(c==='manteiga') return 'mant'; if(c==='acucar') return 'acu'; return 'sab'; }
+function pizza(choc,itens){
+  var t={choc:choc,liq:0,mant:0,acu:0,sab:0}; itens.forEach(function(it){ t[fatiaDe(it[0])]+=it[1]; });
+  var tot=choc; itens.forEach(function(it){tot+=it[1]});
+  var cx=75,cy=75,R=70,a=-Math.PI/2,s='';
+  FATIAS.forEach(function(f){
+    var v=t[f[0]]/tot*100; if(v<0.3) return;
+    var ang=v/100*2*Math.PI, a2=a+ang;
+    if(v>99.9){ s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+R+'" fill="var('+f[2]+')"/>'; }
+    else s+='<path d="M'+cx+','+cy+' L'+(cx+R*Math.cos(a)).toFixed(2)+','+(cy+R*Math.sin(a)).toFixed(2)+' A'+R+','+R+' 0 '+(ang>Math.PI?1:0)+' 1 '+(cx+R*Math.cos(a2)).toFixed(2)+','+(cy+R*Math.sin(a2)).toFixed(2)+' Z" fill="var('+f[2]+')" stroke="var(--stroke)" stroke-width="2"><title>'+f[1]+' '+Math.round(v)+'%</title></path>';
+    if(v>=8){ var m=a+ang/2; s+='<text x="'+(cx+R*.6*Math.cos(m)).toFixed(1)+'" y="'+(cy+R*.6*Math.sin(m)).toFixed(1)+'" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="700" font-family="Montserrat,system-ui,sans-serif" fill="'+(f[0]==='choc'?'#FFF6F2':'#2B1A12')+'">'+Math.round(v)+'%</text>'; }
+    a=a2;
+  });
+  return '<svg viewBox="0 0 150 150" role="img" aria-label="Pizza da receita">'+s+'</svg>';
+}
+
+/* ---------- modo de preparo (texto próprio, montado pelos ingredientes) ---------- */
+function preparo(tipo,tex,itens,falsa){
+  var ids=itens.map(function(x){return x[0]}), has=function(c){return itens.some(function(x){return ING[x[0]].cat===c})};
+  var nome=function(c){return itens.filter(function(x){return ING[x[0]].cat===c}).map(function(x){return ING[x[0]].n.toLowerCase()}).join(', ')};
+  var maxT=(tipo==='branco'||tipo==='leite'||tipo==='caramelo'||tipo==='ruby')?40:45, st=[];
+  if(falsa){
+    return ['Derreta a cobertura entre 40 e 45 °C. Não precisa temperar.','Aqueça o creme até ficar bem quente, sem ferver.','Despeje o creme sobre a cobertura em 3 vezes, mexendo do centro para fora até ficar liso.','Não use manteiga, manteiga de cacau nem chocolate de verdade misturado.','Deixe chegar no ponto de pomada e aplique logo sobre o bolo gelado, alisando.','Se endurecer, leve ao micro-ondas em pulsos de 5 segundos.'];
+  }
+  if(has('queijo')||has('geleia')){
+    return ['Misture bem '+[nome('queijo'),nome('geleia'),nome('seco'),nome('raspas')].filter(Boolean).join(', ')+'.','Derreta o chocolate (até '+maxT+' °C).','Junte a mistura ao chocolate aos poucos, mexendo até ficar liso. Não precisa temperar.',pontoTxt(tex)];
+  }
+  if(ids.indexOf('acucar')>=0) st.push('Derreta o açúcar em fogo baixo até ficar cor de âmbar. Junte o creme morno aos poucos (cuidado com o vapor) e mexa até dissolver.');
+  st.push('Derreta o chocolate (até '+maxT+' °C).'+(has('pasta')?' Misture '+nome('pasta')+' ao chocolate derretido.':'')+(ids.indexOf('mcacau')>=0?' Junte a manteiga de cacau.':''));
+  var inf=itens.filter(function(x){var c=ING[x[0]].cat;return c==='cha'||c==='erva'||c==='especiaria'||c==='raspas'}).map(function(x){return ING[x[0]].n.toLowerCase()});
+  var cremes=itens.filter(function(x){return ING[x[0]].cat==='creme'});
+  var base = has('agua')?'a água':(cremes.length?'o creme':'');
+  var acu=itens.filter(function(x){return x[0]==='glucose'||x[0]==='invertido'}).map(function(x){return ING[x[0]].n.toLowerCase()}).join(' e ');
+  if(ids.indexOf('acucar')<0 && base){
+    var t='Aqueça '+base+(inf.length?' com '+inf.join(', '):'')+(acu&&!has('fruta')?(inf.length?' e a ':' com a ')+acu:'')+' até começar a ferver.';
+    if(inf.length) t+=' Desligue, tampe e deixe 5 minutos. Coe o que for folha ou pau.';
+    if(has('agua')&&cremes.length) t+=' Depois junte o creme e aqueça de novo.';
+    if(ids.indexOf('cafe')>=0) t+=' Dissolva o café no líquido quente.';
+    st.push(t);
+  }
+  if(has('fruta')){
+    var fr=itens.filter(function(x){return ING[x[0]].cat==='fruta'});
+    var t2='Aqueça '+fr.map(function(x){return ING[x[0]].n.toLowerCase()}).join(' e ')+(acu?' com a '+acu:'')+(cremes.length?', separado do creme':'')+'.';
+    if(fr.some(function(x){return ING[x[0]].enzima})) t2+=' Deixe ferver 2 minutos: isso desliga uma enzima da fruta que talha o creme.';
+    st.push(t2);
+  }
+  st.push('Despeje o líquido quente sobre o chocolate em 3 vezes, mexendo do centro para fora até ficar liso e brilhante.');
+  if(has('leitecoco')||has('seco')) st.push('Junte '+[nome('leitecoco'),nome('seco')].filter(Boolean).join(' e ')+' e deixe descansar 10 minutos.');
+  if(has('alcool')) st.push('Quando a ganache estiver a uns 35 °C, junte '+nome('alcool')+'.');
+  if(ids.indexOf('manteiga')>=0) st.push('Junte a manteiga em pedaços (com a ganache a uns 35 °C) e passe o mixer.'); else st.push('Passe o mixer para deixar bem lisa.');
+  var fin=itens.filter(function(x){return x[0]==='baunilha'||x[0]==='flordesal'}).map(function(x){return ING[x[0]].n.toLowerCase()});
+  if(fin.length) st.push('No fim, quando esfriar um pouco, junte '+fin.join(' e ')+'.');
+  st.push(pontoTxt(tex));
+  return st;
+}
+function pontoTxt(tex){
+  if(tex==='estrutura') return 'Deixe firmar em lugar fresco (16 a 20 °C) até o ponto de pomada e aplique sobre o bolo gelado, alisando.';
+  if(tex==='cobertura') return 'Use a 30–32 °C sobre o bolo gelado, deixando escorrer pela borda.';
+  return 'Ponto: para trufa, leve à geladeira até firmar e boleie. Para bombom ou casca, recheie a uns 28–30 °C. Para bolo, use em ponto de pomada.';
+}
+
+/* ---------- avisos ---------- */
+function avisos(tipo,origem,tex,itens,extra){
+  var a=[];
+  if(origem==='fracionada') a.push(['bad','Falsa Ganache:','cobertura fracionada não é chocolate. Serve só para blindagem, sem manteiga. Guarde o bolo fora da geladeira, com recheio que aguente temperatura ambiente.']);
+  if(itens.some(function(x){return ING[x[0]].enzima})) a.push(['','Abacaxi e kiwi:','ferva a polpa antes. Crus, eles talham o creme.']);
+  else if(itens.some(function(x){return ING[x[0]].acida})) a.push(['','Fruta ácida:','aqueça separada do creme e junte aos poucos, senão o creme pode talhar.']);
+  if(tipo==='branco'&&origem==='nacional') a.push(['','Chocolate branco de barra','de supermercado costuma ser mais mole: use 10% a mais de chocolate.']);
+  (extra||[]).forEach(function(e){a.push(e)});
+  a.push(['ok','Teste primeiro:','faça uma porção pequena. A calculadora faz a conta, mas o ponto final quem confirma é você.']);
+  return '<div class="alerts">'+a.map(function(x){return '<div class="alert '+x[0]+'"><b>'+x[1]+'</b> '+x[2]+'</div>'}).join('')+'</div>';
+}
+
+/* ---------- desenho do resultado ---------- */
+function resultado(titulo,sub,tipo,origem,tex,itens,peso,extras,isFalsa,swapsHtml,fotoId){
+  var choc=100, tot=choc; itens.forEach(function(it){tot+=it[1]});
+  var k=peso?peso/tot:1;
+  var chocNome=(origem==='fracionada'?'Cobertura fracionada ':'Chocolate ')+TIPOS[tipo].n.toLowerCase()+(origem==='fracionada'?'':' '+ORIGENS[origem].toLowerCase());
+  var li='<li><span class="sw" style="background:var(--i-choc)"></span><span>'+esc(chocNome)+'</span><span class="g">'+fmtG(choc*k)+' g</span></li>';
+  itens.forEach(function(it){ li+='<li><span class="sw" style="background:var('+FATIAS.filter(function(f){return f[0]===fatiaDe(it[0])})[0][2]+')"></span><span>'+esc(ING[it[0]].n)+'</span><span class="g">'+fmtG(it[1]*k)+' g</span></li>'; });
+  var h='<div class="result">';
+  if(fotoId){
+    h+='<div class="rec-hero" style="--cor-tipo:var('+TIPOS[tipo].cor+')">'+(foto(fotoId,'',titulo)||'<span class="ilu">'+ILU[tex]+'</span>')+'<div class="tt"><div><span class="tag">'+TEXTURAS[tex].n+'</span></div><h2>'+esc(titulo)+'</h2></div></div>';
+    h+='<div class="stats"><div>'+ICS.uso+'<b>'+esc(sub)+'</b></div><div>'+ICS.peso+'<b>'+Math.round(tot*k)+' g</b>rendimento</div><div>'+ICS.choc+'<b>'+esc(TIPOS[tipo].n)+'</b>'+esc(ORIGENS[origem].toLowerCase())+'</div></div>';
+  } else {
+    h+='<div><span class="tag">'+TEXTURAS[tex].n+'</span> <span class="tag">'+esc(ORIGENS[origem])+'</span></div><h2>'+esc(titulo)+'</h2>'+(sub?'<p class="lede" style="margin:0">'+esc(sub)+'</p>':'');
+  }
+  h+='<div class="res-top">'+pizza(choc,itens)+'<div><ul class="ingr">'+li+'</ul><p class="total">Rende cerca de '+Math.round(tot*k)+' g.</p><p class="dica-marcar">Toque no ingrediente para marcar o que já separou.</p></div></div>';
+  if(swapsHtml) h+=swapsHtml;
+  h+='<div><h3>Como fazer</h3><ol class="steps">'+preparo(tipo,tex,itens,isFalsa).map(function(s){return '<li>'+esc(s)+'</li>'}).join('')+'</ol></div>';
+  h+=avisos(tipo,origem,tex,itens,extras);
+  h+='<div class="actions noprint"><button class="btn" type="button" data-print>Imprimir ou salvar em PDF</button></div></div>';
+  return h;
+}
+
+/* ===================== MONTE A SUA GANACHE ===================== */
+var B={tex:'cremosa',tipo:'meio',origem:'nacional',creme:'creme20',fam:'classica',esc:null,peso:500};
+function opts(el,list,key,onpick,dis){
+  el.innerHTML='';
+  list.forEach(function(o){
+    var b=document.createElement('button'); b.type='button'; b.id='b-'+key+'-'+o[0];
+    b.innerHTML=o[1]; b.setAttribute('aria-pressed',B[key]===o[0]?'true':'false');
+    if(dis&&dis(o[0])) b.disabled=true;
+    b.addEventListener('click',function(){B[key]=o[0]; if(onpick) onpick(o[0]); drawBuild();});
+    el.appendChild(b);
+  });
+}
+function drawBuild(){
+  opts($('q-tex'),Object.keys(TEXTURAS).map(function(k){return [k,'<span class="ti">'+(foto(k,'',TEXTURAS[k].n)||ILU[k])+'</span><b>'+TEXTURAS[k].n+'</b>']}),'tex');
+  $('q-tex-uso').innerHTML='<b>'+TEXTURAS[B.tex].n+':</b> '+esc(TEXTURAS[B.tex].usos);
+  opts($('q-tipo'),Object.keys(TIPOS).map(function(k){return [k,'<span class="dot" style="background:var('+TIPOS[k].cor+')"></span>'+TIPOS[k].n]}),'tipo',function(){ if(!existe(B.tipo,B.origem)) B.origem='importado'; });
+  opts($('q-orig'),Object.keys(ORIGENS).map(function(k){return [k,ORIGENS[k]]}),'origem',null,function(o){return !existe(B.tipo,o)});
+  opts($('q-creme'),['creme35','creme30','creme25','creme20','creme17'].map(function(k){return [k,ING[k].n.replace('Creme de leite ','').replace('de caixinha ','caixinha ')]}),'creme');
+  var famDis=function(f){return B.origem==='fracionada'&&f!=='classica'};
+  opts($('q-fam'),Object.keys(FAMILIAS).map(function(k){return [k,FAMILIAS[k].n]}),'fam',function(){B.esc=null;},famDis);
+  if(famDis(B.fam)) B.fam='classica';
+  var F=FAMILIAS[B.fam], e=$('q-escolha'); e.innerHTML='';
+  if(F.lista){
+    if(!B.esc||F.lista.indexOf(B.esc)<0) B.esc=F.lista[0];
+    var s=document.createElement('select'); s.id='q-esc'; s.setAttribute('aria-label','Qual sabor');
+    F.lista.forEach(function(id){var o=document.createElement('option');o.value=id;o.textContent=ING[id].n;if(id===B.esc)o.selected=true;s.appendChild(o);});
+    s.addEventListener('change',function(){B.esc=s.value;drawBuild();});
+    e.appendChild(s);
+  }
+  $('build-out').innerHTML=buildRecipe();
+}
+function buildRecipe(){
+  var tex=B.tex,tipo=B.tipo,origem=B.origem,cr=ING[B.creme];
+  if(origem==='fracionada'){
+    if(tex!=='estrutura') return '<div class="result blocked"><h2>Não recomendado</h2><p>Com cobertura fracionada a gente só faz <b>blindagem</b> (textura Estrutura). No recheio ela fica mole, puxenta e com gosto de gordura, e nem as fábricas recomendam. Para '+TEXTURAS[tex].usos.toLowerCase()+', use chocolate de verdade.</p><div class="actions"><button class="btn" type="button" data-fix="estrutura">Mudar para Estrutura (blindagem)</button><button class="btn ghost" type="button" data-fix="nacional">Usar chocolate de verdade</button></div></div>';
+    var itF=[[B.creme, FALSA.creme*0.73/cr.w]];
+    return resultado('Blindagem com cobertura fracionada','Falsa Ganache · proporção das marcas, 5 : 1',tipo,origem,tex,itF,B.peso,[['','Outras opções que funcionam:','3 : 1 com creme 17% + chantilly vegetal, ou 3,3 a 4 : 1 só com chantilly vegetal em temperatura ambiente, batido até ponto de pomada.'],['','Marcas:','use só cobertura que a própria marca indica para ganache (ex.: Selecta Supreme, Garoto Confeitaria, Harald Top).']],true);
+  }
+  var agua=100/W(tipo,origem,tex), ex=EXTRAS[tex];
+  var r35=PROPORCAO[tipo][tex]*FIRME.importado[tipo]/FIRME[origem][tipo], chocPct=(100-ex[0]-ex[1])*r35/(r35+1);
+  var mant=ex[0]/chocPct*100, gli=ex[1]/chocPct*100;
+  var it=[], F=FAMILIAS[B.fam], extra=[], titulo='Ganache '+TIPOS[tipo].n.toLowerCase();
+  var aguaResto=agua;
+  if(B.fam==='fruta'){ var fw=agua*F.parteAgua; it.push([B.esc,fw/ING[B.esc].w]); aguaResto-=fw; titulo+=' com '+ING[B.esc].n.toLowerCase().replace('polpa de ','').replace('suco de ',''); }
+  if(B.fam==='alcool'){ it.push([B.esc,F.g]); aguaResto-=F.g*ING[B.esc].w; titulo+=' com '+ING[B.esc].n.toLowerCase(); }
+  if(B.fam==='coco'){ it.push(['leitecoco',22]); it.push(['coco',35]); aguaResto-=22*ING.leitecoco.w; titulo+=' com coco'; }
+  if(B.fam==='caramelo'){ it.unshift(['acucar',32]); titulo='Ganache de caramelo com chocolate '+TIPOS[tipo].n.toLowerCase(); }
+  it.unshift([B.creme,aguaResto/cr.w]);
+  if(B.fam==='infusao'){ var c=ING[B.esc].cat; it.push([B.esc,F.g[c]]); titulo+=' com '+ING[B.esc].n.toLowerCase(); }
+  if(B.fam==='pasta'){ it.push([B.esc,F.g]); titulo+=' de '+ING[B.esc].n.toLowerCase().replace('pasta saborizante de ','').replace('pasta de ',''); }
+  if(mant>0.1) it.push(['manteiga',mant]);
+  if(gli>0.1) it.push(['glucose',gli]);
+  if(F.aTestar) extra.push(['','Sabor ainda sem receita testada','neste ponto: comece com uma porção pequena.']);
+  if(tex!=='cremosa'&&B.fam!=='classica') extra.push(['','Para '+TEXTURAS[tex].n.toLowerCase()+',','o sabor clássico é o mais seguro: sabor com muito líquido pode deixar mole.']);
+  return resultado(titulo, TEXTURAS[tex].usos, tipo, origem, tex, it, B.peso, extra, false);
+}
+
+/* ===================== RECEITAS PRONTAS ===================== */
+var M={filtro:'todas', rec:null};
+function drawMenu(){
+  var fs=[['todas','Todas'],['meio','Meio amargo'],['leite','Ao leite'],['branco','Branco']], f=$('m-filtro'); f.innerHTML='';
+  fs.forEach(function(o){var b=document.createElement('button');b.type='button';b.textContent=o[1];b.setAttribute('aria-pressed',M.filtro===o[0]?'true':'false');b.addEventListener('click',function(){M.filtro=o[0];drawMenu();});f.appendChild(b);});
+  var l=$('m-list'); l.innerHTML='';
+  RECEITAS.filter(function(r){return M.filtro==='todas'||r.tipo===M.filtro}).forEach(function(r){
+    var b=document.createElement('button'); b.type='button'; b.className='rc';
+    var img=foto(r.foto,'',r.nome);
+    b.innerHTML='<div class="band'+(TIPOS[r.tipo].claro&&!img?' light':'')+'" style="background:linear-gradient(160deg,var('+TIPOS[r.tipo].cor+'),#16243E)">'+(img||'<span class="ilu">'+ILU[r.tex]+'</span>')+'<span class="lbl">'+TIPOS[r.tipo].n+'</span></div><div class="bd"><b>'+esc(r.nome)+'</b><span>'+esc(r.uso)+'</span></div>';
+    b.addEventListener('click',function(){abrir(r)});
+    l.appendChild(b);
+  });
+}
+function abrir(r){
+  M.rec={base:r, tipo:r.tipo, origem:r.origem, itens:r.itens.map(function(x){return [x[0],x[1]]}), peso:null, msg:null};
+  show('rec'); drawRec(); window.scrollTo(0,0);
+}
+function trocarChocolate(tipo,origem){
+  var R=M.rec;
+  if(origem==='fracionada'){ R.msg='Cobertura fracionada não serve para '+R.base.uso.toLowerCase()+': fica mole, puxenta e com gosto de gordura. Use chocolate de verdade.'; return; }
+  if(!existe(tipo,origem)){ R.msg=TIPOS[tipo].n+' '+ORIGENS[origem].toLowerCase()+' não existe. Escolha importado.'; return; }
+  var f=W(R.tipo,R.origem,R.base.tex)/W(tipo,origem,R.base.tex); // mais firme → mais líquido
+  R.itens.forEach(function(it){ if(ING[it[0]].w) it[1]*=f; });
+  R.tipo=tipo; R.origem=origem; R.msg=null;
+}
+function trocarItem(i,novo){
+  var R=M.rec, it=R.itens[i];
+  if(novo==='__tirar'){ R.itens.splice(i,1); return; }
+  var a=ING[it[0]], b=ING[novo];
+  if(a.w&&b.w) it[1]=it[1]*a.w/b.w; // mantém a mesma água
+  it[0]=novo;
+}
+function drawRec(){
+  var R=M.rec, sw='<div class="swaps-wrap noprint"><h3>Não tem algum ingrediente? Troque aqui</h3><div class="swaps">';
+  sw+='<div class="sw-row"><span>Chocolate</span><span class="row"><select id="rc-tipo" aria-label="Tipo de chocolate">'+Object.keys(TIPOS).map(function(k){return '<option value="'+k+'"'+(k===R.tipo?' selected':'')+'>'+TIPOS[k].n+'</option>'}).join('')+'</select><select id="rc-orig" aria-label="Origem do chocolate">'+Object.keys(ORIGENS).map(function(k){return '<option value="'+k+'"'+(k===R.origem?' selected':'')+'>'+ORIGENS[k]+'</option>'}).join('')+'</select></span></div>';
+  R.itens.forEach(function(it,i){
+    var cat=ING[it[0]].cat, g=grupoDe(cat), ops=Object.keys(ING).filter(function(id){return GRUPOS[g].indexOf(ING[id].cat)>=0});
+    if(ops.length<2 && PODE_TIRAR.indexOf(cat)<0) return;
+    sw+='<div class="sw-row"><span>'+esc(ING[it[0]].n)+'</span><select data-i="'+i+'" aria-label="Trocar '+esc(ING[it[0]].n)+'">'+ops.map(function(id){return '<option value="'+id+'"'+(id===it[0]?' selected':'')+'>'+(id===it[0]?'manter: ':'trocar por: ')+esc(ING[id].n)+'</option>'}).join('')+(PODE_TIRAR.indexOf(cat)>=0?'<option value="__tirar">tirar este ingrediente</option>':'')+'</select></div>';
+  });
+  sw+='<div class="sw-row"><span>Quanto quer fazer?</span><span class="row"><input type="number" id="rc-peso" min="100" max="10000" step="50" placeholder="gramas" value="'+(R.peso||'')+'" aria-label="Peso final em gramas"> g</span></div>';
+  sw+='</div><div class="actions" style="margin-top:8px"><button class="btn ghost" type="button" id="rc-reset">Voltar à receita original</button></div></div>';
+  var extra=[]; if(R.msg) extra.unshift(['bad','Atenção:',R.msg]);
+  var mudou = R.tipo!==R.base.tipo||R.origem!==R.base.origem||JSON.stringify(R.itens)!==JSON.stringify(R.base.itens);
+  if(mudou) extra.push(['','Receita recalculada:','mantive a mesma quantidade de água para o ponto continuar igual.']);
+  $('rec-out').innerHTML=resultado(R.base.nome,R.base.uso,R.tipo,R.origem,R.base.tex,R.itens,R.peso,extra,false,sw,R.base.foto);
+  $('rc-tipo').addEventListener('change',function(){trocarChocolate(this.value,R.origem);drawRec();});
+  $('rc-orig').addEventListener('change',function(){trocarChocolate(R.tipo,this.value);drawRec();});
+  Array.prototype.forEach.call(document.querySelectorAll('#rec-out select[data-i]'),function(s){s.addEventListener('change',function(){trocarItem(+s.dataset.i,s.value);drawRec();});});
+  $('rc-peso').addEventListener('change',function(){var v=+this.value; R.peso=v>=50?v:null; drawRec();});
+  $('rc-reset').addEventListener('click',function(){abrir(R.base);});
+}
+
+/* ===================== início ===================== */
+if(FOTOS.capa){ $('capa').innerHTML=foto('capa','capa','Ganache'); $('whisk').hidden=true; }
+$('quatro').innerHTML=[['chocolate','Chocolate','Dá sabor e firmeza'],['liquido','Líquido','Deixa cremosa'],['manteiga','Manteiga','Deixa macia e aveludada'],['glucose','Glucose','Dá brilho e conserva']]
+  .map(function(x){return '<div>'+ILU[x[0]]+'<span><b>'+x[1]+'</b><span>'+x[2]+'</span></span></div>'}).join('');
+
+/* ===================== navegação ===================== */
+function show(v){
+  ['home','build','menu','rec','guia'].forEach(function(x){ $('v-'+x).hidden = x!==v; });
+  var aba = v==='rec'?'menu':v;
+  Array.prototype.forEach.call(document.querySelectorAll('.abas [data-go]'),function(b){ if(b.dataset.go===aba) b.setAttribute('aria-current','page'); else b.removeAttribute('aria-current'); });
+}
+$('go-build').addEventListener('click',function(){show('build');drawBuild();window.scrollTo(0,0);});
+$('go-menu').addEventListener('click',function(){show('menu');drawMenu();window.scrollTo(0,0);});
+document.addEventListener('click',function(e){
+  var t=e.target.closest('[data-go]'); if(t){ var v=t.dataset.go; show(v); if(v==='menu') drawMenu(); if(v==='build') drawBuild(); if(v==='guia') drawGuia(); window.scrollTo(0,0); }
+  var li=e.target.closest('.ingr li'); if(li) li.classList.toggle('feito');
+  if(e.target.closest('[data-print]')) window.print();
+  var fx=e.target.closest('[data-fix]'); if(fx){ if(fx.dataset.fix==='estrutura') B.tex='estrutura'; else B.origem='nacional'; if(!existe(B.tipo,B.origem)) B.origem='importado'; drawBuild(); }
+});
+show('home');
+$('q-peso').addEventListener('input',function(){ var v=+this.value; B.peso=v>=50?v:500; $('build-out').innerHTML=buildRecipe(); });
+})();
+</script>

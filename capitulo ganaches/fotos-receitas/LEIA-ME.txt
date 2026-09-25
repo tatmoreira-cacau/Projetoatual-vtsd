@@ -1,0 +1,26 @@
+FOTOS DAS RECEITAS DA CALCULADORA
+
+Coloque aqui as fotos, com estes nomes:
+  capa.jpg   -> foto de abertura da calculadora (uma ganache bonita)
+  1.jpg      -> Ganache de Bico Meio Amargo com Laranja
+  2.jpg      -> Ganache de Bico ao Leite com Canela
+  3.jpg      -> Ganache de Bico Branca com Baunilha
+  4.jpg      -> Recheio de Coco Tostado com Limão
+  5.jpg      -> Recheio Cremoso de Queijo com Goiabada
+  6.jpg      -> Trufa de Limão com Alecrim
+  7.jpg      -> Trufa de Chá Preto com Laranja
+  8.jpg      -> Recheio de Bombom ao Leite com Licor de Café
+  9.jpg      -> Recheio de Bombom de Avelã
+  10.jpg     -> Recheio de Cajá com Cachaça e Limão
+  11.jpg     -> Recheio de Maracujá com Hortelã
+  12.jpg     -> Recheio de Bombom de Mate Tostado
+  13.jpg     -> Trufa Meio Amargo com Café
+  14.jpg     -> Trufa ao Leite com Cardamomo
+  15.jpg     -> Ganache de Caramelo com Flor de Sal
+  cremosa.jpg, estrutura.jpg, cobertura.jpg -> uma foto de cada textura
+
+Dicas:
+- Foto sua (ou com direito de uso). Não use foto de apostila, site ou marca.
+- Formato quadrado ou deitado, luz natural, fundo limpo.
+- Pode ser .jpg ou .png. O programa diminui o tamanho sozinho.
+- Receita sem foto aparece com um cartão colorido no lugar.
