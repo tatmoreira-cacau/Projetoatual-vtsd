@@ -332,7 +332,7 @@ var ING = {
   goiabada:{n:'Goiabada cremosa',cat:'geleia',w:.30}, geleiavermelha:{n:'Geleia de frutas vermelhas',cat:'geleia',w:.33},
   geleiadamasco:{n:'Geleia de damasco',cat:'geleia',w:.33}, geleiamaracuja:{n:'Geleia de maracuj\u00e1',cat:'geleia',w:.33},
   chapreto:{n:'Ch\u00e1 preto',cat:'cha'}, earlgrey:{n:'Ch\u00e1 Earl Grey',cat:'cha'}, mate:{n:'Ch\u00e1 mate tostado',cat:'cha'},
-  hibisco:{n:'Hibisco seco',cat:'cha'}, camomila:{n:'Camomila',cat:'cha'},
+  hibisco:{n:'Hibisco seco',cat:'cha'}, matcha:{n:'Matcha (ch\u00e1 verde em p\u00f3)',cat:'cha'}, camomila:{n:'Camomila',cat:'cha'},
   alecrim:{n:'Alecrim fresco',cat:'erva'}, hortela:{n:'Hortel\u00e3 fresca',cat:'erva'}, manjericao:{n:'Manjeric\u00e3o fresco',cat:'erva'}, lavanda:{n:'Lavanda seca',cat:'erva'},
   rasplimao:{n:'Raspas de lim\u00e3o',cat:'raspas'}, rasplaranja:{n:'Raspas de laranja',cat:'raspas'},
   canela:{n:'Canela em pau',cat:'especiaria'}, cardamomo:{n:'Cardamomo',cat:'especiaria'}, cravo:{n:'Cravo',cat:'especiaria'}, cumaru:{n:'Cumaru',cat:'especiaria'},
@@ -427,12 +427,20 @@ var RECEITAS = [
  {id:17, foto:'17', nome:'Bombom de Cumaru e Mel', tipo:'leite', origem:'importado', tex:'cremosa', uso:'Bombom moldado',
   itens:[['creme30',64,'na receita original: 70 g de creme fresco 35%'],['mel',13],['cumaru',0.9,'2 favas raladas para cada 230 g de chocolate'],['manteiga',13]],
   prep:['Derreta o chocolate aos poucos, mexendo sempre.','Leve o creme e o mel ao fogo com o cumaru ralado. Quando ferver, desligue e deixe em infus\u00e3o por 30 minutos.','Coe o cumaru e volte ao fogo at\u00e9 ferver.','Despeje um ter\u00e7o da mistura quente sobre o chocolate e mexa r\u00e1pido, em pequenos c\u00edrculos, at\u00e9 formar um centro liso e brilhante.','Junte mais um ter\u00e7o e mexa do mesmo jeito. Depois junte o resto, sempre mexendo.','Com a ganache entre 35 e 40 \u00b0C, junte a manteiga em cubos e passe o mixer.','Recheie as casquinhas a 28\u201330 \u00b0C, deixe firmar e feche com chocolate amargo.'],
-  notas:[['','Durabilidade:','7 a 10 dias, em ambiente de 18 a 21 \u00b0C.'],['','Rende:','cerca de 50 bombons com 230 g de chocolate.']]}
+  notas:[['','Durabilidade:','7 a 10 dias, em ambiente de 18 a 21 \u00b0C.'],['','Rende:','cerca de 50 bombons com 230 g de chocolate.']]},
+ {id:18, foto:'18', nome:'Ganache de Ch\u00e1 Verde (Matcha)', tipo:'branco', origem:'importado', tex:'cremosa', uso:'Bombom moldado',
+  itens:[['creme30',64,'na receita original: 56 g de creme de leite UHT'],['glucose',11],['matcha',4.4],['mcacau',14.4]],
+  prep:['Aque\u00e7a o creme com a glucose e o matcha, mexendo bem.','Despeje sobre o chocolate e misture at\u00e9 ficar homog\u00eaneo.','Quando chegar a 35 \u00b0C, junte a manteiga de cacau e passe o mixer.','Recheie as casquinhas, feche e leve \u00e0 geladeira at\u00e9 firmar. Desenforme.'],
+  notas:[['','Validade:','15 dias (n\u00e3o tem conservante). Congelada e bem embalada, at\u00e9 2 meses.'],['','Rende:','cerca de 45 bombons de 12 g com 180 g de chocolate.']]},
+ {id:19, foto:'19', nome:'Ganache de Chocolate ao Leite', tipo:'leite', origem:'importado', tex:'cremosa', uso:'Bombom moldado',
+  itens:[['creme30',47.5,'na receita original: 41 g de creme de leite UHT'],['glucose',8],['manteiga',2.5]],
+  prep:['Aque\u00e7a o creme com a glucose.','Despeje sobre o chocolate ao leite.','Junte a manteiga.','Passe o mixer para emulsionar.','Recheie as casquinhas, feche e leve \u00e0 geladeira at\u00e9 firmar. Desenforme.'],
+  notas:[['','Validade:','15 dias (n\u00e3o tem conservante). Congelada e bem embalada, at\u00e9 2 meses.'],['','Rende:','cerca de 58 bombons de 12 g com 400 g de chocolate.']]}
 ];
 
 /* ===================== fim dos dados ===================== */
 
-// Fotos: o montar.py preenche sozinho com as fotos da pasta fotos-receitas (capa, 1 a 17, cremosa, estrutura, cobertura).
+// Fotos: o montar.py preenche sozinho com as fotos da pasta fotos-receitas (capa, 1 a 19, cremosa, estrutura, cobertura).
 var FOTOS = {};
 
 // Ilustra\u00e7\u00f5es (desenho simples, sem foto): os 4 ingredientes e as 3 texturas

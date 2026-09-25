@@ -192,6 +192,27 @@
 **Preparo:** Derreta o chocolate aos poucos, mexendo sempre. Leve o creme e o mel ao fogo com o cumaru ralado. Quando ferver, desligue e deixe em infusão por 30 minutos. Coe o cumaru e volte ao fogo até ferver. Despeje um terço da mistura quente sobre o chocolate e mexa rápido, em pequenos círculos, até formar um centro liso e brilhante. Junte mais um terço e mexa do mesmo jeito. Depois junte o resto, sempre mexendo. Com a ganache entre 35 e 40 °C, junte a manteiga em cubos e passe o mixer. Recheie as casquinhas a 28–30 °C, deixe firmar e feche com chocolate amargo.
 **Durabilidade:** 7 a 10 dias, em ambiente de 18 a 21 °C.
 
+## 18. Ganache de Chá Verde (Matcha)
+**Textura:** Cremosa · recheio de bombom moldado · **Sabor:** chá
+- 100 g de chocolate branco (33% de cacau)
+- 64 g de creme de leite 30% (na receita original: 56 g de creme de leite UHT)
+- 11 g de glucose
+- 4,4 g de matcha em pó
+- 14,4 g de manteiga de cacau
+
+**Preparo:** Aqueça o creme com a glucose e o matcha, mexendo bem. Despeje sobre o chocolate e misture até ficar homogêneo. Quando chegar a 35 °C, junte a manteiga de cacau e passe o mixer. Recheie as casquinhas, feche e leve à geladeira até firmar. Desenforme.
+**Validade:** 15 dias (não tem conservante). Congelada e bem embalada, até 2 meses.
+
+## 19. Ganache de Chocolate ao Leite
+**Textura:** Cremosa · recheio de bombom moldado · **Sabor:** clássica
+- 100 g de chocolate ao leite
+- 47,5 g de creme de leite 30% (na receita original: 41 g de creme de leite UHT)
+- 8 g de glucose
+- 2,5 g de manteiga sem sal
+
+**Preparo:** Aqueça o creme com a glucose. Despeje sobre o chocolate ao leite. Junte a manteiga. Passe o mixer para emulsionar. Recheie as casquinhas, feche e leve à geladeira até firmar. Desenforme.
+**Validade:** 15 dias (não tem conservante). Congelada e bem embalada, até 2 meses.
+
 ---
 
 ## Tabela rápida (para a calculadora)
@@ -215,5 +236,7 @@
 | 15 | Caramelo salgado | ao leite | 1,1 : 1 (+ caramelo) | Cremosa · recheio de barra |
 | 16 | Framboesa e vinho do Porto | ruby | 1,3 : 1 | Cremosa · trufa oca |
 | 17 | Cumaru e mel | ao leite | 1,3 : 1 | Cremosa · bombom moldado |
+| 18 | Chá verde (matcha) | branco | 1,8 : 1 | Cremosa · bombom moldado |
+| 19 | Chocolate ao leite | ao leite | 2,4 : 1 | Cremosa · bombom moldado |
 
 *As proporções mudaram um pouco em relação às receitas originais porque o creme agora é 30%: com menos água no creme, entra mais creme para dar o mesmo ponto. O controle interno de onde veio cada receita fica só em `Analise-das-15-receitas.md`, que não vai para o livro.*

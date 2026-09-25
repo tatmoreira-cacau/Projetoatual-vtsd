@@ -19,6 +19,8 @@ Coloque aqui as fotos, com estes nomes:
   15.jpg     -> Ganache de Caramelo Salgado
   16.jpg     -> Trufa de Framboesa e Vinho do Porto
   17.jpg     -> Bombom de Cumaru e Mel
+  18.jpg     -> Ganache de Chá Verde (Matcha)
+  19.jpg     -> Ganache de Chocolate ao Leite
   cremosa.jpg, estrutura.jpg, cobertura.jpg -> uma foto de cada textura
 
 Dicas:
