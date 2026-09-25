@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Montserrat:wght@400;500;600;700&display=swap">
 <style>
-/* Tema escuro com as cores do ebook: azul-marinho de fundo, vinho nos bot&#245;es, ouro nos detalhes, creme no texto, rosa nos &#237;cones */
+/* Tema escuro com as cores do ebook: azul-marinho de fundo, vinho nos bot\f5 es, ouro nos detalhes, creme no texto, rosa nos \ed cones */
 :root{
   color-scheme:dark;
   --creme:#F8F5F0; --vinho:#8C3A3B; --vinho2:#A5494A; --ouro:#B0863A; --ouro2:#D4A24E; --marinho:#16243E; --marinho2:#22365A; --rosa:#D98B95; --rosa-soft:#F5E1E4;
@@ -42,7 +42,7 @@ button{font:inherit;cursor:pointer}
 button:focus-visible,select:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--ouro2);outline-offset:2px}
 .back{align-self:flex-start;background:none;border:none;color:var(--ouro2);font-weight:600;padding:4px 0}
 
-/* in&#237;cio */
+/* in\ed cio */
 .hero{background:linear-gradient(160deg,var(--marinho2),var(--marinho));border:1px solid var(--line);border-radius:24px;padding:26px 20px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;color:#fff;box-shadow:0 18px 40px rgba(0,0,0,.35);overflow:hidden}
 .hero h1{color:#fff}
 .hero .lede{color:#D8DEE8}
@@ -128,14 +128,14 @@ select,input[type=number]{font:inherit;font-size:16px;padding:10px 12px;border-r
 .stats svg{width:22px;height:22px;color:var(--ouro2)}
 .stats b{color:var(--ink);font-size:13px;font-weight:600}
 
-/* ilustra&#231;&#245;es dos 4 ingredientes */
+/* ilustra\e7 \f5 es dos 4 ingredientes */
 .quatro{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .quatro div{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:10px;display:grid;grid-template-columns:48px 1fr;gap:10px;align-items:center}
 .quatro svg{width:48px;height:48px}
 .quatro b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:600;color:var(--titulo);font-size:16px;line-height:1.1}
 .quatro span{font-size:12px;color:var(--muted);line-height:1.3;display:block}
 
-/* card&#225;pio */
+/* card\e1 pio */
 .menu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .rc{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;text-align:left;padding:0;display:flex;flex-direction:column;color:var(--ink);box-shadow:0 10px 22px rgba(0,0,0,.3)}
 .rc:hover{border-color:var(--ouro2)}
@@ -163,13 +163,14 @@ select,input[type=number]{font:inherit;font-size:16px;padding:10px 12px;border-r
 .matriz tr:last-child th,.matriz tr:last-child td{border-bottom:none}
 .matriz thead th{background:var(--surface2);font-size:12px;color:var(--ouro2);font-weight:700}
 .matriz tbody th{text-align:left;padding-left:12px;font-weight:600;font-size:13px}
+.matriz td{white-space:nowrap}
 .matriz td b{color:var(--titulo);font-size:15px}
 .acc{display:flex;flex-direction:column;gap:8px}
 .acc details{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
 .acc summary{list-style:none;padding:13px 14px;display:grid;grid-template-columns:28px 1fr 16px;gap:10px;align-items:center;cursor:pointer;font-weight:600;font-size:15px}
 .acc summary::-webkit-details-marker{display:none}
 .acc summary .ic{width:28px;height:28px;border-radius:8px;background:var(--bad-soft);display:grid;place-items:center;font-size:15px}
-.acc summary::after{content:"&#8250;";color:var(--ouro2);font-size:22px;transition:transform .2s;text-align:center}
+.acc summary::after{content:"\203a ";color:var(--ouro2);font-size:22px;transition:transform .2s;text-align:center}
 .acc details[open] summary::after{transform:rotate(90deg)}
 .acc .bdy{padding:0 14px 14px 52px;font-size:14px;color:var(--ink);display:flex;flex-direction:column;gap:8px}
 .acc .bdy p{margin:0}
