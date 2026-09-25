@@ -18,34 +18,41 @@ Depois do teste da Tatiana com cobertura fracionada, que deu recheio e blindagem
 
 Leia também: `capitulo ganaches/Conclusão para a calculadora de ganache.pdf` e `capitulo ganaches/Teste-23-09-e-receitas-oficiais.md`.
 
-## ▶️ ESTADO ATUAL (24/09/2026): a v1 da calculadora JÁ EXISTE. Continue a partir dela, não comece do zero.
+## ▶️ ESTADO ATUAL (25/09/2026): a v1 da calculadora JÁ EXISTE, com tema escuro. Continue a partir dela, não comece do zero.
 
 **Arquivos**
 - **Fonte da calculadora (edite este):** `capitulo ganaches/fontes/calculadora-src.html`
 - **Fonte da tabela Ganache Perfeita:** `capitulo ganaches/fontes/ganache-perfeita-src.html` (conteúdo do capítulo 3; **não mude os números sem a Tatiana pedir**)
-- **Gerar as versões finais:** `python "capitulo ganaches/fontes/montar.py"` gera `capitulo ganaches/calculadora-ganache.html` e `capitulo ganaches/ganache-perfeita.html` (arquivo único, acentos escapados, pronto para a Hotmart). **Nunca edite os arquivos gerados à mão.**
-- **Fotos:** `capitulo ganaches/fotos-receitas/` (nomes em `LEIA-ME.txt`: `capa.jpg`, `1.jpg`…`15.jpg`, `cremosa.jpg`, `estrutura.jpg`, `cobertura.jpg`)
+- **Gerar as versões finais:** `python "capitulo ganaches/fontes/montar.py"` gera `capitulo ganaches/calculadora-ganache.html` e `capitulo ganaches/ganache-perfeita.html` (arquivo único, pronto para a Hotmart). **Nunca edite os arquivos gerados à mão.** Precisa de Pillow (`pip install pillow`); sem ele, gera sem fotos e avisa.
+- **O que o `montar.py` faz:** põe o cabeçalho com charset; troca acentos e símbolos por códigos (`&#NNN;` no HTML, `\uXXXX` no `<script>`, com par substituto para emojis, e `\XXXX ` no `<style>`), porque a Hotmart entrega o arquivo sem charset; diminui as fotos (lado maior 800 px, JPEG 75%) e embute como data URI; avisa se o arquivo passar de 5 MB.
+- **Fotos:** `capitulo ganaches/fotos-receitas/` (nomes em `LEIA-ME.txt`: `capa.jpg`, `1.jpg`…`15.jpg`, `cremosa.jpg`, `estrutura.jpg`, `cobertura.jpg`). **A pasta ainda está sem fotos**; sem foto, aparece uma ilustração SVG.
+- **Prévia para a Tatiana:** artifact privado https://claude.ai/artifact/HFEk7pv8KywwcEAN8e8124 (atualize republicando `capitulo ganaches/calculadora-ganache.html` com esse `url`).
+- **Git:** branch `main-p86j61`, PR #1 (rascunho) para `main`.
 
-**O que a v1 já faz (testado em 24/09)**
-- Início "Faça a Sua Própria Ganache" com dois botões: **Monte a sua ganache** e **Receitas prontas**.
-- **Monte a sua ganache:** textura (Cremosa, Estrutura, Cobertura) · chocolate (7 tipos) · origem (nacional, importado, cobertura fracionada) · creme (35, 30, 25, 20, 17%) · sabor (clássica, fruta, chá/erva/especiaria, licor, pasta, coco, caramelo) · peso. Devolve receita em gramas + pizza + modo de preparo + avisos. A cobertura fracionada só libera **Estrutura/blindagem** (5 : 1, sem manteiga). Nas outras texturas, bloqueia com o texto da Tatiana.
-- **Receitas prontas:** as 15 de `Receitas-autorais-100g.md`, com filtro por chocolate. Dentro de cada receita dá para: trocar o chocolate (tipo e origem), trocar qualquer ingrediente por outro do mesmo grupo (ex.: limão → abacaxi), tirar um sabor, escolher o peso final, voltar à original e imprimir.
+**O que a v1 já faz**
+- **Abas embaixo:** Início · Monte · Receitas · Guia. Barra do topo com o nome da calculadora.
+- **Início** "Faça a Sua Própria Ganache", com dois botões grandes: **Monte a sua ganache** e **Receitas prontas**.
+- **Monte a sua ganache:** passos numerados com botões em grade. Textura (Cremosa, Estrutura, Cobertura, em 3 cards com foto ou ilustração) · chocolate (7 tipos) · origem (nacional, importado, cobertura fracionada) · creme (35, 30, 25, 20, 17%) · sabor (clássica, fruta, chá/erva/especiaria, licor, pasta, coco, caramelo) · peso. Devolve receita em gramas + pizza + modo de preparo + avisos. A cobertura fracionada só libera **Estrutura/blindagem** (5 : 1, sem manteiga); nas outras texturas, bloqueia com o texto da Tatiana.
+- **Receitas prontas:** as 15 de `Receitas-autorais-100g.md`, em cards de 2 colunas com filtro por chocolate. A receita abre com foto grande e título por cima, linha de informações (ponto, rendimento, chocolate), pizza, ingredientes com bolinha de marcar, preparo e avisos. Dentro dela dá para: trocar o chocolate (tipo e origem), trocar qualquer ingrediente por outro do mesmo grupo (ex.: limão → abacaxi), tirar um sabor, escolher o peso final, voltar à original e imprimir/salvar em PDF.
+- **Guia:** (1) tabela "Quanto chocolate para cada 1 g de creme" (creme 35%, nacional/importado, mesma fórmula da tabela Ganache Perfeita) + nota da Falsa Ganache; (2) "Deu errado? Veja como consertar", 6 casos em sanfona (talhou; não voltou nem com mixer; talhou com fruta ou licor; mole demais; empelotou ao bater; grossa e sem brilho), com base na Fase 2.
 - **Regra de troca:** líquido por líquido mantém a **mesma quantidade de água**. Troca de chocolate reescala os líquidos pela régua da tabela Ganache Perfeita (`W = PROPORCAO × FIRME.importado ÷ FIRME[origem] ÷ 0,58`).
 - Modo de preparo gerado a partir dos ingredientes, com texto próprio (sem copiar fontes). Avisos de fruta ácida, abacaxi/kiwi (ferver), chocolate branco de supermercado (+10%), fracionada e "teste primeiro".
 - Os dados ficam no topo do script (`DADOS: edite aqui`): TIPOS, TEXTURAS, FIRME, PROPORCAO, EXTRAS, FALSA, ING (ingredientes com % de água), GRUPOS, FAMILIAS, RECEITAS.
 
-**Visual aprovado (24/09): cara de aplicativo com as cores do ebook.** A referência de formato é um app de receitas da Google Play (barra no topo, opções em lista com ícone, botões grandes), mas **as cores e fontes são as do ebook**: creme `#F8F5F0` (fundo), vinho `#8C3A3B` (títulos, botão principal, opção escolhida, círculos numerados), ouro `#B0863A` e `#D4A24E` (sobretítulos, detalhes), azul-marinho `#16243E` (barra do topo e capa), rosa `#D98B95` (fundo dos ícones, líquido na pizza). Fontes: **Playfair Display** (títulos) e **Montserrat** (texto). Tamanho de celular: largura máxima de 520 px. Não trocar esse visual sem a Tatiana pedir.
+**Visual aprovado pela Tatiana (25/09): tema ESCURO com as cores do ebook.** Inspirado no app da Google Play "Chocolate Cake Recipes: Baking" (Beast code Studios): abas embaixo, cards com foto, receita com foto grande e título por cima, ingredientes com bolinha de marcar. Cores (tokens no `:root` do fonte): fundo azul-marinho escuro `#0E1626`, cartões `#16243E`/`#1D2E4D`, vinho `#8C3A3B` (botão principal, opção escolhida), ouro `#D4A24E`/`#B0863A` (sobretítulos, números, aba ativa, detalhes), texto creme `#F3ECE2`, títulos `#F3E3C9`, rosa `#D98B95` (ícones, líquido na pizza). Fontes: **Playfair Display** (títulos) e **Montserrat** (texto). Largura máxima 520 px. Na impressão, volta para fundo branco. **Não trocar esse visual sem a Tatiana pedir.**
+
+**Conferido no celular (25/09), 360 e 400 px, Chromium:** barra de abas sempre no rodapé (a vez em que "apareceu no meio" era só a captura de tela da página inteira), sem rolagem para o lado, sem erro de script. Corrigidos: setinha do "Deu errado?" que aparecia como `&#` (o `montar.py` não escapava o CSS) e proporção "2,8 : 1" quebrando em duas linhas na tabela do Guia.
+- Para testar de novo: `pip install playwright` (não rode `playwright install`; use `executable_path='/opt/pw-browsers/chromium-1194/chrome-linux/chrome'`), viewport 360×740, `is_mobile=True`, e tire capturas da **tela visível** (não `full_page`, que desenha a barra fixa no meio).
 
 **O que falta fazer (nesta ordem, parando para a Tatiana aprovar cada item)**
-1. **Fotos e imagens:**
-   - No `montar.py`, ler `fotos-receitas/`, diminuir cada foto (lado maior ≈ 800 px, JPEG ≈ 75%; use Pillow) e **embutir como data URI** no HTML final, porque a Hotmart hospeda um arquivo só. Limite do arquivo final: ~5 MB.
-   - No `RECEITAS`, campo `foto` (id do arquivo). Card do cardápio com a foto no topo (proporção 4:3, `object-fit:cover`). Na página da receita, a foto grande acima dos ingredientes. Sem foto → o cartão colorido atual.
-   - Foto de capa no início e uma foto por textura nos botões do passo 1.
-   - Ilustrações simples em SVG (não foto) para os 4 ingredientes e as 3 texturas, no mesmo estilo da tabela Ganache Perfeita. Não usar imagem de banco de fotos nem de marca.
-2. Revisão dos textos com a Tatiana (voz de confeiteira, "você").
-3. Números "a confirmar" (% do creme nas receitas 4, 7 e 11; manteiga da 15) e marcar como `testada: true` as que a Tatiana testar.
-4. "Adicionar à tela de início": ícone (SVG embutido) e `<meta name="apple-mobile-web-app-title">`.
-5. Teste no celular (360–400 px) e no link da Hotmart.
+1. **Tatiana ver a prévia no celular e aprovar** (link do artifact acima). Ajustar o que ela pedir.
+2. **Revisão dos textos com a Tatiana** (voz de confeiteira, "você"), incluindo os 6 consertos do "Deu errado?", os avisos e o modo de preparo.
+3. **Fotos:** quando ela mandar, colocar em `fotos-receitas/` com os nomes do LEIA-ME, rodar o `montar.py` e conferir o tamanho final (até ~5 MB).
+4. Números "a confirmar" (% do creme nas receitas 4, 7 e 11; manteiga da 15) e marcar como `testada: true` as que a Tatiana testar.
+5. "Adicionar à tela de início": ícone (SVG embutido) e `<meta name="apple-mobile-web-app-title">`.
+6. Teste no link da Hotmart.
+
+**Como falar com a Tatiana:** português simples, frases curtas, sem termos técnicos. Ela usa o celular e é iniciante em tecnologia. Mande imagens das telas e o link da prévia, e termine com o que ela precisa responder.
 
 ## 0. Antes de escrever qualquer código, leia
 
@@ -332,7 +339,7 @@ Fonte: `capitulo ganaches/Teste-23-09-e-receitas-oficiais.md` e o PDF "Conclusã
 Derreter a 40–45 °C (Selecta: até 50 °C). **Nunca temperar.** Sem manteiga, sem manteiga de cacau e sem chocolate de verdade misturado. O chantilly vegetal completa o líquido melhor que mais creme. Aplicar logo. Se endurecer, micro-ondas em pulsos de 5 s. Na prática, o bolo coberto fica melhor fora da geladeira, com recheio que aguente temperatura ambiente.
 
 ## 8. Visual
-- Mesma identidade de `ganache-perfeita.html`: fontes **Gloock** (títulos) + **Figtree** (texto); tons de chocolate e rosa; cores da pizza: chocolate `#5A3526`, líquido `#E79AB0`, manteiga `#EBC96E`, glucose `#9CCADB`; modo claro e modo escuro.
+- **O visual que vale é o tema escuro de "ESTADO ATUAL" (25/09).** A tabela `ganache-perfeita.html` continua com a identidade dela (Gloock + Figtree).
 - **Celular primeiro:** funcionar bem com 360–400 px, botões grandes, sem rolagem lateral.
 - A barra do semáforo mostra a faixa ideal como uma área sombreada e o valor como um marcador.
 
