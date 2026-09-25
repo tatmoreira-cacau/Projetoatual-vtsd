@@ -103,17 +103,17 @@
 **Preparo:** Aqueça o creme com a glucose. Despeje sobre o chocolate, a manteiga de cacau e a pasta de pistache. Passe o mixer até ficar liso. Recheie as casquinhas a 30 °C, feche e leve à geladeira até firmar. Desenforme.
 **Validade:** 15 dias (não tem conservante). Congelada e bem embalada, até 2 meses.
 
-## 10. Recheio de Cajá com Cachaça e Limão
+## 10. Bombom de Cajá com Cachaça
 **Textura:** Cremosa · recheio de bombom moldado · **Sabor:** polpa de fruta + álcool
-- 100 g de chocolate branco
-- 43 g de polpa de cajá
-- 5 g de cachaça
-- 15 g de manteiga sem sal
-- 6 g de glucose
-- raspas de ½ limão
+- 100 g de chocolate branco (importado)
+- 43,5 g de polpa de cajá
+- 6,5 g de glucose
+- 17,4 g de manteiga sem sal
+- 5 g de cachaça (12 ml para cada 230 g de chocolate)
 
-**Preparo:** Aqueça a polpa com a glucose. Despeje sobre o chocolate em 3 vezes, mexendo. Junte a manteiga, a cachaça e as raspas e passe o mixer. Recheie as casquinhas. Funciona melhor em ambiente fresco (18 a 21 °C).
-**Variações:** cajá → maracujá, cupuaçu ou manga.
+**Preparo:** Numa panela, junte a polpa, a glucose e a manteiga e aqueça até ferver. Despeje sobre o chocolate e misture até emulsionar. Junte a cachaça e misture até ficar um creme liso. Deixe chegar a 28–30 °C antes de rechear.
+**Gel de cajá (camada do bombom):** 100 g de polpa de cajá + 200 g de glucose. Aqueça até 105 °C e use a 28–30 °C.
+**Durabilidade:** 7 a 10 dias, em ambiente de 18 a 21 °C.
 
 ## 11. Recheio de Maracujá com Hortelã
 **Textura:** Cremosa · recheio de trufa oca ou casca · **Sabor:** fruta + erva
@@ -169,6 +169,29 @@
 
 **Preparo:** Derreta o açúcar em fogo baixo até ficar cor de âmbar. Junte o creme morno aos poucos (cuidado com o vapor) e mexa até dissolver. Despeje sobre o chocolate, junte a manteiga e a baunilha e passe o mixer até ficar brilhante. Quando esfriar, junte a flor de sal. Cubra com filme encostado e descanse pelo menos 8 horas.
 
+## 16. Trufa de Framboesa e Vinho do Porto
+**Textura:** Cremosa · recheio de trufa oca · **Sabor:** polpa de fruta + álcool
+- 100 g de chocolate ruby
+- 26 g de polpa de framboesa
+- 8 g de glucose
+- 20 g de manteiga sem sal
+- 26 g de vinho do Porto (65 ml para cada 250 g de chocolate)
+
+**Preparo:** Numa panela, junte a polpa, a glucose e a manteiga e aqueça até ferver. Despeje sobre o chocolate ruby e misture até emulsionar. Junte o vinho do Porto e misture até ficar homogêneo. Deixe esfriar até 28 °C.
+**Montagem:** com o saco de confeitar, recheie trufas ocas de chocolate branco. Depois de 1 hora, cubra o recheio com ruby temperado, banhe as trufas no ruby e deixe secar em temperatura ambiente. Se quiser, pincele pó metalizado cor ruby.
+**Durabilidade:** 7 a 10 dias, em ambiente de 18 a 21 °C.
+
+## 17. Bombom de Cumaru e Mel
+**Textura:** Cremosa · recheio de bombom moldado · **Sabor:** especiaria (infusão) + mel
+- 100 g de chocolate ao leite
+- 64 g de creme de leite 30% (na receita original: 70 g de creme fresco 35%)
+- 13 g de mel
+- cumaru: 2 favas raladas para cada 230 g de chocolate
+- 13 g de manteiga sem sal
+
+**Preparo:** Derreta o chocolate aos poucos, mexendo sempre. Leve o creme e o mel ao fogo com o cumaru ralado. Quando ferver, desligue e deixe em infusão por 30 minutos. Coe o cumaru e volte ao fogo até ferver. Despeje um terço da mistura quente sobre o chocolate e mexa rápido, em pequenos círculos, até formar um centro liso e brilhante. Junte mais um terço e mexa do mesmo jeito. Depois junte o resto, sempre mexendo. Com a ganache entre 35 e 40 °C, junte a manteiga em cubos e passe o mixer. Recheie as casquinhas a 28–30 °C, deixe firmar e feche com chocolate amargo.
+**Durabilidade:** 7 a 10 dias, em ambiente de 18 a 21 °C.
+
 ---
 
 ## Tabela rápida (para a calculadora)
@@ -184,11 +207,13 @@
 | 7 | Earl Grey | branco | 5 : 1 | Cremosa · trufa de modelar |
 | 8 | Ao leite com conhaque | ao leite | 1,4 : 1 | Cremosa · recheio de bombom |
 | 9 | Pistache | branco ou ao leite | 1,2 : 1 | Cremosa · bombom moldado |
-| 10 | Cajá com cachaça e limão | branco | 2,1 : 1 | Cremosa · bombom moldado |
+| 10 | Cajá com cachaça | branco | 2,1 : 1 | Cremosa · bombom moldado |
 | 11 | Maracujá com hortelã | branco | 2,9 : 1 | Cremosa · trufa oca |
 | 12 | Mate tostado | branco | 1,6 : 1 | Cremosa · bombom moldado |
 | 13 | Meio amargo com café | meio amargo | 2,2 : 1 | Cremosa · trufa |
 | 14 | Ao leite com cardamomo | ao leite | 2,5 : 1 | Cremosa · trufa |
 | 15 | Caramelo salgado | ao leite | 1,1 : 1 (+ caramelo) | Cremosa · recheio de barra |
+| 16 | Framboesa e vinho do Porto | ruby | 1,3 : 1 | Cremosa · trufa oca |
+| 17 | Cumaru e mel | ao leite | 1,3 : 1 | Cremosa · bombom moldado |
 
 *As proporções mudaram um pouco em relação às receitas originais porque o creme agora é 30%: com menos água no creme, entra mais creme para dar o mesmo ponto. O controle interno de onde veio cada receita fica só em `Analise-das-15-receitas.md`, que não vai para o livro.*

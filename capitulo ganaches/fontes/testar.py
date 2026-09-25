@@ -56,7 +56,7 @@ with sync_playwright() as p:
 import re
 md = open(os.path.join(os.path.dirname(AQUI), 'Receitas-autorais-100g.md'), encoding='utf-8').read()
 difs = []
-for n, bloco in enumerate(re.split(r'\n## \d+\. ', md)[1:16]):
+for n, bloco in enumerate(re.split(r'\n## \d+\. ', md)[1:]):
     tela = telas[n]
     for g, nome in re.findall(r'^- (\d+) g de ([^\n(*]+)', bloco, re.M):
         if not re.search(r'(^|\D)' + g + r' g', tela): difs.append('receita %d: %s g de %s' % (n + 1, g, nome.strip()))

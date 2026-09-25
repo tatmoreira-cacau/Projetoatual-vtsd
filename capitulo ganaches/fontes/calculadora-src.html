@@ -203,7 +203,7 @@ footer{color:var(--muted);font-size:12px;text-align:center;border-top:1px solid 
     </header>
     <div class="home">
       <button class="big main" id="go-build" type="button"><span class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 11h16a8 8 0 0 1-16 0z"/><path d="M12 3v5M9 5l3-2 3 2"/></svg></span><span><b>Monte a sua ganache</b><span>Escolha a textura, o chocolate e o sabor. Eu faço a receita.</span></span><span class="go">›</span></button>
-      <button class="big" id="go-menu" type="button"><span class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/><path d="M9 7h6M9 11h6"/></svg></span><span><b>Receitas prontas</b><span>15 ideias para usar como estão ou trocar o que você não tem.</span></span><span class="go">›</span></button>
+      <button class="big" id="go-menu" type="button"><span class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/><path d="M9 7h6M9 11h6"/></svg></span><span><b>Receitas prontas</b><span><span id="n-rec">17</span> ideias para usar como estão ou trocar o que você não tem.</span></span><span class="go">›</span></button>
     </div>
     <div><div class="eyebrow">Os 4 ingredientes</div><h3 style="margin-top:4px">Toda ganache é feita destes</h3></div>
     <div class="quatro" id="quatro"></div>
@@ -317,7 +317,7 @@ var ING = {
   framboesa:{n:'Polpa de framboesa',cat:'fruta',w:.86,acida:1}, goiaba:{n:'Polpa de goiaba',cat:'fruta',w:.86},
   kiwi:{n:'Polpa de kiwi',cat:'fruta',w:.84,acida:1,enzima:1},
   cachaca:{n:'Cachaça',cat:'alcool',w:.6}, rum:{n:'Rum',cat:'alcool',w:.6}, conhaque:{n:'Conhaque',cat:'alcool',w:.6},
-  licorcafe:{n:'Licor de café',cat:'alcool',w:.55}, licorlaranja:{n:'Licor de laranja',cat:'alcool',w:.55},
+  licorcafe:{n:'Licor de café',cat:'alcool',w:.55}, vinhoporto:{n:'Vinho do Porto',cat:'alcool',w:.7}, licorlaranja:{n:'Licor de laranja',cat:'alcool',w:.55},
   agua:{n:'Água',cat:'agua',w:1}, leitecoco:{n:'Leite de coco',cat:'leitecoco',w:.7},
   creamcheese:{n:'Cream cheese',cat:'queijo',w:.55},
   goiabada:{n:'Goiabada cremosa',cat:'geleia',w:.30}, geleiavermelha:{n:'Geleia de frutas vermelhas',cat:'geleia',w:.33},
@@ -326,14 +326,14 @@ var ING = {
   hibisco:{n:'Hibisco seco',cat:'cha'}, camomila:{n:'Camomila',cat:'cha'},
   alecrim:{n:'Alecrim fresco',cat:'erva'}, hortela:{n:'Hortelã fresca',cat:'erva'}, manjericao:{n:'Manjericão fresco',cat:'erva'}, lavanda:{n:'Lavanda seca',cat:'erva'},
   rasplimao:{n:'Raspas de limão',cat:'raspas'}, rasplaranja:{n:'Raspas de laranja',cat:'raspas'},
-  canela:{n:'Canela em pau',cat:'especiaria'}, cardamomo:{n:'Cardamomo',cat:'especiaria'}, cravo:{n:'Cravo',cat:'especiaria'},
+  canela:{n:'Canela em pau',cat:'especiaria'}, cardamomo:{n:'Cardamomo',cat:'especiaria'}, cravo:{n:'Cravo',cat:'especiaria'}, cumaru:{n:'Cumaru',cat:'especiaria'},
   cafe:{n:'Café solúvel',cat:'final'}, baunilha:{n:'Extrato de baunilha',cat:'final'}, flordesal:{n:'Flor de sal',cat:'final'},
   pastaavela:{n:'Pasta saborizante de avelã',cat:'pasta'}, pastapistache:{n:'Pasta saborizante de pistache',cat:'pasta'},
   pastaamendoim:{n:'Pasta de amendoim',cat:'pasta'}, pastamaracuja:{n:'Pasta saborizante de maracujá',cat:'pasta'},
   coco:{n:'Coco ralado seco tostado',cat:'seco'}, cocoseco:{n:'Coco desidratado',cat:'seco'}, nozes:{n:'Nozes picadas',cat:'seco'}, amendoim:{n:'Amendoim torrado picado',cat:'seco'},
   biscoito:{n:'Biscoito de maisena triturado',cat:'seco'},
   manteiga:{n:'Manteiga sem sal',cat:'manteiga'}, mcacau:{n:'Manteiga de cacau',cat:'manteiga'},
-  glucose:{n:'Glucose',cat:'acucar'}, invertido:{n:'Açúcar invertido',cat:'acucar'}, acucar:{n:'Açúcar (para o caramelo)',cat:'acucar'}
+  glucose:{n:'Glucose',cat:'acucar'}, mel:{n:'Mel',cat:'acucar',w:.17}, invertido:{n:'Açúcar invertido',cat:'acucar'}, acucar:{n:'Açúcar (para o caramelo)',cat:'acucar'}
 };
 // Grupos de troca: um ingrediente só troca por outro do mesmo grupo
 var GRUPOS = {creme:['creme'], fruta:['fruta'], alcool:['alcool'], infusao:['cha','erva','raspas','especiaria'], final:['final'],
@@ -390,10 +390,10 @@ var RECEITAS = [
   itens:[['creme30',81],['glucose',10],['mcacau',5],['pastapistache',18]],
   prep:['Aqueça o creme com a glucose.','Despeje sobre o chocolate, a manteiga de cacau e a pasta de pistache.','Passe o mixer até ficar liso.','Recheie as casquinhas a 30 °C, feche e leve à geladeira até firmar. Desenforme.'],
   notas:[['','Chocolate:','branco ou ao leite.'],['','Validade:','15 dias (não tem conservante). Congelada e bem embalada, até 2 meses.']]},
- {id:10, foto:'10', nome:'Recheio de Cajá com Cachaça e Limão', tipo:'branco', origem:'importado', tex:'cremosa', uso:'Bombom moldado',
-  itens:[['caja',43],['cachaca',5],['manteiga',15],['glucose',6],['rasplimao',1,'raspas de ½ limão']],
-  prep:['Aqueça a polpa com a glucose.','Despeje sobre o chocolate em 3 vezes, mexendo.','Junte a manteiga, a cachaça e as raspas e passe o mixer.','Recheie as casquinhas. Funciona melhor em ambiente fresco (18 a 21 °C).'],
-  notas:[['','Variações:','cajá → maracujá, cupuaçu ou manga.']]},
+ {id:10, foto:'10', nome:'Bombom de Cajá com Cachaça', tipo:'branco', origem:'importado', tex:'cremosa', uso:'Bombom moldado',
+  itens:[['caja',43.5],['glucose',6.5],['manteiga',17.4],['cachaca',5,'12 ml para cada 230 g de chocolate']],
+  prep:['Numa panela, junte a polpa, a glucose e a manteiga e aqueça até ferver.','Despeje sobre o chocolate e misture até emulsionar.','Junte a cachaça e misture até ficar um creme liso.','Deixe chegar a 28–30 °C antes de rechear.'],
+  notas:[['','Gel de cajá (camada do bombom):','100 g de polpa de cajá + 200 g de glucose. Aqueça até 105 °C e use a 28–30 °C.'],['','Durabilidade:','7 a 10 dias, em ambiente de 18 a 21 °C.'],['','Rende:','cerca de 50 bombons com 230 g de chocolate.']]},
  {id:11, foto:'11', nome:'Recheio de Maracujá com Hortelã', tipo:'branco', origem:'importado', tex:'cremosa', uso:'Trufa oca ou casca',
   itens:[['creme30',14,'a confirmar: a receita original não dizia o % do creme'],['maracuja',20],['manteiga',7],['glucose',5],['hortela',1,'6 folhas']],
   prep:['Derreta o chocolate (até 40 °C).','Aqueça a polpa com a glucose e o creme.','Junte ao chocolate e misture.','Adicione a manteiga e a hortelã bem picada e passe o mixer.','Recheie a ~28 °C.'],
@@ -410,12 +410,20 @@ var RECEITAS = [
   prep:['Aqueça o creme com o cardamomo, tampe 5 minutos e coe.','Aqueça de novo e faça a ganache em 3 vezes.','Firme na geladeira e boleie.']},
  {id:15, foto:'15', nome:'Ganache de Caramelo Salgado', tipo:'leite', origem:'importado', tex:'cremosa', uso:'Recheio de barra e bombom',
   itens:[['acucar',32],['creme30',94,'morno'],['manteiga',10,'a confirmar: a receita original não dizia a quantidade'],['flordesal',1],['baunilha',1]],
-  prep:['Derreta o açúcar em fogo baixo até ficar cor de âmbar.','Junte o creme morno aos poucos (cuidado com o vapor) e mexa até dissolver.','Despeje sobre o chocolate, junte a manteiga e a baunilha e passe o mixer até ficar brilhante.','Quando esfriar, junte a flor de sal.','Cubra com filme encostado e descanse pelo menos 8 horas.']}
+  prep:['Derreta o açúcar em fogo baixo até ficar cor de âmbar.','Junte o creme morno aos poucos (cuidado com o vapor) e mexa até dissolver.','Despeje sobre o chocolate, junte a manteiga e a baunilha e passe o mixer até ficar brilhante.','Quando esfriar, junte a flor de sal.','Cubra com filme encostado e descanse pelo menos 8 horas.']},
+ {id:16, foto:'16', nome:'Trufa de Framboesa e Vinho do Porto', tipo:'ruby', origem:'importado', tex:'cremosa', uso:'Trufa oca',
+  itens:[['framboesa',26],['glucose',8],['manteiga',20],['vinhoporto',26,'65 ml para cada 250 g de chocolate']],
+  prep:['Numa panela, junte a polpa, a glucose e a manteiga e aqueça até ferver.','Despeje sobre o chocolate ruby e misture até emulsionar.','Junte o vinho do Porto e misture até ficar homogêneo.','Deixe esfriar até 28 °C.'],
+  notas:[['','Montagem:','com o saco de confeitar, recheie trufas ocas de chocolate branco. Depois de 1 hora, cubra o recheio com ruby temperado, banhe as trufas no ruby e deixe secar em temperatura ambiente. Se quiser, pincele pó metalizado cor ruby.'],['','Durabilidade:','7 a 10 dias, em ambiente de 18 a 21 °C.'],['','Rende:','cerca de 40 trufas com 250 g de chocolate.']]},
+ {id:17, foto:'17', nome:'Bombom de Cumaru e Mel', tipo:'leite', origem:'importado', tex:'cremosa', uso:'Bombom moldado',
+  itens:[['creme30',64,'na receita original: 70 g de creme fresco 35%'],['mel',13],['cumaru',0.9,'2 favas raladas para cada 230 g de chocolate'],['manteiga',13]],
+  prep:['Derreta o chocolate aos poucos, mexendo sempre.','Leve o creme e o mel ao fogo com o cumaru ralado. Quando ferver, desligue e deixe em infusão por 30 minutos.','Coe o cumaru e volte ao fogo até ferver.','Despeje um terço da mistura quente sobre o chocolate e mexa rápido, em pequenos círculos, até formar um centro liso e brilhante.','Junte mais um terço e mexa do mesmo jeito. Depois junte o resto, sempre mexendo.','Com a ganache entre 35 e 40 °C, junte a manteiga em cubos e passe o mixer.','Recheie as casquinhas a 28–30 °C, deixe firmar e feche com chocolate amargo.'],
+  notas:[['','Durabilidade:','7 a 10 dias, em ambiente de 18 a 21 °C.'],['','Rende:','cerca de 50 bombons com 230 g de chocolate.']]}
 ];
 
 /* ===================== fim dos dados ===================== */
 
-// Fotos: o montar.py preenche sozinho com as fotos da pasta fotos-receitas (capa, 1 a 15, cremosa, estrutura, cobertura).
+// Fotos: o montar.py preenche sozinho com as fotos da pasta fotos-receitas (capa, 1 a 17, cremosa, estrutura, cobertura).
 var FOTOS = {};
 
 // Ilustrações (desenho simples, sem foto): os 4 ingredientes e as 3 texturas
@@ -684,6 +692,7 @@ function drawRec(){
 }
 
 /* ===================== início ===================== */
+$('n-rec').textContent=RECEITAS.length;
 if(FOTOS.capa){ $('capa').innerHTML=foto('capa','capa','Ganache'); $('whisk').hidden=true; }
 $('quatro').innerHTML=[['chocolate','Chocolate','Dá sabor e firmeza'],['liquido','Líquido','Deixa cremosa'],['manteiga','Manteiga','Deixa macia e aveludada'],['glucose','Glucose','Dá brilho e conserva']]
   .map(function(x){return '<div>'+ILU[x[0]]+'<span><b>'+x[1]+'</b><span>'+x[2]+'</span></span></div>'}).join('');
