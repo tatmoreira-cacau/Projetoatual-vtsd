@@ -44,6 +44,9 @@ Leia também: `capitulo ganaches/Conclusão para a calculadora de ganache.pdf` e
 **Conferido no celular (25/09), 360 e 400 px, Chromium:** barra de abas sempre no rodapé (a vez em que "apareceu no meio" era só a captura de tela da página inteira), sem rolagem para o lado, sem erro de script. Corrigidos: setinha do "Deu errado?" que aparecia como `&#` (o `montar.py` não escapava o CSS) e proporção "2,8 : 1" quebrando em duas linhas na tabela do Guia.
 - Para testar de novo: `pip install playwright` (não rode `playwright install`; use `executable_path='/opt/pw-browsers/chromium-1194/chrome-linux/chrome'`), viewport 360×740, `is_mobile=True`, e tire capturas da **tela visível** (não `full_page`, que desenha a barra fixa no meio).
 
+**Teste das contas:** depois do `montar.py`, rode `python "capitulo ganaches/fontes/testar.py"`. Ele passa por todas as combinações do "Monte a sua ganache" (9.975) e todas as trocas das 15 receitas (630 telas) e reprova NaN, número negativo, peso errado e troca de líquido que muda a água. Em 25/09 achou creme **negativo** em coco + Estrutura + branco; agora esse caso (e qualquer sabor que tome todo o líquido) é bloqueado com sugestão de Cremosa ou Clássica. Rode sempre antes de enviar.
+- As receitas prontas têm mais água que a régua da tabela (até 2,8×). Isso é de propósito: bombom moldado e ponto de bico são mais moles (ver `Analise-das-15-receitas.md`). Não "corrija" esses números.
+
 **O que falta fazer (nesta ordem, parando para a Tatiana aprovar cada item)**
 1. **Tatiana ver a prévia no celular e aprovar** (link do artifact acima). Ajustar o que ela pedir.
 2. **Revisão dos textos com a Tatiana** (voz de confeiteira, "você"), incluindo os 6 consertos do "Deu errado?", os avisos e o modo de preparo.
@@ -366,3 +369,4 @@ Em cada etapa, entregue a **lista do que foi testado** e o que ainda está como 
 - Faixas para blend, caramelo e ruby, que só vão existir depois das receitas dela.
 - Validade e atividade de água: fica fora da v1, que só mostra a validade informada pela autora.
 - Fichas técnicas oficiais da Sicao e da Mavalério (SAC).
+- Sabor coco no "Monte a sua ganache": usa 22 g de leite de coco fixo (da receita 4). Na Estrutura com ao leite ou meio amargo nacional, sobram só 4 a 6 g de creme em 500 g. Perguntar se o coco deve ficar só na Cremosa ou se o leite de coco deve diminuir.

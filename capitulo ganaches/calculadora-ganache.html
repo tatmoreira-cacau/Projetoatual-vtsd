@@ -574,6 +574,7 @@ function buildRecipe(){
   if(B.fam==='alcool'){ it.push([B.esc,F.g]); aguaResto-=F.g*ING[B.esc].w; titulo+=' com '+ING[B.esc].n.toLowerCase(); }
   if(B.fam==='coco'){ it.push(['leitecoco',22]); it.push(['coco',35]); aguaResto-=22*ING.leitecoco.w; titulo+=' com coco'; }
   if(B.fam==='caramelo'){ it.unshift(['acucar',32]); titulo='Ganache de caramelo com chocolate '+TIPOS[tipo].n.toLowerCase(); }
+  if(aguaResto<=0) return '<div class="result blocked"><h2>N\u00e3o cabe nessa textura</h2><p>O sabor '+esc(F.n.toLowerCase())+' j\u00e1 traz todo o l\u00edquido que a textura '+TEXTURAS[tex].n+' aguenta com chocolate '+TIPOS[tipo].n.toLowerCase()+'. N\u00e3o sobra lugar para o creme e a ganache fica mole. Escolha a textura <b>Cremosa</b> ou o sabor <b>Cl\u00e1ssica</b>.</p></div>';
   it.unshift([B.creme,aguaResto/cr.w]);
   if(B.fam==='infusao'){ var c=ING[B.esc].cat; it.push([B.esc,F.g[c]]); titulo+=' com '+ING[B.esc].n.toLowerCase(); }
   if(B.fam==='pasta'){ it.push([B.esc,F.g]); titulo+=' de '+ING[B.esc].n.toLowerCase().replace('pasta saborizante de ','').replace('pasta de ',''); }
