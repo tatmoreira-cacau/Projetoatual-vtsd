@@ -330,7 +330,7 @@ var ING = {
   cafe:{n:'Café solúvel',cat:'final'}, baunilha:{n:'Extrato de baunilha',cat:'final'}, flordesal:{n:'Flor de sal',cat:'final'},
   pastaavela:{n:'Pasta saborizante de avelã',cat:'pasta'}, pastapistache:{n:'Pasta saborizante de pistache',cat:'pasta'},
   pastaamendoim:{n:'Pasta de amendoim',cat:'pasta'}, pastamaracuja:{n:'Pasta saborizante de maracujá',cat:'pasta'},
-  coco:{n:'Coco ralado seco tostado',cat:'seco'}, nozes:{n:'Nozes picadas',cat:'seco'}, amendoim:{n:'Amendoim torrado picado',cat:'seco'},
+  coco:{n:'Coco ralado seco tostado',cat:'seco'}, cocoseco:{n:'Coco desidratado',cat:'seco'}, nozes:{n:'Nozes picadas',cat:'seco'}, amendoim:{n:'Amendoim torrado picado',cat:'seco'},
   biscoito:{n:'Biscoito de maisena triturado',cat:'seco'},
   manteiga:{n:'Manteiga sem sal',cat:'manteiga'}, mcacau:{n:'Manteiga de cacau',cat:'manteiga'},
   glucose:{n:'Glucose',cat:'acucar'}, invertido:{n:'Açúcar invertido',cat:'acucar'}, acucar:{n:'Açúcar (para o caramelo)',cat:'acucar'}
@@ -352,41 +352,44 @@ var FAMILIAS = {
 };
 
 // Receitas prontas (por 100 g de chocolate), iguais a Receitas-autorais-100g.md.
-// itens: [ingrediente, gramas, medida da Tatiana (opcional)] · prep: preparo dela · notas: dica, variações, validade
+// itens: [ingrediente, gramas, medida da Tatiana (opcional)] · prep: preparo · notas: dica, variações, validade · trava: não deixar trocar
 var RECEITAS = [
- {id:1, foto:'1', nome:'Ganache de Bico Meio Amargo com Laranja', tipo:'meio', origem:'nacional', tex:'cremosa', uso:'Ponto de bico',
-  itens:[['creme30',65],['glucose',4],['rasplaranja',2,'raspas de ½ laranja']],
-  prep:['Aqueça o creme com as raspas até começar a ferver, desligue, tampe e deixe 5 minutos.','Derreta o chocolate (até 45 °C).','Despeje o creme quente em 3 vezes, mexendo do centro para fora até ficar brilhante.','Junte a glucose e passe o mixer.','Deixe firmar mexendo de vez em quando até o ponto de bico.']},
- {id:2, foto:'2', nome:'Ganache de Bico ao Leite com Canela', tipo:'leite', origem:'nacional', tex:'cremosa', uso:'Ponto de bico',
-  itens:[['creme30',43],['glucose',4],['canela',1,'1 pau (na infusão) ou 1 g de canela em pó']],
-  prep:['Aqueça o creme com a canela até começar a ferver, desligue, tampe e deixe 5 minutos.','Derreta o chocolate (até 45 °C).','Despeje o creme quente em 3 vezes, mexendo do centro para fora até ficar brilhante.','Junte a glucose e passe o mixer. Se usar canela em pó, junte com a glucose.','Deixe firmar mexendo de vez em quando até o ponto de bico.']},
- {id:3, foto:'3', nome:'Ganache de Bico Branca com Baunilha', tipo:'branco', origem:'nacional', tex:'cremosa', uso:'Ponto de bico',
-  itens:[['creme30',30],['glucose',4],['baunilha',2]],
-  prep:['Aqueça o creme até começar a ferver.','Derreta o chocolate (até 45 °C).','Despeje o creme quente em 3 vezes, mexendo do centro para fora até ficar brilhante.','Junte a glucose e passe o mixer.','A baunilha e o corante entram no final.','Deixe firmar mexendo de vez em quando até o ponto de bico.'],
-  notas:[['','Corante:','em gel ou líquido, se quiser colorir.'],['','Dica:','chocolate branco de barra de supermercado costuma ser mais mole. Use 10% a mais de chocolate.']]},
- {id:4, foto:'4', nome:'Recheio de Coco Tostado com Limão', tipo:'branco', origem:'nacional', tex:'cremosa', uso:'Recheio de casca e bombom',
-  itens:[['creme30',50,'a confirmar: a receita original não dizia o % do creme'],['leitecoco',22],['coco',35,'levemente tostado'],['rasplimao',1,'raspas de ½ limão']],
-  prep:['Toste o coco em frigideira seca, mexendo, até dourar de leve.','Faça a ganache com o creme quente (como na receita 1).','Junte o leite de coco, o coco e as raspas.','Deixe descansar 10 minutos para o coco hidratar e recheie as cascas.'],
-  notas:[['','Variações:','doce de leite com nozes, amendoim torrado, abóbora em compota. No lugar do leite de coco, suco concentrado de maracujá.']]},
- {id:5, foto:'5', nome:'Recheio Cremoso de Queijo com Goiabada', tipo:'branco', origem:'nacional', tex:'cremosa', uso:'Recheio de casca',
-  itens:[['creamcheese',30],['goiabada',40],['biscoito',10],['rasplimao',1,'raspas de ½ limão']],
-  prep:['Misture bem o cream cheese, a goiabada, o biscoito e as raspas.','Derreta o chocolate, junte a mistura aos poucos e mexa até ficar liso.','Não precisa temperar.'],
-  notas:[['','Variações:','geleia de frutas vermelhas, damasco ou maracujá no lugar da goiabada.']]},
- {id:6, foto:'6', nome:'Trufa de Limão com Alecrim', tipo:'branco', origem:'nacional', tex:'cremosa', uso:'Trufa ou recheio de casca',
-  itens:[['creme30',19],['limao',13],['manteiga',10],['glucose',6],['rasplimao',1,'raspas de ½ limão'],['alecrim',0.5,'1 raminho pequeno']],
-  prep:['Aqueça o creme com o alecrim, desligue, tampe e deixe esfriar. Tire o alecrim.','Junte a manteiga, a glucose, o suco e as raspas.','Derreta o chocolate e misture tudo até ficar liso.','Leve à geladeira até firmar, boleie e banhe.'],
-  notas:[['','Variações:','hortelã ou chá preto no lugar do alecrim; limão siciliano ou tahiti.']]},
- {id:7, foto:'7', nome:'Trufa de Chá Preto com Laranja', tipo:'branco', origem:'nacional', tex:'cremosa', uso:'Trufa de modelar',
-  itens:[['creme30',20,'a confirmar: a receita original não dizia o % do creme'],['manteiga',5],['glucose',3,'é o que ajuda a modelar'],['chapreto',2,'1 sachê'],['rasplaranja',1,'raspas de ¼ de laranja']],
-  prep:['Aqueça o creme com o chá, tampe e deixe esfriar. Coe.','Junte a manteiga, a glucose e as raspas.','Verta sobre o chocolate derretido e misture.','Deixe firmar cerca de 1 hora e modele (ótima para envolver physalis).'],
-  notas:[['','Dica:','com chocolate branco de barra, use 10% a mais de chocolate.']]},
- {id:8, foto:'8', nome:'Recheio de Bombom ao Leite com Licor de Café', tipo:'leite', origem:'nacional', tex:'cremosa', uso:'Recheio de bombom',
-  itens:[['creme30',65],['licorcafe',6]],
-  prep:['Faça a ganache com o creme quente.','Junte o licor quando estiver a ~35 °C.','Deixe firmar 1 hora em temperatura ambiente e recheie as casquinhas (fica ótimo com cereja).']},
- {id:9, foto:'9', nome:'Recheio de Bombom de Avelã', tipo:'branco', origem:'importado', tex:'cremosa', uso:'Bombom moldado',
-  itens:[['creme30',81],['glucose',10],['mcacau',5],['pastaavela',18]],
-  prep:['Aqueça o creme com a glucose.','Coloque numa jarra o chocolate, a manteiga de cacau e a pasta.','Despeje o creme quente e passe o mixer até ficar liso.','Recheie as casquinhas a ~30 °C e feche depois de firmar.'],
-  notas:[['','Chocolate:','branco ou ao leite.'],['','Variações:','pistache, amendoim ou castanha no lugar da avelã.']]},
+ {id:1, foto:'1', nome:'Ganache de Bico Meio Amargo', tipo:'meio', origem:'nacional', tex:'cremosa', uso:'Ponto de bico',
+  itens:[['creme30',65],['glucose',4]],
+  prep:['Derreta o chocolate (até 45 °C) até ficar liso e sem grumos.','Junte o creme e misture com a espátula, raspando bem a lateral e o fundo. Se sobrar grumo, passe o fouet.','Junte a glucose.','Dê o ponto na pedra, ou na geladeira mexendo a cada 10 minutos, até o ponto de bico.','Coloque no saco de confeitar com o bico que preferir.'],
+  notas:[['','Para doce aberto:','fica durinha por fora e cremosa por dentro, e não mela no transporte.']]},
+ {id:2, foto:'2', nome:'Ganache de Bico ao Leite', tipo:'leite', origem:'nacional', tex:'cremosa', uso:'Ponto de bico',
+  itens:[['creme30',43],['glucose',4]],
+  prep:['Derreta o chocolate (até 40 °C) até ficar liso e sem grumos.','Junte o creme e misture com a espátula, raspando bem a lateral e o fundo. Se sobrar grumo, passe o fouet.','Junte a glucose.','Dê o ponto na pedra, ou na geladeira mexendo a cada 10 minutos, até o ponto de bico.','Coloque no saco de confeitar com o bico que preferir.'],
+  notas:[['','Para doce aberto:','fica durinha por fora e cremosa por dentro, e não mela no transporte.']]},
+ {id:3, foto:'3', nome:'Ganache de Bico Branca ou Colorida', tipo:'branco', origem:'nacional', tex:'cremosa', uso:'Ponto de bico',
+  itens:[['creme30',30],['glucose',4]],
+  prep:['Derreta o chocolate (até 40 °C) até ficar liso e sem grumos.','Junte o creme e misture com a espátula, raspando bem a lateral e o fundo. Se sobrar grumo, passe o fouet.','Junte a glucose.','Para colorir, junte umas gotinhas de corante líquido.','Dê o ponto na pedra, ou na geladeira mexendo a cada 10 minutos, até o ponto de bico.','Coloque no saco de confeitar com o bico que preferir.'],
+  notas:[['','Corante:','cerca de 2 gotinhas de corante líquido para cada 500 g de chocolate, ou a gosto.']]},
+ {id:4, foto:'4', nome:'Ganache de Coco', tipo:'branco', origem:'nacional', tex:'cremosa', uso:'Recheio de casca e bombom',
+  itens:[['creme30',50,'a confirmar: a receita original não dizia o % do creme'],['leitecoco',22],['cocoseco',39]],
+  prep:['Derreta o chocolate.','Junte o creme e misture com a espátula, raspando bem as beiradas. Termine com o fouet até ficar liso.','Junte o coco e o leite de coco e deixe descansar uns 10 minutos para o coco hidratar.','Recheie as casquinhas, tampe com chocolate e leve à geladeira para firmar.'],
+  notas:[['','Variações (a mesma receita):','no lugar do coco, doce de leite com nozes moídas, doce de leite com coco, amendoim ou purê de compota de abóbora. No lugar do leite de coco, suco concentrado de maracujá, a gosto.']]},
+ {id:5, foto:'5', nome:'Cheesecake de Frutas Vermelhas', tipo:'branco', origem:'nacional', tex:'cremosa', uso:'Recheio de casca',
+  itens:[['creamcheese',30],['geleiavermelha',43.5],['biscoito',10,'2 bolachas trituradas']],
+  prep:['Derreta o chocolate.','Numa vasilha, misture bem com o fouet o cream cheese, a geleia e as bolachas trituradas.','Junte essa mistura ao chocolate derretido. Não precisa temperar.','Misture com a espátula raspando as bordas e termine com o fouet para tirar os grumos.'],
+  notas:[['','Geleia:','pode ser de framboesa, morango, damasco ou goiabada mole.'],['','Corante:','se quiser realçar a cor.'],['','Dica:','com chocolate branco de barra (marfim), use 10% a mais de chocolate.']]},
+ {id:6, foto:'6', nome:'Trufa de Limão Siciliano e Lavanda', tipo:'branco', origem:'nacional', tex:'cremosa', uso:'Trufa ou recheio de casca',
+  trava:['limao','rasplimao'],
+  itens:[['creme30',19],['lavanda',0.6,'6 colheres (chá) para cada 1 kg de chocolate'],['manteiga',10,'derretida'],['glucose',6],['limao',13,'limão siciliano'],['rasplimao',0.6,'raspas de 1 limão siciliano para cada 1 kg de chocolate']],
+  prep:['Faça a infusão: aqueça o creme com a lavanda por 1 minuto no micro-ondas (potência média) e deixe esfriar.','Junte a manteiga derretida, a glucose, o suco e as raspas de limão e misture bem.','Derreta o chocolate e junte a mistura de lavanda e limão, mexendo bem até ficar liso.','Deixe firmar na geladeira ou na pedra.','Boleie e banhe no chocolate branco, ou use para rechear cascas. Decore com raspas de limão e lavanda.'],
+  notas:[['','Troque o sabor, não a fruta:','no lugar da lavanda, use chá Earl Grey ou hortelã bem picada (faça a infusão igual, mas não coe), ou ervas e temperos como alecrim e manjericão. O limão pode ser siciliano ou tahiti.'],['','Dica:','com chocolate branco de barra (marfim), use 10% a mais de chocolate.']]},
+ {id:7, foto:'7', nome:'Trufa de Earl Grey', tipo:'branco', origem:'nacional', tex:'cremosa', uso:'Trufa de modelar',
+  itens:[['creme30',20,'a confirmar: a receita original não dizia o % do creme'],['earlgrey',1.2,'3 sachês para cada 500 g de chocolate'],['glucose',3,'é o que dá efeito de modelagem'],['manteiga',5,'derretida']],
+  prep:['Derreta o chocolate até ficar liso. Reserve.','Faça a infusão: misture o chá no creme, aqueça 30 segundos no micro-ondas (potência alta) e deixe esfriar.','Misture a infusão com a glucose e a manteiga derretida.','Junte ao chocolate e envolva até incorporar.','Deixe firmar por 1 hora.','No ponto de modelar, faça as porções e guarde na geladeira até envolver as physalis.'],
+  notas:[['','Dica:','com chocolate branco de barra (marfim), use 10% a mais de chocolate.']]},
+ {id:8, foto:'8', nome:'Ganache ao Leite com Conhaque', tipo:'leite', origem:'nacional', tex:'cremosa', uso:'Recheio de bombom',
+  itens:[['creme30',65],['conhaque',6,'2 colheres (sopa) para cada 500 g de chocolate']],
+  prep:['Derreta o chocolate até ficar fluido e sem grumos.','Junte o creme e misture até ficar homogêneo.','Junte o conhaque e misture.','Deixe firmar 1 hora em temperatura ambiente.','Recheie as casquinhas com a ganache e a cereja com cabo e feche o bombom.']},
+ {id:9, foto:'9', nome:'Ganache de Pistache', tipo:'branco', origem:'importado', tex:'cremosa', uso:'Bombom moldado',
+  itens:[['creme30',81],['glucose',10],['mcacau',5],['pastapistache',18]],
+  prep:['Aqueça o creme com a glucose.','Despeje sobre o chocolate, a manteiga de cacau e a pasta de pistache.','Passe o mixer até ficar liso.','Recheie as casquinhas a 30 °C, feche e leve à geladeira até firmar. Desenforme.'],
+  notas:[['','Chocolate:','branco ou ao leite.'],['','Validade:','15 dias (não tem conservante). Congelada e bem embalada, até 2 meses.']]},
  {id:10, foto:'10', nome:'Recheio de Cajá com Cachaça e Limão', tipo:'branco', origem:'importado', tex:'cremosa', uso:'Bombom moldado',
   itens:[['caja',43],['cachaca',5],['manteiga',15],['glucose',6],['rasplimao',1,'raspas de ½ limão']],
   prep:['Aqueça a polpa com a glucose.','Despeje sobre o chocolate em 3 vezes, mexendo.','Junte a manteiga, a cachaça e as raspas e passe o mixer.','Recheie as casquinhas. Funciona melhor em ambiente fresco (18 a 21 °C).'],
@@ -405,7 +408,7 @@ var RECEITAS = [
  {id:14, foto:'14', nome:'Trufa ao Leite com Cardamomo', tipo:'leite', origem:'importado', tex:'cremosa', uso:'Trufa',
   itens:[['creme30',40],['cardamomo',0.5,'2 bagas amassadas (na infusão)']],
   prep:['Aqueça o creme com o cardamomo, tampe 5 minutos e coe.','Aqueça de novo e faça a ganache em 3 vezes.','Firme na geladeira e boleie.']},
- {id:15, foto:'15', nome:'Ganache de Caramelo com Flor de Sal', tipo:'leite', origem:'importado', tex:'cremosa', uso:'Recheio de barra e bombom',
+ {id:15, foto:'15', nome:'Ganache de Caramelo Salgado', tipo:'leite', origem:'importado', tex:'cremosa', uso:'Recheio de barra e bombom',
   itens:[['acucar',32],['creme30',94,'morno'],['manteiga',10,'a confirmar: a receita original não dizia a quantidade'],['flordesal',1],['baunilha',1]],
   prep:['Derreta o açúcar em fogo baixo até ficar cor de âmbar.','Junte o creme morno aos poucos (cuidado com o vapor) e mexa até dissolver.','Despeje sobre o chocolate, junte a manteiga e a baunilha e passe o mixer até ficar brilhante.','Quando esfriar, junte a flor de sal.','Cubra com filme encostado e descanse pelo menos 8 horas.']}
 ];
@@ -605,7 +608,7 @@ function buildRecipe(){
   var aguaResto=agua;
   if(B.fam==='fruta'){ var fw=agua*F.parteAgua; it.push([B.esc,fw/ING[B.esc].w]); aguaResto-=fw; titulo+=' com '+ING[B.esc].n.toLowerCase().replace('polpa de ','').replace('suco de ',''); }
   if(B.fam==='alcool'){ it.push([B.esc,F.g]); aguaResto-=F.g*ING[B.esc].w; titulo+=' com '+ING[B.esc].n.toLowerCase(); }
-  if(B.fam==='coco'){ it.push(['leitecoco',22]); it.push(['coco',35]); aguaResto-=22*ING.leitecoco.w; titulo+=' com coco'; }
+  if(B.fam==='coco'){ it.push(['leitecoco',22]); it.push(['cocoseco',39]); aguaResto-=22*ING.leitecoco.w; titulo+=' com coco'; }
   if(B.fam==='caramelo'){ it.unshift(['acucar',32]); titulo='Ganache de caramelo com chocolate '+TIPOS[tipo].n.toLowerCase(); }
   if(aguaResto<=0) return '<div class="result blocked"><h2>Não cabe nessa textura</h2><p>O sabor '+esc(F.n.toLowerCase())+' já traz todo o líquido que a textura '+TEXTURAS[tex].n+' aguenta com chocolate '+TIPOS[tipo].n.toLowerCase()+'. Não sobra lugar para o creme e a ganache fica mole. Escolha a textura <b>Cremosa</b> ou o sabor <b>Clássica</b>.</p></div>';
   it.unshift([B.creme,aguaResto/cr.w]);
@@ -657,6 +660,7 @@ function drawRec(){
   R.itens.forEach(function(it,i){
     var cat=ING[it[0]].cat, g=grupoDe(cat), ops=Object.keys(ING).filter(function(id){return GRUPOS[g].indexOf(ING[id].cat)>=0});
     if(ops.length<2 && PODE_TIRAR.indexOf(cat)<0) return;
+    if((R.base.trava||[]).indexOf(it[0])>=0) return; // a Tatiana pediu para não trocar
     sw+='<div class="sw-row"><span>'+esc(ING[it[0]].n)+'</span><select data-i="'+i+'" aria-label="Trocar '+esc(ING[it[0]].n)+'">'+ops.map(function(id){return '<option value="'+id+'"'+(id===it[0]?' selected':'')+'>'+(id===it[0]?'manter: ':'trocar por: ')+esc(ING[id].n)+'</option>'}).join('')+(PODE_TIRAR.indexOf(cat)>=0?'<option value="__tirar">tirar este ingrediente</option>':'')+'</select></div>';
   });
   sw+='<div class="sw-row"><span>Quanto quer fazer?</span><span class="row"><input type="number" id="rc-peso" min="100" max="10000" step="50" placeholder="gramas" value="'+(R.peso||'')+'" aria-label="Peso final em gramas"> g</span></div>';

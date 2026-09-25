@@ -1,5 +1,5 @@
 # Receitas autorais · base de 100 g de chocolate
-*Volume 3 · Faça a Sua Própria Ganache · Tatiana Duarte Moreira · rascunho de 24/09/2026*
+*Volume 3 · Faça a Sua Própria Ganache · Tatiana Duarte Moreira · rascunho de 24/09/2026, sabores 1 a 9 voltados aos originais da Tatiana em 25/09*
 
 **Como ler:** toda receita está escrita para **100 g de chocolate**. Para fazer mais, multiplique tudo. Ex.: 500 g de chocolate = tudo × 5.
 
@@ -9,100 +9,99 @@
 
 ---
 
-## 1. Ganache de Bico Meio Amargo com Laranja
-**Textura:** Cremosa · ponto de bico · **Sabor:** clássica + raspas de fruta
+## 1. Ganache de Bico Meio Amargo
+**Textura:** Cremosa · ponto de bico (confeitar, doce aberto) · **Sabor:** clássica
 - 100 g de chocolate meio amargo
 - 65 g de creme de leite 30%
 - 4 g de glucose
-- raspas de ½ laranja
 
-**Preparo:** Aqueça o creme com as raspas até começar a ferver, desligue, tampe e deixe 5 minutos. Derreta o chocolate (até 45 °C). Despeje o creme quente em 3 vezes, mexendo do centro para fora até ficar brilhante. Junte a glucose e passe o mixer. Deixe firmar mexendo de vez em quando até o ponto de bico.
+**Preparo:** Derreta o chocolate (até 45 °C) até ficar liso e sem grumos. Junte o creme e misture com a espátula, raspando bem a lateral e o fundo. Se sobrar grumo, passe o fouet. Junte a glucose. Dê o ponto na pedra, ou na geladeira mexendo a cada 10 minutos, até o ponto de bico. Coloque no saco de confeitar com o bico que preferir.
+**Para doce aberto:** fica durinha por fora e cremosa por dentro, e não mela no transporte.
 
-## 2. Ganache de Bico ao Leite com Canela
-**Textura:** Cremosa · ponto de bico · **Sabor:** clássica + especiaria
+## 2. Ganache de Bico ao Leite
+**Textura:** Cremosa · ponto de bico (confeitar, doce aberto) · **Sabor:** clássica
 - 100 g de chocolate ao leite
 - 43 g de creme de leite 30%
 - 4 g de glucose
-- 1 pau de canela (na infusão) ou 1 g de canela em pó
 
-**Preparo:** igual à receita 1, com a canela no lugar da laranja. Se usar canela em pó, junte com a glucose.
+**Preparo:** Derreta o chocolate (até 40 °C) até ficar liso e sem grumos. Junte o creme e misture com a espátula, raspando bem a lateral e o fundo. Se sobrar grumo, passe o fouet. Junte a glucose. Dê o ponto na pedra, ou na geladeira mexendo a cada 10 minutos, até o ponto de bico. Coloque no saco de confeitar com o bico que preferir.
+**Para doce aberto:** fica durinha por fora e cremosa por dentro, e não mela no transporte.
 
-## 3. Ganache de Bico Branca com Baunilha
-**Textura:** Cremosa · ponto de bico · **Sabor:** clássica
+## 3. Ganache de Bico Branca ou Colorida
+**Textura:** Cremosa · ponto de bico (confeitar, doce aberto) · **Sabor:** clássica
 - 100 g de chocolate branco
 - 30 g de creme de leite 30%
 - 4 g de glucose
-- 2 g de extrato de baunilha
-- corante em gel ou líquido, se quiser colorir
+- corante líquido, se quiser colorir
 
-**Preparo:** igual à receita 1. A baunilha e o corante entram no final.
-**Dica:** chocolate branco de barra de supermercado costuma ser mais mole. Use 10% a mais de chocolate.
+**Preparo:** Derreta o chocolate (até 40 °C) até ficar liso e sem grumos. Junte o creme e misture com a espátula, raspando bem a lateral e o fundo. Se sobrar grumo, passe o fouet. Junte a glucose. Para colorir, junte umas gotinhas de corante líquido. Dê o ponto na pedra, ou na geladeira mexendo a cada 10 minutos, até o ponto de bico. Coloque no saco de confeitar com o bico que preferir.
+**Corante:** cerca de 2 gotinhas de corante líquido para cada 500 g de chocolate, ou a gosto.
 
-## 4. Recheio de Coco Tostado com Limão
+## 4. Ganache de Coco
 **Textura:** Cremosa · recheio de casca e bombom · **Sabor:** coco
 - 100 g de chocolate branco
 - 50 g de creme de leite 30% *(a confirmar: a receita original não dizia o % do creme)*
 - 22 g de leite de coco
-- 35 g de coco ralado seco, levemente tostado
-- raspas de ½ limão
+- 39 g de coco desidratado
 
-**Preparo:** Toste o coco em frigideira seca, mexendo, até dourar de leve. Faça a ganache com o creme quente (como na receita 1). Junte o leite de coco, o coco e as raspas. Deixe descansar 10 minutos para o coco hidratar e recheie as cascas.
-**Variações:** doce de leite com nozes, amendoim torrado, abóbora em compota. No lugar do leite de coco, suco concentrado de maracujá.
+**Preparo:** Derreta o chocolate. Junte o creme e misture com a espátula, raspando bem as beiradas. Termine com o fouet até ficar liso. Junte o coco e o leite de coco e deixe descansar uns 10 minutos para o coco hidratar. Recheie as casquinhas, tampe com chocolate e leve à geladeira para firmar.
+**Variações (a mesma receita):** no lugar do coco, doce de leite com nozes moídas, doce de leite com coco, amendoim ou purê de compota de abóbora. No lugar do leite de coco, suco concentrado de maracujá, a gosto.
 
-## 5. Recheio Cremoso de Queijo com Goiabada
+## 5. Cheesecake de Frutas Vermelhas
 **Textura:** Cremosa · recheio de casca · **Sabor:** creme de queijo
 - 100 g de chocolate branco
 - 30 g de cream cheese
-- 40 g de goiabada cremosa
-- 10 g de biscoito de maisena triturado
-- raspas de ½ limão
+- 43,5 g de geleia de frutas vermelhas
+- 10 g de bolacha triturada (2 bolachas)
+- corante, se quiser realçar a cor
 
-**Preparo:** Misture bem o cream cheese, a goiabada, o biscoito e as raspas. Derreta o chocolate, junte a mistura aos poucos e mexa até ficar liso. Não precisa temperar.
-**Variações:** geleia de frutas vermelhas, damasco ou maracujá no lugar da goiabada.
+**Preparo:** Derreta o chocolate. Numa vasilha, misture bem com o fouet o cream cheese, a geleia e as bolachas trituradas. Junte essa mistura ao chocolate derretido. Não precisa temperar. Misture com a espátula raspando as bordas e termine com o fouet para tirar os grumos.
+**Geleia:** pode ser de framboesa, morango, damasco ou goiabada mole.
+**Dica:** com chocolate branco de barra (marfim), use 10% a mais de chocolate.
 
-## 6. Trufa de Limão com Alecrim
-**Textura:** Cremosa · trufa boleada ou recheio de casca · **Sabor:** fruta + erva
+## 6. Trufa de Limão Siciliano e Lavanda
+**Textura:** Cremosa · trufa boleada ou recheio de casca · **Sabor:** fruta + infusão
 - 100 g de chocolate branco
 - 19 g de creme de leite 30%
-- 13 g de suco de limão
-- 10 g de manteiga sem sal
+- lavanda seca: 6 colheres (chá) para cada 1 kg de chocolate
+- 10 g de manteiga sem sal derretida
 - 6 g de glucose
-- raspas de ½ limão
-- 1 raminho pequeno de alecrim fresco
+- 13 g de suco de limão siciliano
+- raspas de 1 limão siciliano para cada 1 kg de chocolate
 
-**Preparo:** Aqueça o creme com o alecrim, desligue, tampe e deixe esfriar. Tire o alecrim. Junte a manteiga, a glucose, o suco e as raspas. Derreta o chocolate e misture tudo até ficar liso. Leve à geladeira até firmar, boleie e banhe.
-**Variações:** hortelã ou chá preto no lugar do alecrim; limão siciliano ou tahiti.
+**Preparo:** Faça a infusão: aqueça o creme com a lavanda por 1 minuto no micro-ondas (potência média) e deixe esfriar. Junte a manteiga derretida, a glucose, o suco e as raspas de limão e misture bem. Derreta o chocolate e junte a mistura de lavanda e limão, mexendo bem até ficar liso. Deixe firmar na geladeira ou na pedra. Boleie e banhe no chocolate branco, ou use para rechear cascas. Decore com raspas de limão e lavanda.
+**Troque o sabor, não a fruta:** no lugar da lavanda, use chá Earl Grey ou hortelã bem picada (faça a infusão igual, mas não coe), ou ervas e temperos como alecrim e manjericão. O limão pode ser siciliano ou tahiti.
+**Dica:** com chocolate branco de barra (marfim), use 10% a mais de chocolate.
 
-## 7. Trufa de Chá Preto com Laranja
-**Textura:** Cremosa · trufa de modelar · **Sabor:** chá + raspas de fruta
+## 7. Trufa de Earl Grey
+**Textura:** Cremosa · trufa de modelar · **Sabor:** chá
 - 100 g de chocolate branco
 - 20 g de creme de leite 30% *(a confirmar: a receita original não dizia o % do creme)*
-- 5 g de manteiga sem sal
-- 3 g de glucose (é o que ajuda a modelar)
-- 2 g de chá preto (1 sachê)
-- raspas de ¼ de laranja
+- chá Earl Grey: 3 sachês para cada 500 g de chocolate
+- 3 g de glucose (é o que dá efeito de modelagem)
+- 5 g de manteiga sem sal derretida
 
-**Preparo:** Aqueça o creme com o chá, tampe e deixe esfriar. Coe. Junte a manteiga, a glucose e as raspas. Verta sobre o chocolate derretido e misture. Deixe firmar cerca de 1 hora e modele (ótima para envolver physalis).
-**Dica:** com chocolate branco de barra, use 10% a mais de chocolate.
+**Preparo:** Derreta o chocolate até ficar liso. Reserve. Faça a infusão: misture o chá no creme, aqueça 30 segundos no micro-ondas (potência alta) e deixe esfriar. Misture a infusão com a glucose e a manteiga derretida. Junte ao chocolate e envolva até incorporar. Deixe firmar por 1 hora. No ponto de modelar, faça as porções e guarde na geladeira até envolver as physalis.
+**Dica:** com chocolate branco de barra (marfim), use 10% a mais de chocolate.
 
-## 8. Recheio de Bombom ao Leite com Licor de Café
+## 8. Ganache ao Leite com Conhaque
 **Textura:** Cremosa · recheio de bombom · **Sabor:** álcool
 - 100 g de chocolate ao leite
 - 65 g de creme de leite 30%
-- 6 g de licor de café
+- 6 g de conhaque (2 colheres de sopa para cada 500 g de chocolate)
 
-**Preparo:** Faça a ganache com o creme quente. Junte o licor quando estiver a ~35 °C. Deixe firmar 1 hora em temperatura ambiente e recheie as casquinhas (fica ótimo com cereja).
+**Preparo:** Derreta o chocolate até ficar fluido e sem grumos. Junte o creme e misture até ficar homogêneo. Junte o conhaque e misture. Deixe firmar 1 hora em temperatura ambiente. Recheie as casquinhas com a ganache e a cereja com cabo e feche o bombom.
 
-## 9. Recheio de Bombom de Avelã
+## 9. Ganache de Pistache
 **Textura:** Cremosa · recheio de bombom moldado · **Sabor:** pasta saborizante
 - 100 g de chocolate branco ou ao leite
 - 81 g de creme de leite 30%
 - 10 g de glucose
 - 5 g de manteiga de cacau
-- 18 g de pasta saborizante de avelã
+- 18 g de pasta saborizante de pistache
 
-**Preparo:** Aqueça o creme com a glucose. Coloque numa jarra o chocolate, a manteiga de cacau e a pasta. Despeje o creme quente e passe o mixer até ficar liso. Recheie as casquinhas a ~30 °C e feche depois de firmar.
-**Variações:** pistache, amendoim ou castanha no lugar da avelã.
+**Preparo:** Aqueça o creme com a glucose. Despeje sobre o chocolate, a manteiga de cacau e a pasta de pistache. Passe o mixer até ficar liso. Recheie as casquinhas a 30 °C, feche e leve à geladeira até firmar. Desenforme.
+**Validade:** 15 dias (não tem conservante). Congelada e bem embalada, até 2 meses.
 
 ## 10. Recheio de Cajá com Cachaça e Limão
 **Textura:** Cremosa · recheio de bombom moldado · **Sabor:** polpa de fruta + álcool
@@ -159,7 +158,7 @@
 
 **Preparo:** Aqueça o creme com o cardamomo, tampe 5 minutos e coe. Aqueça de novo e faça a ganache em 3 vezes. Firme na geladeira e boleie.
 
-## 15. Ganache de Caramelo com Flor de Sal
+## 15. Ganache de Caramelo Salgado
 **Textura:** Cremosa · recheio de barra e bombom · **Sabor:** caramelo
 - 100 g de chocolate ao leite
 - 32 g de açúcar
@@ -176,20 +175,20 @@
 
 | # | Receita | Chocolate | Choc : líquido | Textura / uso |
 |---|---|---|---|---|
-| 1 | Bico meio amargo com laranja | meio amargo | 1,5 : 1 | Cremosa · ponto de bico |
-| 2 | Bico ao leite com canela | ao leite | 2,3 : 1 | Cremosa · ponto de bico |
-| 3 | Bico branca com baunilha | branco | 3,3 : 1 | Cremosa · ponto de bico |
-| 4 | Coco tostado com limão | branco | 1,4 : 1 | Cremosa · recheio de casca |
-| 5 | Queijo com goiabada | branco | 1,4 : 1 (úmidos) | Cremosa · recheio de casca |
-| 6 | Limão com alecrim | branco | 3,1 : 1 | Cremosa · trufa |
-| 7 | Chá preto com laranja | branco | 5 : 1 | Cremosa · trufa de modelar |
-| 8 | Ao leite com licor de café | ao leite | 1,4 : 1 | Cremosa · recheio de bombom |
-| 9 | Avelã | branco ou ao leite | 1,2 : 1 | Cremosa · bombom moldado |
+| 1 | Bico meio amargo | meio amargo | 1,5 : 1 | Cremosa · ponto de bico |
+| 2 | Bico ao leite | ao leite | 2,3 : 1 | Cremosa · ponto de bico |
+| 3 | Bico branca ou colorida | branco | 3,3 : 1 | Cremosa · ponto de bico |
+| 4 | Coco | branco | 1,4 : 1 | Cremosa · recheio de casca |
+| 5 | Cheesecake de frutas vermelhas | branco | 1,4 : 1 (úmidos) | Cremosa · recheio de casca |
+| 6 | Limão siciliano e lavanda | branco | 3,1 : 1 | Cremosa · trufa |
+| 7 | Earl Grey | branco | 5 : 1 | Cremosa · trufa de modelar |
+| 8 | Ao leite com conhaque | ao leite | 1,4 : 1 | Cremosa · recheio de bombom |
+| 9 | Pistache | branco ou ao leite | 1,2 : 1 | Cremosa · bombom moldado |
 | 10 | Cajá com cachaça e limão | branco | 2,1 : 1 | Cremosa · bombom moldado |
 | 11 | Maracujá com hortelã | branco | 2,9 : 1 | Cremosa · trufa oca |
 | 12 | Mate tostado | branco | 1,6 : 1 | Cremosa · bombom moldado |
 | 13 | Meio amargo com café | meio amargo | 2,2 : 1 | Cremosa · trufa |
 | 14 | Ao leite com cardamomo | ao leite | 2,5 : 1 | Cremosa · trufa |
-| 15 | Caramelo com flor de sal | ao leite | 1,1 : 1 (+ caramelo) | Cremosa · recheio de barra |
+| 15 | Caramelo salgado | ao leite | 1,1 : 1 (+ caramelo) | Cremosa · recheio de barra |
 
 *As proporções mudaram um pouco em relação às receitas originais porque o creme agora é 30%: com menos água no creme, entra mais creme para dar o mesmo ponto. O controle interno de onde veio cada receita fica só em `Analise-das-15-receitas.md`, que não vai para o livro.*
