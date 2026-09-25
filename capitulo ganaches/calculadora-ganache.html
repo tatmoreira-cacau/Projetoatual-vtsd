@@ -352,7 +352,7 @@ var PODE_TIRAR = ['cha','erva','raspas','especiaria','final','seco','alcool','ma
 // Sabores do "Monte a sua ganache": quantidade por 100 g de chocolate
 var FAMILIAS = {
   classica:{n:'Cl\u00e1ssica (s\u00f3 chocolate)'},
-  fruta:{n:'Fruta', lista:['maracuja','limao','abacaxi','morango','manga','caja','cupuacu','laranja','framboesa','goiaba'], parteAgua:.5},
+  fruta:{n:'Fruta', lista:['maracuja','limao','abacaxi','morango','manga','caja','cupuacu','laranja','framboesa','goiaba'], parteAgua:.5, acucar:32/94, aTestar:1}, // polpa vai no caramelo, como no caramelo salgado (regra da Tatiana): 32 g de a\u00e7\u00facar para 94 g de l\u00edquido
   infusao:{n:'Ch\u00e1, erva ou especiaria', lista:['earlgrey','chapreto','mate','hibisco','camomila','alecrim','hortela','manjericao','lavanda','canela','cardamomo','rasplimao','rasplaranja'], g:{cha:2,erva:1,especiaria:1,raspas:2}},
   alcool:{n:'Licor ou destilado', lista:['licorcafe','licorlaranja','rum','cachaca','conhaque'], g:6},
   pasta:{n:'Pasta saborizante', lista:['pastapistache','pastaavela','pastaamendoim','pastamaracuja'], g:18, aTestar:1},
@@ -503,7 +503,8 @@ function preparo(tipo,tex,itens,falsa){
   if(has('queijo')||has('geleia')){
     return ['Misture bem '+[nome('queijo'),nome('geleia'),nome('seco'),nome('raspas')].filter(Boolean).join(', ')+'.','Derreta o chocolate (at\u00e9 '+maxT+' \u00b0C).','Junte a mistura ao chocolate aos poucos, mexendo at\u00e9 ficar liso. N\u00e3o precisa temperar.',pontoTxt(tex)];
   }
-  if(ids.indexOf('acucar')>=0) st.push('Derreta o a\u00e7\u00facar em fogo baixo at\u00e9 ficar cor de \u00e2mbar. Junte o creme morno aos poucos (cuidado com o vapor) e mexa at\u00e9 dissolver.');
+  var caramFruta=ids.indexOf('acucar')>=0&&has('fruta');
+  if(ids.indexOf('acucar')>=0) st.push('Derreta o a\u00e7\u00facar em fogo baixo at\u00e9 ficar cor de \u00e2mbar. Junte '+(caramFruta?'o creme e a '+nome('fruta')+', mornos,':'o creme morno')+' aos poucos (cuidado com o vapor) e mexa at\u00e9 dissolver.'+(ids.indexOf('glucose')>=0?' Junte a glucose.':'')+(caramFruta&&itens.some(function(x){return ING[x[0]].enzima})?' Deixe ferver 2 minutos: isso desliga uma enzima da fruta que talha o creme.':''));
   st.push('Derreta o chocolate (at\u00e9 '+maxT+' \u00b0C).'+(has('pasta')?' Misture '+nome('pasta')+' ao chocolate derretido.':'')+(ids.indexOf('mcacau')>=0?' Junte a manteiga de cacau.':''));
   var inf=itens.filter(function(x){var c=ING[x[0]].cat;return c==='cha'||c==='erva'||c==='especiaria'||c==='raspas'}).map(function(x){return ING[x[0]].n.toLowerCase()});
   var cremes=itens.filter(function(x){return ING[x[0]].cat==='creme'});
@@ -516,7 +517,7 @@ function preparo(tipo,tex,itens,falsa){
     if(ids.indexOf('cafe')>=0) t+=' Dissolva o caf\u00e9 no l\u00edquido quente.';
     st.push(t);
   }
-  if(has('fruta')){
+  if(has('fruta')&&!caramFruta){
     var fr=itens.filter(function(x){return ING[x[0]].cat==='fruta'});
     var t2='Aque\u00e7a '+fr.map(function(x){return ING[x[0]].n.toLowerCase()}).join(' e ')+(acu?' com a '+acu:'')+(cremes.length?', separado do creme':'')+'.';
     if(fr.some(function(x){return ING[x[0]].enzima})) t2+=' Deixe ferver 2 minutos: isso desliga uma enzima da fruta que talha o creme.';
@@ -543,7 +544,8 @@ function avisos(tipo,origem,tex,itens,extra,proprio){
   if(proprio){ (proprio.notas||[]).concat(extra||[]).forEach(function(e){a.push(e)}); a.push(['ok','Teste primeiro:','fa\u00e7a uma por\u00e7\u00e3o pequena antes da receita inteira.']); return '<div class="alerts">'+a.map(function(x){return '<div class="alert '+x[0]+'"><b>'+x[1]+'</b> '+x[2]+'</div>'}).join('')+'</div>'; }
   if(origem==='fracionada') a.push(['bad','Falsa Ganache:','cobertura fracionada n\u00e3o \u00e9 chocolate. Serve s\u00f3 para blindagem, sem manteiga. Guarde o bolo fora da geladeira, com recheio que aguente temperatura ambiente.']);
   if(itens.some(function(x){return ING[x[0]].enzima})) a.push(['','Abacaxi e kiwi:','ferva a polpa antes. Crus, eles talham o creme.']);
-  else if(itens.some(function(x){return ING[x[0]].acida})) a.push(['','Fruta \u00e1cida:','aque\u00e7a separada do creme e junte aos poucos, sen\u00e3o o creme pode talhar.']);
+  else if(itens.some(function(x){return ING[x[0]].acida})&&!itens.some(function(x){return x[0]==='acucar'})) a.push(['','Fruta \u00e1cida:','aque\u00e7a separada do creme e junte aos poucos, sen\u00e3o o creme pode talhar.']);
+  if(itens.some(function(x){return ING[x[0]].cat==='fruta'})&&itens.some(function(x){return x[0]==='acucar'})) a.push(['','Polpa de fruta nunca vai crua:','ela entra no caramelo, como no caramelo salgado. Assim a \u00e1gua da fruta reduz e a ganache n\u00e3o desanda.']);
   if(tipo==='branco'&&origem==='nacional') a.push(['','Chocolate branco de barra','de supermercado costuma ser mais mole: use 10% a mais de chocolate.']);
   (extra||[]).forEach(function(e){a.push(e)});
   a.push(['ok','Teste primeiro:','fa\u00e7a uma por\u00e7\u00e3o pequena. A calculadora faz a conta, mas o ponto final quem confirma \u00e9 voc\u00ea.']);
@@ -621,6 +623,7 @@ function buildRecipe(){
   if(B.fam==='caramelo'){ it.unshift(['acucar',32]); titulo='Ganache de caramelo com chocolate '+TIPOS[tipo].n.toLowerCase(); }
   if(aguaResto<=0) return '<div class="result blocked"><h2>N\u00e3o cabe nessa textura</h2><p>O sabor '+esc(F.n.toLowerCase())+' j\u00e1 traz todo o l\u00edquido que a textura '+TEXTURAS[tex].n+' aguenta com chocolate '+TIPOS[tipo].n.toLowerCase()+'. N\u00e3o sobra lugar para o creme e a ganache fica mole. Escolha a textura <b>Cremosa</b> ou o sabor <b>Cl\u00e1ssica</b>.</p></div>';
   it.unshift([B.creme,aguaResto/cr.w]);
+  if(B.fam==='fruta') it.unshift(['acucar',(it[0][1]+it[1][1])*F.acucar]); // creme + polpa
   if(B.fam==='infusao'){ var c=ING[B.esc].cat; it.push([B.esc,F.g[c]]); titulo+=' com '+ING[B.esc].n.toLowerCase(); }
   if(B.fam==='pasta'){ it.push([B.esc,F.g]); titulo+=' de '+ING[B.esc].n.toLowerCase().replace('pasta saborizante de ','').replace('pasta de ',''); }
   if(mant>0.1) it.push(['manteiga',mant]);
