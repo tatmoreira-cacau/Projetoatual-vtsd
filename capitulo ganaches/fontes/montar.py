@@ -2,7 +2,7 @@
 # Uso: python montar.py            (usa as fotos de ../fotos-receitas)
 #      python montar.py OUTRA_PASTA (usa as fotos de outra pasta, para teste)
 # - acrescenta o cabeçalho HTML com charset utf-8
-# - troca os acentos por códigos (&#NNN; no HTML e escapes unicode no JS), porque a Hotmart entrega o arquivo sem charset
+# - troca os acentos por códigos (&#NNN; no HTML, escapes unicode no JS e no CSS), porque a Hotmart entrega o arquivo sem charset
 # - diminui as fotos (lado maior 800 px, JPEG 75%) e embute dentro do HTML, porque a Hotmart hospeda um arquivo só
 import base64, io, json, os, re, sys
 AQUI = os.path.dirname(os.path.abspath(__file__))
@@ -14,6 +14,9 @@ LADO, QUALIDADE, LIMITE_MB = 800, 75, 5.0
 EXTS = ('.jpg', '.jpeg', '.png', '.webp')
 
 def esc_html(t): return ''.join(c if ord(c) < 128 else '&#%d;' % ord(c) for c in t)
+def esc_css(t):
+    # dentro do <style>, &#NNN; não funciona: usa o escape do CSS (\203a )
+    return ''.join(c if ord(c) < 128 else BS + '%x ' % ord(c) for c in t)
 def esc_js(t):
     # emojis (acima de FFFF) viram par substituto: 💧
     return ''.join(c if ord(c) < 128 else ''.join(BS + 'u%04x' % u for u in u16(c)) for c in t)
@@ -58,8 +61,8 @@ for src, dst in PARES:
     s = io.open(os.path.join(AQUI, src), encoding='utf-8').read()
     if 'var FOTOS = {};' in s:
         s = s.replace('var FOTOS = {};', 'var FOTOS = ' + json.dumps(fotos, separators=(',', ':')) + ';')
-    partes = re.split(r'(<script>.*?</script>)', s, flags=re.S)
-    corpo = ''.join(esc_js(p) if p.startswith('<script>') else esc_html(p) for p in partes)
+    partes = re.split(r'(<script>.*?</script>|<style>.*?</style>)', s, flags=re.S)
+    corpo = ''.join(esc_js(p) if p.startswith('<script>') else esc_css(p) if p.startswith('<style>') else esc_html(p) for p in partes)
     i = corpo.index('<div class="wrap">')
     out = CAB + corpo[:i] + '</head>\n<body>\n' + corpo[i:] + '\n</body>\n</html>\n'
     io.open(os.path.join(SAIDA, dst), 'w', encoding='utf-8', newline='\n').write(out)

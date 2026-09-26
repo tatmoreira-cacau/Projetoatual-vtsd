@@ -2,21 +2,23 @@ FOTOS DAS RECEITAS DA CALCULADORA
 
 Coloque aqui as fotos, com estes nomes:
   capa.jpg   -> foto de abertura da calculadora (uma ganache bonita)
-  1.jpg      -> Ganache de Bico Meio Amargo com Laranja
-  2.jpg      -> Ganache de Bico ao Leite com Canela
-  3.jpg      -> Ganache de Bico Branca com Baunilha
-  4.jpg      -> Recheio de Coco Tostado com Limão
-  5.jpg      -> Recheio Cremoso de Queijo com Goiabada
-  6.jpg      -> Trufa de Limão com Alecrim
-  7.jpg      -> Trufa de Chá Preto com Laranja
-  8.jpg      -> Recheio de Bombom ao Leite com Licor de Café
-  9.jpg      -> Recheio de Bombom de Avelã
-  10.jpg     -> Recheio de Cajá com Cachaça e Limão
-  11.jpg     -> Recheio de Maracujá com Hortelã
-  12.jpg     -> Recheio de Bombom de Mate Tostado
-  13.jpg     -> Trufa Meio Amargo com Café
-  14.jpg     -> Trufa ao Leite com Cardamomo
-  15.jpg     -> Ganache de Caramelo com Flor de Sal
+  1.jpg      -> Ganache de Chocolate Amargo 54% – Ponto de Bico
+  2.jpg      -> Ganache de Chocolate ao Leite 33% – Ponto de Bico
+  3.jpg      -> Ganache de Chocolate Branco 28% – Ponto de Bico
+  4.jpg      -> Ganache de Coco (doce de leite, creme de abóbora e nozes)
+  5.jpg      -> Ganache de Cheesecake de Frutas Vermelhas
+  6.jpg      -> Ganache de Limão com Lavanda
+  7.jpg      -> Ganache de Chocolate Branco 28% com Earl Grey
+  8.jpg      -> Ganache de Chocolate ao Leite 33% com Conhaque
+  9.jpg      -> Ganache de Chocolate de Pistache (pasta saborizante)
+  10.jpg     -> Ganache de Chocolate Branco com Caipirinha de Cupuaçu
+  11.jpg     -> Ganache de Chocolate Branco com Manjericão
+  12.jpg     -> Ganache de Chocolate Branco de Chá Verde
+  13.jpg     -> Ganache de Chocolate Amargo – Trufa
+  14.jpg     -> Ganache de Chocolate ao Leite – Trufa
+  15.jpg     -> Ganache de Caramelo Salgado
+  16.jpg     -> Ganache de Chocolate Ruby com Amora e Vinho
+  17.jpg     -> Ganache de Mel com Especiarias
   cremosa.jpg, estrutura.jpg, cobertura.jpg -> uma foto de cada textura
 
 Dicas:

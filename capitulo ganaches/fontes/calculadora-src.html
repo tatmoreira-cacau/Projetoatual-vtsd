@@ -76,6 +76,10 @@ button:focus-visible,select:focus-visible,input:focus-visible,summary:focus-visi
 .tex-uso b{color:var(--ouro2);font-weight:600}
 select,input[type=number]{font:inherit;font-size:16px;padding:10px 12px;border-radius:12px;border:1px solid var(--line2);background:var(--surface2);color:var(--ink);max-width:100%}
 .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.comp{display:flex;flex-direction:column;gap:10px;margin-top:12px;background:var(--surface2);border-radius:12px;padding:12px}
+.comp label{justify-content:space-between;font-size:14px;font-weight:600}
+.comp input,.sw-row input{width:6.5em}
+.opc,.comp label.opc{color:var(--muted);font-weight:500;font-size:13px}
 #q-escolha select{width:100%}
 
 /* resultado */
@@ -90,8 +94,10 @@ select,input[type=number]{font:inherit;font-size:16px;padding:10px 12px;border-r
 .ingr li.feito::before{background:var(--ouro2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' fill='none' stroke='%2316243E' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/80% no-repeat;border-color:var(--ouro2)}
 .ingr li.feito span:not(.sw){opacity:.5;text-decoration:line-through}
 .ingr .sw{width:10px;height:10px;border-radius:50%}
+.ingr .med{display:block;font-size:12px;color:var(--muted);font-weight:500;margin-top:1px}
 .ingr .g{font-weight:700;white-space:nowrap;color:var(--ouro2)}
-.total{font-size:14px;color:var(--muted)}
+.total{display:flex;flex-direction:column;gap:2px;background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:14px;color:var(--muted)}
+.total b{color:var(--ouro2);font-size:16px}
 .dica-marcar{font-size:12px;color:var(--muted);margin:0}
 .steps{margin:0;padding-left:0;list-style:none;counter-reset:p;display:flex;flex-direction:column;gap:10px}
 .steps li{counter-increment:p;display:grid;grid-template-columns:28px 1fr;gap:10px}
@@ -156,6 +162,8 @@ select,input[type=number]{font:inherit;font-size:16px;padding:10px 12px;border-r
 .matriz tr:last-child th,.matriz tr:last-child td{border-bottom:none}
 .matriz thead th{background:var(--surface2);font-size:12px;color:var(--ouro2);font-weight:700}
 .matriz tbody th{text-align:left;padding-left:12px;font-weight:600;font-size:13px}
+.matriz td{white-space:nowrap}
+@media (max-width:400px){.matriz{font-size:13px}.matriz th,.matriz td{padding:9px 3px}.matriz td b{font-size:14px}.matriz thead th{font-size:11px}}
 .matriz td b{color:var(--titulo);font-size:15px}
 .acc{display:flex;flex-direction:column;gap:8px}
 .acc details{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
@@ -201,7 +209,7 @@ footer{color:var(--muted);font-size:12px;text-align:center;border-top:1px solid 
     </header>
     <div class="home">
       <button class="big main" id="go-build" type="button"><span class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 11h16a8 8 0 0 1-16 0z"/><path d="M12 3v5M9 5l3-2 3 2"/></svg></span><span><b>Monte a sua ganache</b><span>Escolha a textura, o chocolate e o sabor. Eu faço a receita.</span></span><span class="go">›</span></button>
-      <button class="big" id="go-menu" type="button"><span class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/><path d="M9 7h6M9 11h6"/></svg></span><span><b>Receitas prontas</b><span>15 ideias para usar como estão ou trocar o que você não tem.</span></span><span class="go">›</span></button>
+      <button class="big" id="go-menu" type="button"><span class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/><path d="M9 7h6M9 11h6"/></svg></span><span><b>Receitas prontas</b><span><span id="n-rec">17</span> ideias para usar como estão ou trocar o que você não tem.</span></span><span class="go">›</span></button>
     </div>
     <div><div class="eyebrow">Os 4 ingredientes</div><h3 style="margin-top:4px">Toda ganache é feita destes</h3></div>
     <div class="quatro" id="quatro"></div>
@@ -212,10 +220,12 @@ footer{color:var(--muted);font-size:12px;text-align:center;border-top:1px solid 
   <section id="v-build" hidden style="display:flex;flex-direction:column;gap:14px">
     <h2>Monte a sua ganache</h2>
     <div class="q"><h3><span class="n">1</span><span>Qual textura você quer?</span></h3><div class="opts tex" id="q-tex"></div><p class="tex-uso" id="q-tex-uso"></p></div>
-    <div class="q"><h3><span class="n">2</span><span>Qual chocolate você vai usar?<small>O tipo e a origem mudam a receita, porque a lei brasileira e a europeia são diferentes.</small></span></h3><div class="opts" id="q-tipo"></div><div class="opts" id="q-orig"></div></div>
+    <div class="q"><h3><span class="n">2</span><span>Qual chocolate você vai usar?<small>O que muda a receita é a manteiga de cacau do chocolate. Por isso a calculadora pergunta o % de cacau do rótulo, e não o nome.</small></span></h3><div class="opts" id="q-tipo"></div><div class="opts" id="q-orig"></div>
+      <div class="comp" id="q-comp"><label class="row">% de cacau (está na frente da embalagem) <span class="row"><input type="number" id="q-cacau" step="0.5" inputmode="decimal" aria-label="Porcentagem de cacau"> %</span></label>
+      <label class="row opc">Gordura em 100 g (tabela nutricional, se souber) <span class="row"><input type="number" id="q-gord" step="0.5" inputmode="decimal" placeholder="opcional" aria-label="Gordura total em 100 gramas"> g</span></label></div></div>
     <div class="q"><h3><span class="n">3</span><span>Qual creme de leite você tem?</span></h3><div class="opts" id="q-creme"></div></div>
     <div class="q"><h3><span class="n">4</span><span>Qual sabor?</span></h3><div class="opts two" id="q-fam"></div><div class="row" id="q-escolha"></div></div>
-    <div class="q"><h3><span class="n">5</span><span>Quanto quer fazer?</span></h3><div class="row"><input type="number" id="q-peso" min="100" max="10000" step="50" value="500" aria-label="Peso final em gramas"> <span>gramas de ganache</span></div></div>
+    <div class="q"><h3><span class="n">5</span><span>Quantos gramas de chocolate você vai usar?</span></h3><div class="row"><input type="number" id="q-peso" min="50" max="10000" step="50" value="400" aria-label="Gramas de chocolate"> <span>gramas de chocolate</span></div></div>
     <div id="build-out"></div>
   </section>
 
@@ -237,7 +247,7 @@ footer{color:var(--muted);font-size:12px;text-align:center;border-top:1px solid 
   <section id="v-guia" hidden style="display:flex;flex-direction:column;gap:16px">
     <div><div class="eyebrow">Guia</div><h2 style="margin-top:4px">Proporções e como consertar</h2></div>
     <div class="q">
-      <h3><span class="n">1</span><span>Quanto chocolate para cada 1 g de creme<small>Com creme de leite fresco 35%. Os mesmos números da tabela Ganache Perfeita.</small></span></h3>
+      <h3><span class="n">1</span><span>Quanto chocolate para cada 1 g de creme<small>Com creme de leite fresco 35%, a partir das receitas de bico da autora.</small></span></h3>
       <div class="opts" id="g-orig"></div>
       <div id="g-matriz"></div>
       <p class="tex-uso">Cobertura fracionada (Falsa Ganache): só <b>blindagem</b>, 5 : 1, sem manteiga. Branca fracionada: ainda sem receita segura.</p>
@@ -264,10 +274,13 @@ footer{color:var(--muted);font-size:12px;text-align:center;border-top:1px solid 
 (function(){
 /* ===================== DADOS: edite aqui ===================== */
 
-// Tipos de chocolate
+// Tipos de chocolate. O chocolate escuro não se escolhe pelo nome (amargo, meio amargo): escolhe-se pelo % de cacau do rótulo.
+// cacau: % de cacau padrão de cada origem (referências da Fase 1, tabela 1.3). Sem cacau = composição fixa.
 var TIPOS = {
-  amargo:{n:'Amargo', cor:'--t-amargo'}, meio:{n:'Meio amargo', cor:'--t-meio'}, blend:{n:'Blend', cor:'--t-blend'},
-  leite:{n:'Ao leite', cor:'--t-leite'}, branco:{n:'Branco', cor:'--t-branco', claro:1}, caramelo:{n:'Caramelo', cor:'--t-caramelo'}, ruby:{n:'Ruby', cor:'--t-ruby'}
+  escuro:{n:'Amargo / meio amargo', cor:'--t-meio', cacau:{importado:54.5, nacional:40}, faixa:[35,90]},
+  leite:{n:'Ao leite', cor:'--t-leite', cacau:{importado:33.6, nacional:30}, faixa:[25,50], gl:6},
+  branco:{n:'Branco', cor:'--t-branco', claro:1, cacau:{importado:28, nacional:25}, faixa:[20,40], gl:6},
+  blend:{n:'Blend', cor:'--t-blend'}, caramelo:{n:'Caramelo', cor:'--t-caramelo'}, ruby:{n:'Ruby', cor:'--t-ruby'}
 };
 var ORIGENS = {nacional:'Nacional', importado:'Importado', fracionada:'Cobertura fracionada'};
 
@@ -278,60 +291,83 @@ var TEXTURAS = {
   cobertura:{n:'Cobertura', usos:'Drip cake, calda, decoração', ic:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16v10H4z"/><path d="M4 9v3a1.5 1.5 0 0 0 3 0v-1a1.5 1.5 0 0 0 3 0v3a1.5 1.5 0 0 0 3 0v-2a1.5 1.5 0 0 0 3 0v1a1.5 1.5 0 0 0 3 0V9"/></svg>'}
 };
 
-// Gordura que dá firmeza: manteiga de cacau + gordura vegetal (% no chocolate). null = não existe.
-var FIRME = {
-  importado:{amargo:42, meio:37, blend:33.5, leite:30, branco:29.5, caramelo:35.4, ruby:30},
-  nacional: {amargo:38, meio:26, blend:26.5, leite:27, branco:28,   caramelo:null, ruby:null}
-};
-
-// Gramas de chocolate importado para 1 g de creme fresco 35% (tabela Ganache Perfeita)
+/* ---------- MOTOR DE BALANCEAMENTO (Fase 1 e 2; Contexto Mestre, item 5) ----------
+   Quem dá firmeza à ganache é a MANTEIGA DE CACAU (+ gordura vegetal no nacional); os sólidos de cacau absorvem água.
+   Por isso o chocolate entra pela COMPOSIÇÃO: % de cacau do rótulo → gordura que firma (MC).
+   Referências com ficha técnica (Fase 1, 1.3):
+     escuro importado: Callebaut 811 = 54,5% cacau, MC 36,6 ✅ · Valrhona Guanaja = 70%, MC 42 🔶
+     escuro nacional:  Sicao Nobre = 40%, gordura que firma ~26 ⚠️ · Harald Unique = 70%, MC ~38 ⚠️
+     ao leite: Callebaut 823 = 33,6%, MC ~30 🔶 (nacional ~27 ⚠️) · branco: W2 = 28%, MC 29,5 ✅ (nacional ~28 ⚠️)
+   Balanceamento: para o MESMO ponto, a água acompanha a gordura que firma do chocolate:
+     g de chocolate por g de água = PROPORÇÃO do chocolate de referência × MC da referência ÷ MC do seu chocolate ÷ 0,58
+     (referência: importado com ficha; no escuro, entre o 811 e o Guanaja conforme o % de cacau; abaixo de 54,5%, o 811)
+   Com o % de cacau padrão, o motor devolve exatamente a tabela Ganache Perfeita. */
+function mcImp(t,c){ // gordura que firma do chocolate importado com c% de cacau
+  if(t==='escuro') return 36.6+(c-54.5)*(42-36.6)/(70-54.5);
+  if(t==='leite') return c-3.6;   // 823: 33,6% → ~30 (o cacau do ao leite é quase todo manteiga)
+  if(t==='branco') return c+1.5;  // W2: 28% → 29,5 (no branco, o % de cacau é a própria manteiga)
+  return {blend:33.5, caramelo:35.4, ruby:30}[t];
+}
+function mcNac(t,c){ // nacional: menos manteiga de cacau, parte de gordura vegetal (Fase 1, 1.3 e 1.4)
+  if(t==='escuro') return 26+(c-40)*(38-26)/(70-40);
+  if(t==='leite') return c-3;
+  if(t==='branco') return c+3;
+  return {blend:26.5}[t]; // caramelo e ruby: não existem nacionais
+}
+// Gramas de chocolate IMPORTADO para 1 g de creme fresco 35% (tabela Ganache Perfeita)
 var PROPORCAO = {
-  amargo:{cremosa:1.6, estrutura:2.0, cobertura:0.9},
-  meio:  {cremosa:2.0, estrutura:2.5, cobertura:1.0},
-  leite: {cremosa:2.5, estrutura:3.1, cobertura:1.5},
-  branco:{cremosa:3.2, estrutura:4.0, cobertura:2.5}
+  escuro70:{cremosa:1.6, estrutura:2.0, cobertura:0.9}, // amargo 70% (Guanaja)
+  escuro55:{cremosa:2.0, estrutura:2.5, cobertura:1.0}, // meio amargo 54,5% (811)
+  leite: {cremosa:2.5, estrutura:3.1, cobertura:1.5},   // 823
+  branco:{cremosa:3.2, estrutura:4.0, cobertura:2.5}    // W2
 };
 PROPORCAO.blend={}; PROPORCAO.caramelo={}; PROPORCAO.ruby={};
-Object.keys(PROPORCAO.meio).forEach(function(u){
-  PROPORCAO.blend[u]=(PROPORCAO.meio[u]+PROPORCAO.leite[u])/2;
+Object.keys(PROPORCAO.escuro55).forEach(function(u){
+  PROPORCAO.blend[u]=(PROPORCAO.escuro55[u]+PROPORCAO.leite[u])/2;
   PROPORCAO.caramelo[u]=PROPORCAO.branco[u]*29.5/35.4;
   PROPORCAO.ruby[u]=PROPORCAO.leite[u];
 });
-// Manteiga e glucose em % do total da ganache [manteiga, glucose]
-var EXTRAS = {cremosa:[5,5], estrutura:[0,3], cobertura:[0,5]};
+function propImp(t,tex,c){ // proporção de referência do importado com c% de cacau
+  if(t==='escuro'){ // entre o 811 e o Guanaja: mais cacau → mais manteiga e mais sólidos → pede mais líquido
+    var p=PROPORCAO.escuro55[tex]+(c-54.5)*(PROPORCAO.escuro70[tex]-PROPORCAO.escuro55[tex])/(70-54.5);
+    return Math.max(p,0.5);
+  }
+  if(t==='leite'||t==='branco') return PROPORCAO[t][tex]*mcImp(t,TIPOS[t].cacau.importado)/mcImp(t,c);
+  return PROPORCAO[t][tex];
+}
 
 // Falsa Ganache (cobertura fracionada): só blindagem, sem manteiga
-var FALSA = {tipos:['amargo','meio','blend'], creme:20}; // 100 g de cobertura : 20 g de creme (5 : 1)
+var FALSA = {tipos:['escuro','blend'], creme:20}; // 100 g de cobertura : 20 g de creme (5 : 1)
 
 // Ingredientes. w = parte de água (0 a 1): só os líquidos têm. ⚠️ valores estimados (tabelas de composição)
 var ING = {
-  creme35:{n:'Creme de leite fresco 35%',cat:'creme',w:.58}, creme30:{n:'Creme de leite 30%',cat:'creme',w:.63},
-  creme25:{n:'Creme de leite 25%',cat:'creme',w:.68}, creme20:{n:'Creme de leite de caixinha 20%',cat:'creme',w:.73},
-  creme17:{n:'Creme de leite de caixinha 17%',cat:'creme',w:.76},
+  creme35:{f:0.35, n:'Creme de leite fresco 35%',cat:'creme',w:.58}, creme30:{f:0.3, n:'Creme de leite 30%',cat:'creme',w:.63},
+  creme25:{f:0.25, n:'Creme de leite 25%',cat:'creme',w:.68}, creme20:{f:0.2, n:'Creme de leite de caixinha 20%',cat:'creme',w:.73},
+  creme17:{f:0.17, n:'Creme de leite de caixinha 17%',cat:'creme',w:.76},
   limao:{n:'Suco de limão',cat:'fruta',w:.91,acida:1}, maracuja:{n:'Polpa de maracujá',cat:'fruta',w:.85,acida:1},
   abacaxi:{n:'Polpa de abacaxi',cat:'fruta',w:.86,acida:1,enzima:1}, morango:{n:'Polpa de morango',cat:'fruta',w:.91},
   manga:{n:'Polpa de manga',cat:'fruta',w:.83}, caja:{n:'Polpa de cajá',cat:'fruta',w:.88,acida:1},
   cupuacu:{n:'Polpa de cupuaçu',cat:'fruta',w:.86,acida:1}, laranja:{n:'Suco de laranja',cat:'fruta',w:.88,acida:1},
-  framboesa:{n:'Polpa de framboesa',cat:'fruta',w:.86,acida:1}, goiaba:{n:'Polpa de goiaba',cat:'fruta',w:.86},
+  framboesa:{n:'Polpa de framboesa',cat:'fruta',w:.86,acida:1}, amora:{n:'Polpa de amora',cat:'fruta',w:.88,acida:1}, goiaba:{n:'Polpa de goiaba',cat:'fruta',w:.86},
   kiwi:{n:'Polpa de kiwi',cat:'fruta',w:.84,acida:1,enzima:1},
   cachaca:{n:'Cachaça',cat:'alcool',w:.6}, rum:{n:'Rum',cat:'alcool',w:.6}, conhaque:{n:'Conhaque',cat:'alcool',w:.6},
-  licorcafe:{n:'Licor de café',cat:'alcool',w:.55}, licorlaranja:{n:'Licor de laranja',cat:'alcool',w:.55},
+  licorcafe:{n:'Licor de café',cat:'alcool',w:.55}, vinhoporto:{n:'Vinho do Porto',cat:'alcool',w:.7}, licorlaranja:{n:'Licor de laranja',cat:'alcool',w:.55},
   agua:{n:'Água',cat:'agua',w:1}, leitecoco:{n:'Leite de coco',cat:'leitecoco',w:.7},
   creamcheese:{n:'Cream cheese',cat:'queijo',w:.55},
   goiabada:{n:'Goiabada cremosa',cat:'geleia',w:.30}, geleiavermelha:{n:'Geleia de frutas vermelhas',cat:'geleia',w:.33},
   geleiadamasco:{n:'Geleia de damasco',cat:'geleia',w:.33}, geleiamaracuja:{n:'Geleia de maracujá',cat:'geleia',w:.33},
   chapreto:{n:'Chá preto',cat:'cha'}, earlgrey:{n:'Chá Earl Grey',cat:'cha'}, mate:{n:'Chá mate tostado',cat:'cha'},
-  hibisco:{n:'Hibisco seco',cat:'cha'}, camomila:{n:'Camomila',cat:'cha'},
+  hibisco:{n:'Hibisco seco',cat:'cha'}, matcha:{n:'Matcha (chá verde em pó)',cat:'cha'}, hojicha:{n:'Hojichá',cat:'cha'}, camomila:{n:'Camomila',cat:'cha'},
   alecrim:{n:'Alecrim fresco',cat:'erva'}, hortela:{n:'Hortelã fresca',cat:'erva'}, manjericao:{n:'Manjericão fresco',cat:'erva'}, lavanda:{n:'Lavanda seca',cat:'erva'},
   rasplimao:{n:'Raspas de limão',cat:'raspas'}, rasplaranja:{n:'Raspas de laranja',cat:'raspas'},
-  canela:{n:'Canela em pau',cat:'especiaria'}, cardamomo:{n:'Cardamomo',cat:'especiaria'}, cravo:{n:'Cravo',cat:'especiaria'},
+  canela:{n:'Canela em pau',cat:'especiaria'}, cardamomo:{n:'Cardamomo',cat:'especiaria'}, cravo:{n:'Cravo',cat:'especiaria'}, cumaru:{n:'Cumaru',cat:'especiaria'},
   cafe:{n:'Café solúvel',cat:'final'}, baunilha:{n:'Extrato de baunilha',cat:'final'}, flordesal:{n:'Flor de sal',cat:'final'},
   pastaavela:{n:'Pasta saborizante de avelã',cat:'pasta'}, pastapistache:{n:'Pasta saborizante de pistache',cat:'pasta'},
   pastaamendoim:{n:'Pasta de amendoim',cat:'pasta'}, pastamaracuja:{n:'Pasta saborizante de maracujá',cat:'pasta'},
-  coco:{n:'Coco ralado seco tostado',cat:'seco'}, nozes:{n:'Nozes picadas',cat:'seco'}, amendoim:{n:'Amendoim torrado picado',cat:'seco'},
+  coco:{n:'Coco ralado seco tostado',cat:'seco'}, cocoseco:{n:'Coco desidratado',cat:'seco'}, nozes:{n:'Nozes picadas',cat:'seco'}, amendoim:{n:'Amendoim torrado picado',cat:'seco'},
   biscoito:{n:'Biscoito de maisena triturado',cat:'seco'},
   manteiga:{n:'Manteiga sem sal',cat:'manteiga'}, mcacau:{n:'Manteiga de cacau',cat:'manteiga'},
-  glucose:{n:'Glucose',cat:'acucar'}, invertido:{n:'Açúcar invertido',cat:'acucar'}, acucar:{n:'Açúcar (para o caramelo)',cat:'acucar'}
+  glucose:{n:'Glucose',cat:'acucar'}, mel:{n:'Mel',cat:'acucar',w:.17}, dextrose:{n:'Dextrose',cat:'acucar'}, invertido:{n:'Açúcar invertido',cat:'acucar'}, acucar:{n:'Açúcar (para o caramelo)',cat:'acucar'}
 };
 // Grupos de troca: um ingrediente só troca por outro do mesmo grupo
 var GRUPOS = {creme:['creme'], fruta:['fruta'], alcool:['alcool'], infusao:['cha','erva','raspas','especiaria'], final:['final'],
@@ -339,38 +375,101 @@ var GRUPOS = {creme:['creme'], fruta:['fruta'], alcool:['alcool'], infusao:['cha
 var PODE_TIRAR = ['cha','erva','raspas','especiaria','final','seco','alcool','manteiga'];
 
 // Sabores do "Monte a sua ganache": quantidade por 100 g de chocolate
+// oculta: receita que não aparece no cardápio (a 19 é só a base do Monte a sua ganache)
+// tambem: tipos de chocolate que a própria receita aceita com as MESMAS quantidades (ex.: pistache = branco ou ao leite)
+// Receita da autora que serve de base para cada sabor no "Monte a sua ganache" (id das RECEITAS)
+// clássica = receita 19 (400 g de ao leite + 164 g de creme UHT 25% + 32 g de glucose + 10 g de manteiga), a base que a Tatiana deu
+var MODELO = {classica:19, fruta:10, infusao:7, alcool:8, pasta:9, coco:4, caramelo:15};
 var FAMILIAS = {
   classica:{n:'Clássica (só chocolate)'},
-  fruta:{n:'Fruta', lista:['maracuja','limao','abacaxi','morango','manga','caja','cupuacu','laranja','framboesa','goiaba'], parteAgua:.5},
+  fruta:{n:'Fruta', lista:['maracuja','limao','abacaxi','morango','manga','caja','cupuacu','laranja','framboesa','goiaba']},
   infusao:{n:'Chá, erva ou especiaria', lista:['earlgrey','chapreto','mate','hibisco','camomila','alecrim','hortela','manjericao','lavanda','canela','cardamomo','rasplimao','rasplaranja'], g:{cha:2,erva:1,especiaria:1,raspas:2}},
   alcool:{n:'Licor ou destilado', lista:['licorcafe','licorlaranja','rum','cachaca','conhaque'], g:6},
-  pasta:{n:'Pasta saborizante', lista:['pastapistache','pastaavela','pastaamendoim','pastamaracuja'], g:18, aTestar:1},
-  coco:{n:'Coco', aTestar:1},
-  caramelo:{n:'Caramelo', aTestar:1}
+  pasta:{n:'Pasta saborizante', lista:['pastapistache','pastaavela','pastaamendoim','pastamaracuja']},
+  coco:{n:'Coco'},
+  caramelo:{n:'Caramelo'}
 };
 
-// Receitas prontas (por 100 g de chocolate). testada:false = ainda em teste pela Tatiana
+// Receitas prontas da Tatiana (por 100 g de chocolate). BASE: chocolate importado + o creme que a receita original diz
+// (creme UHT das apostilas = 25%, como a Tatiana explicou; creme fresco = 35%),
+// com as quantidades das receitas originais dela. Nacional: a calculadora refaz a proporção (trocarChocolate).
+// Receitas-autorais-100g.md é gerado daqui por receitas-md.py.
+// itens: [ingrediente, gramas, medida da Tatiana (opcional)] · prep: preparo · notas: dica, variações, validade · trava: não deixar trocar
 var RECEITAS = [
- {id:1, foto:'1', nome:'Ganache de Bico Meio Amargo com Laranja', tipo:'meio', origem:'nacional', tex:'cremosa', uso:'Ponto de bico', itens:[['creme30',65],['glucose',4],['rasplaranja',2]]},
- {id:2, foto:'2', nome:'Ganache de Bico ao Leite com Canela', tipo:'leite', origem:'nacional', tex:'cremosa', uso:'Ponto de bico', itens:[['creme30',43],['glucose',4],['canela',1]]},
- {id:3, foto:'3', nome:'Ganache de Bico Branca com Baunilha', tipo:'branco', origem:'nacional', tex:'cremosa', uso:'Ponto de bico', itens:[['creme30',30],['glucose',4],['baunilha',2]]},
- {id:4, foto:'4', nome:'Recheio de Coco Tostado com Limão', tipo:'branco', origem:'nacional', tex:'cremosa', uso:'Recheio de casca e bombom', itens:[['creme30',50],['leitecoco',22],['coco',35],['rasplimao',1]]},
- {id:5, foto:'5', nome:'Recheio Cremoso de Queijo com Goiabada', tipo:'branco', origem:'nacional', tex:'cremosa', uso:'Recheio de casca', itens:[['creamcheese',30],['goiabada',40],['biscoito',10],['rasplimao',1]]},
- {id:6, foto:'6', nome:'Trufa de Limão com Alecrim', tipo:'branco', origem:'nacional', tex:'cremosa', uso:'Trufa ou recheio de casca', itens:[['creme30',19],['limao',13],['manteiga',10],['glucose',6],['rasplimao',1],['alecrim',0.5]]},
- {id:7, foto:'7', nome:'Trufa de Chá Preto com Laranja', tipo:'branco', origem:'nacional', tex:'cremosa', uso:'Trufa de modelar', itens:[['creme30',20],['manteiga',5],['glucose',3],['chapreto',2],['rasplaranja',1]]},
- {id:8, foto:'8', nome:'Recheio de Bombom ao Leite com Licor de Café', tipo:'leite', origem:'nacional', tex:'cremosa', uso:'Recheio de bombom', itens:[['creme30',65],['licorcafe',6]]},
- {id:9, foto:'9', nome:'Recheio de Bombom de Avelã', tipo:'branco', origem:'importado', tex:'cremosa', uso:'Bombom moldado', itens:[['creme30',81],['glucose',10],['mcacau',5],['pastaavela',18]]},
- {id:10, foto:'10', nome:'Recheio de Cajá com Cachaça e Limão', tipo:'branco', origem:'importado', tex:'cremosa', uso:'Bombom moldado', itens:[['caja',43],['cachaca',5],['manteiga',15],['glucose',6],['rasplimao',1]]},
- {id:11, foto:'11', nome:'Recheio de Maracujá com Hortelã', tipo:'branco', origem:'importado', tex:'cremosa', uso:'Trufa oca ou casca', itens:[['creme30',14],['maracuja',20],['manteiga',7],['glucose',5],['hortela',1]]},
- {id:12, foto:'12', nome:'Recheio de Bombom de Mate Tostado', tipo:'branco', origem:'importado', tex:'cremosa', uso:'Bombom moldado', itens:[['agua',15],['mate',4],['creme30',49],['glucose',5],['invertido',4],['manteiga',8]]},
- {id:13, foto:'13', nome:'Trufa Meio Amargo com Café', tipo:'meio', origem:'importado', tex:'cremosa', uso:'Trufa', itens:[['creme30',46],['glucose',12],['manteiga',12],['cafe',2]]},
- {id:14, foto:'14', nome:'Trufa ao Leite com Cardamomo', tipo:'leite', origem:'importado', tex:'cremosa', uso:'Trufa', itens:[['creme30',40],['cardamomo',0.5]]},
- {id:15, foto:'15', nome:'Ganache de Caramelo com Flor de Sal', tipo:'leite', origem:'importado', tex:'cremosa', uso:'Recheio de barra e bombom', itens:[['acucar',32],['creme30',94],['manteiga',10],['flordesal',1],['baunilha',1]]}
+ {id:1, foto:'1', nome:'Ganache de Chocolate Amargo 54% – Ponto de Bico', tipo:'escuro', origem:'importado', cacau:54.5, tex:'cremosa', uso:'Ponto de bico',
+  itens:[['creme25',60],['glucose',4]],
+  prep:['Derreta o chocolate (até 45 °C) até ficar liso e sem grumos.','Junte o creme e misture com a espátula, raspando bem a lateral e o fundo. Se sobrar grumo, passe o fouet.','Junte a glucose.','Dê o ponto na pedra, ou na geladeira mexendo a cada 10 minutos, até o ponto de bico.','Coloque no saco de confeitar com o bico que preferir.'],
+  notas:[['','Para doce aberto:','fica durinha por fora e cremosa por dentro, e não mela no transporte.']]},
+ {id:2, foto:'2', nome:'Ganache de Chocolate ao Leite 33% – Ponto de Bico', tipo:'leite', origem:'importado', cacau:33.6, tex:'cremosa', uso:'Ponto de bico',
+  itens:[['creme25',40],['glucose',4]],
+  prep:['Derreta o chocolate (até 40 °C) até ficar liso e sem grumos.','Junte o creme e misture com a espátula, raspando bem a lateral e o fundo. Se sobrar grumo, passe o fouet.','Junte a glucose.','Dê o ponto na pedra, ou na geladeira mexendo a cada 10 minutos, até o ponto de bico.','Coloque no saco de confeitar com o bico que preferir.'],
+  notas:[['','Para doce aberto:','fica durinha por fora e cremosa por dentro, e não mela no transporte.']]},
+ {id:3, foto:'3', nome:'Ganache de Chocolate Branco 28% – Ponto de Bico', tipo:'branco', origem:'importado', cacau:28, tex:'cremosa', uso:'Ponto de bico',
+  itens:[['creme25',28],['glucose',4]],
+  prep:['Derreta o chocolate (até 40 °C) até ficar liso e sem grumos.','Junte o creme e misture com a espátula, raspando bem a lateral e o fundo. Se sobrar grumo, passe o fouet.','Junte a glucose.','Para colorir, junte umas gotinhas de corante líquido.','Dê o ponto na pedra, ou na geladeira mexendo a cada 10 minutos, até o ponto de bico.','Coloque no saco de confeitar com o bico que preferir.'],
+  notas:[['','Corante:','umas gotinhas de corante líquido, a gosto.']]},
+ {id:4, foto:'4', nome:'Ganache de Coco (doce de leite, creme de abóbora e nozes)', tipo:'branco', origem:'importado', cacau:28, tex:'cremosa', uso:'Recheio de casca e bombom',
+  itens:[['creme25',50,'a receita original não diz o %; a apostila usa creme UHT 25%'],['leitecoco',22.2],['cocoseco',38.9]],
+  prep:['Derreta o chocolate.','Junte o creme e misture com a espátula, raspando bem as beiradas. Termine com o fouet até ficar liso.','Junte o coco e o leite de coco e deixe descansar uns 10 minutos para o coco hidratar.','Recheie as casquinhas, tampe com chocolate e leve à geladeira para firmar.'],
+  notas:[['','Variações (a mesma receita):','no lugar do coco, doce de leite com nozes moídas, doce de leite com coco, amendoim ou purê de compota de abóbora. No lugar do leite de coco, suco concentrado de maracujá, a gosto.']]},
+ {id:5, foto:'5', nome:'Ganache de Cheesecake de Frutas Vermelhas', tipo:'branco', origem:'importado', cacau:28, tex:'cremosa', uso:'Recheio de casca',
+  itens:[['creamcheese',30],['geleiavermelha',43.5],['biscoito',10,'2 bolachas trituradas']],
+  prep:['Derreta o chocolate.','Numa vasilha, misture bem com o fouet o cream cheese, a geleia e as bolachas trituradas.','Junte essa mistura ao chocolate derretido. Não precisa temperar.','Misture com a espátula raspando as bordas e termine com o fouet para tirar os grumos.'],
+  notas:[['','Geleia:','pode ser de framboesa, morango, damasco ou goiabada mole.'],['','Corante:','se quiser realçar a cor.']]},
+ {id:6, foto:'6', nome:'Ganache de Limão com Lavanda', tipo:'branco', origem:'importado', cacau:28, tex:'cremosa', uso:'Trufa ou recheio de casca',
+  trava:['limao','rasplimao'],
+  itens:[['creme25',17.5,'de 16 a 19 g'],['lavanda',0.6,'cerca de ½ colher (chá)'],['manteiga',10.6,'derretida'],['glucose',6.4],['limao',12.8,'limão siciliano'],['rasplimao',0.6,'um pouco de raspas']],
+  prep:['Faça a infusão: aqueça o creme com a lavanda por 1 minuto no micro-ondas (potência média) e deixe esfriar.','Junte a manteiga derretida, a glucose, o suco e as raspas de limão e misture bem.','Derreta o chocolate e junte a mistura de lavanda e limão, mexendo bem até ficar liso.','Deixe firmar na geladeira ou na pedra.','Boleie e banhe no chocolate branco, ou use para rechear cascas. Decore com raspas de limão e lavanda.'],
+  notas:[['','Troque o sabor, não a fruta:','no lugar da lavanda, use chá Earl Grey ou hortelã bem picada (faça a infusão igual, mas não coe), ou ervas e temperos como alecrim e manjericão. O limão pode ser siciliano ou tahiti.']]},
+ {id:7, foto:'7', nome:'Ganache de Chocolate Branco 28% com Earl Grey', tipo:'branco', origem:'importado', cacau:28, tex:'cremosa', uso:'Trufa de modelar',
+  itens:[['creme25',20,'a receita original não diz o %; a apostila usa creme UHT 25%'],['earlgrey',1.2,'cerca de ½ sachê'],['glucose',3,'é o que dá efeito de modelagem'],['manteiga',5,'derretida']],
+  prep:['Derreta o chocolate até ficar liso. Reserve.','Faça a infusão: misture o chá no creme, aqueça 30 segundos no micro-ondas (potência alta) e deixe esfriar.','Misture a infusão com a glucose e a manteiga derretida.','Junte ao chocolate e envolva até incorporar.','Deixe firmar por 1 hora.','No ponto de modelar, faça as porções e guarde na geladeira até envolver as physalis.']},
+ {id:8, foto:'8', nome:'Ganache de Chocolate ao Leite 33% com Conhaque', tipo:'leite', origem:'importado', cacau:33.6, tex:'cremosa', uso:'Recheio de bombom',
+  itens:[['creme25',60],['conhaque',6]],
+  prep:['Derreta o chocolate até ficar fluido e sem grumos.','Junte o creme e misture até ficar homogêneo.','Junte o conhaque e misture.','Deixe firmar 1 hora em temperatura ambiente.','Recheie as casquinhas com a ganache e a cereja com cabo e feche o bombom.']},
+ {id:9, foto:'9', nome:'Ganache de Chocolate de Pistache (pasta saborizante)', tipo:'branco', tambem:['leite'], origem:'importado', cacau:33, tex:'cremosa', uso:'Bombom moldado',
+  itens:[['creme25',70,'creme de leite UHT'],['glucose',10],['mcacau',5],['pastapistache',17.5]],
+  prep:['Aqueça o creme com a glucose.','Despeje sobre o chocolate, a manteiga de cacau e a pasta de pistache.','Passe o mixer até ficar liso.','Recheie as casquinhas a 30 °C, feche e leve à geladeira até firmar. Desenforme.'],
+  notas:[['','Chocolate:','branco ou ao leite.'],['','Validade:','15 dias (não tem conservante). Congelada e bem embalada, até 2 meses.']]},
+ {id:10, foto:'10', nome:'Ganache de Chocolate Branco com Caipirinha de Cupuaçu', tipo:'branco', origem:'importado', cacau:32, tex:'cremosa', uso:'Bombom moldado',
+  itens:[['cupuacu',43.5],['glucose',6.5],['manteiga',17.4],['cachaca',5]],
+  prep:['Numa panela, junte a polpa, a glucose e a manteiga e aqueça até ferver.','Despeje sobre o chocolate e misture até emulsionar.','Junte a cachaça e misture até ficar um creme liso.','Deixe chegar a 28–30 °C antes de rechear.'],
+  notas:[['','Gel de cupuaçu (camada do bombom):','1 parte de polpa de cupuaçu para 2 de glucose. Aqueça até 105 °C e use a 28–30 °C.'],['','Durabilidade:','7 a 10 dias, em ambiente de 18 a 21 °C.']]},
+ {id:11, foto:'11', nome:'Ganache de Chocolate Branco com Manjericão', tipo:'branco', origem:'importado', cacau:25.9, tex:'cremosa', uso:'Recheio de trufa oca',
+  itens:[['creme35',14],['limao',20],['manteiga',7],['manjericao',0.6],['glucose',5]],
+  prep:['Derreta o chocolate a 40 °C.','Aqueça o suco de limão com a glucose a 70 °C e, separado, o creme a 70 °C.','Junte tudo ao chocolate e misture bem.','Junte o manjericão e a manteiga e passe o mixer.','Recheie as trufas ocas a 28 °C e feche com chocolate ao leite.'],
+  notas:[['','Validade:','7 dias, embalado e na geladeira.']]},
+ {id:12, foto:'12', nome:'Ganache de Chocolate Branco de Chá Verde', tipo:'branco', origem:'importado', cacau:32, tex:'cremosa', uso:'Bombom moldado',
+  itens:[['agua',14.7],['hojicha',4.2],['creme35',52.6],['glucose',5.3],['dextrose',4.2],['manteiga',8.4]],
+  prep:['Ferva a água, junte o hojichá, tampe e deixe 5 minutos.','Na mesma panela, junte o creme, a glucose e a dextrose e ferva de novo.','Despeje sobre o chocolate, junte a manteiga e passe o mixer.','Descanse 12 horas antes de usar.'],
+  notas:[['','Casca:','fica lindo com casca de chocolate ruby.'],['','Validade:','15 dias em temperatura ambiente (até 25 °C).']]},
+ {id:13, foto:'13', nome:'Ganache de Chocolate Amargo – Trufa', tipo:'escuro', origem:'importado', cacau:54.5, tex:'cremosa', uso:'Trufa',
+  itens:[['creme35',50],['glucose',15],['manteiga',15]],
+  notas:[['','Chocolate:','Callebaut 811 (54,5%), que é meio amargo.'],['','Modo de preparo:','a receita original veio sem ele; o passo a passo é o da calculadora.']]},
+ {id:14, foto:'14', nome:'Ganache de Chocolate ao Leite – Trufa', tipo:'leite', origem:'importado', cacau:33.6, tex:'cremosa', uso:'Trufa',
+  itens:[['creme35',42.9]],
+  notas:[['','Chocolate:','Callebaut 823 (33,6%).'],['','Modo de preparo:','a receita original veio sem ele; o passo a passo é o da calculadora.']]},
+ {id:15, foto:'15', nome:'Ganache de Caramelo Salgado', tipo:'leite', origem:'importado', cacau:33.6, tex:'cremosa', uso:'Recheio de barra e bombom',
+  itens:[['acucar',31.8],['creme35',101.8,'morno'],['manteiga',10,'a confirmar: a receita original não dizia a quantidade'],['flordesal',1,'1 boa pitada']],
+  prep:['Derreta o açúcar em fogo baixo até ficar cor de âmbar.','Junte o creme morno aos poucos (cuidado com o vapor) e mexa até ficar liso, sem grumos.','Despeje sobre o chocolate, junte a manteiga e passe o mixer até ficar liso e brilhante.','Quando esfriar, junte a flor de sal.','Cubra com filme encostado e descanse pelo menos 8 horas.'],
+  notas:[['','Chocolate:','Callebaut 823, que tem notas de caramelo.']]},
+ {id:16, foto:'16', nome:'Ganache de Chocolate Ruby com Amora e Vinho', tipo:'ruby', origem:'importado', tex:'cremosa', uso:'Trufa oca',
+  itens:[['amora',26],['glucose',8],['manteiga',20],['vinhoporto',26]],
+  prep:['Numa panela, junte a polpa, a glucose e a manteiga e aqueça até ferver.','Despeje sobre o chocolate ruby e misture até emulsionar.','Junte o vinho do Porto e misture até ficar homogêneo.','Deixe esfriar até 28 °C.'],
+  notas:[['','Montagem:','com o saco de confeitar, recheie trufas ocas de chocolate branco. Depois de 1 hora, cubra o recheio com ruby temperado, banhe as trufas no ruby e deixe secar em temperatura ambiente. Se quiser, pincele pó metalizado cor ruby.'],['','Durabilidade:','7 a 10 dias, em ambiente de 18 a 21 °C.']]},
+ {id:17, foto:'17', nome:'Ganache de Mel com Especiarias', tipo:'leite', origem:'importado', cacau:33.6, tex:'cremosa', uso:'Bombom moldado',
+  itens:[['creme35',69.6],['mel',13],['cumaru',0.9,'cerca de 1 fava ralada'],['manteiga',13]],
+  prep:['Derreta o chocolate aos poucos, mexendo sempre.','Leve o creme e o mel ao fogo com o cumaru ralado. Quando ferver, desligue e deixe em infusão por 30 minutos.','Coe o cumaru e volte ao fogo até ferver.','Despeje um terço da mistura quente sobre o chocolate e mexa rápido, em pequenos círculos, até formar um centro liso e brilhante.','Junte mais um terço e mexa do mesmo jeito. Depois junte o resto, sempre mexendo.','Com a ganache entre 35 e 40 °C, junte a manteiga em cubos e passe o mixer.','Recheie as casquinhas a 28–30 °C, deixe firmar e feche com chocolate amargo.'],
+  notas:[['','Durabilidade:','7 a 10 dias, em ambiente de 18 a 21 °C.']]},
+ {id:19, foto:'19', oculta:1, nome:'Ganache de Chocolate ao Leite 33% (base do Monte a sua ganache)', tipo:'leite', origem:'importado', cacau:33.6, tex:'cremosa', uso:'Bombom moldado',
+  itens:[['creme25',41,'creme de leite UHT'],['glucose',8],['manteiga',2.5]],
+  prep:['Aqueça o creme com a glucose.','Despeje sobre o chocolate ao leite.','Junte a manteiga.','Passe o mixer para emulsionar.','Recheie as casquinhas, feche e leve à geladeira até firmar. Desenforme.'],
+  notas:[['','Validade:','15 dias (não tem conservante). Congelada e bem embalada, até 2 meses.']]}
 ];
 
 /* ===================== fim dos dados ===================== */
 
-// Fotos: o montar.py preenche sozinho com as fotos da pasta fotos-receitas (capa, 1 a 15, cremosa, estrutura, cobertura).
+// Fotos: o montar.py preenche sozinho com as fotos da pasta fotos-receitas (capa, 1 a 19, cremosa, estrutura, cobertura).
 var FOTOS = {};
 
 // Ilustrações (desenho simples, sem foto): os 4 ingredientes e as 3 texturas
@@ -402,9 +501,9 @@ function fmtR(r){ return (Math.round(r*10)/10).toString().replace('.',','); }
 function drawGuia(){
   var o=$('g-orig'); o.innerHTML=''; o.className='opts two';
   ['nacional','importado'].forEach(function(k){ var b=document.createElement('button'); b.type='button'; b.textContent=ORIGENS[k]; b.setAttribute('aria-pressed',G.origem===k?'true':'false'); b.addEventListener('click',function(){G.origem=k;drawGuia();}); o.appendChild(b); });
-  var tipos=['meio','leite','branco'], h='<table class="matriz"><thead><tr><th></th>'+tipos.map(function(t){return '<th>'+TIPOS[t].n+'</th>'}).join('')+'</tr></thead><tbody>';
+  var cols=[['escuro',70,'70% cacau'],['escuro',cacauPadrao('escuro',G.origem),fmtR2(cacauPadrao('escuro',G.origem))+'% cacau'],['leite',null,'Ao leite'],['branco',null,'Branco']], h='<table class="matriz"><thead><tr><th></th>'+cols.map(function(c){return '<th>'+c[2]+'</th>'}).join('')+'</tr></thead><tbody>';
   Object.keys(TEXTURAS).forEach(function(tx){
-    h+='<tr><th>'+TEXTURAS[tx].n+'</th>'+tipos.map(function(t){ var r=PROPORCAO[t][tx]*FIRME.importado[t]/FIRME[G.origem][t]; return '<td><b>'+fmtR(r)+'</b> : 1</td>'; }).join('')+'</tr>';
+    h+='<tr><th>'+TEXTURAS[tx].n+'</th>'+cols.map(function(c){ var r=W(c[0],G.origem,tx,c[1])*0.58; return '<td><b>'+fmtR(r)+'</b> g</td>'; }).join('')+'</tr>';
   });
   $('g-matriz').innerHTML=h+'</tbody></table>';
   if(!$('g-acc').children.length) $('g-acc').innerHTML=CONSERTOS.map(function(c){return '<details><summary><span class="ic">'+c[0]+'</span><span>'+c[1]+'</span></summary><div class="bdy">'+c[2]+'</div></details>'}).join('');
@@ -414,9 +513,58 @@ function foto(id,cls,alt){ return FOTOS[id] ? '<img'+(cls?' class="'+cls+'"':'')
 var $=function(id){return document.getElementById(id)};
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function grupoDe(cat){for(var g in GRUPOS){if(GRUPOS[g].indexOf(cat)>=0) return g;} return null;}
-function existe(tipo,origem){ if(origem==='fracionada') return FALSA.tipos.indexOf(tipo)>=0; return FIRME[origem][tipo]!=null; }
+function existe(tipo,origem){ if(origem==='fracionada') return FALSA.tipos.indexOf(tipo)>=0; return (origem==='importado'?mcImp:mcNac)(tipo,cacauPadrao(tipo,origem))!=null; }
+function cacauPadrao(tipo,origem){ var c=TIPOS[tipo].cacau; return c?(c[origem]||c.importado):null; }
+// gordura que firma do chocolate da pessoa: pelo rótulo (gordura total − gordura do leite), ou pelo % de cacau
+function mc(tipo,origem,cacau,gord){
+  if(gord>0) return Math.max(gord-(TIPOS[tipo].gl||0),10);
+  var c=cacau||cacauPadrao(tipo,origem);
+  return (origem==='importado'?mcImp:mcNac)(tipo,c);
+}
 // chocolate por grama de ÁGUA para tipo/origem/textura (mesma régua da tabela Ganache Perfeita)
-function W(tipo,origem,tex){ return PROPORCAO[tipo][tex]*FIRME.importado[tipo]/FIRME[origem][tipo]/0.58; }
+function Wt(tipo,origem,tex,cacau,gord){ // RELATIVO (tabela Ganache Perfeita + manteiga de cacau): só serve para comparar chocolates e texturas
+  var c=cacau||cacauPadrao(tipo,origem);
+  // referência = chocolate importado com ficha técnica: abaixo de 54,5% não existe ficha, então a referência é o 811
+  var cr=tipo==='escuro'?Math.max(c,54.5):c;
+  return propImp(tipo,tex,cr)*mcImp(tipo,cr)/mc(tipo,origem,c,gord)/0.58;
+}
+/* ===== MOTOR (26/09, pedido da Tatiana): as RECEITAS DELA são a base =====
+   Nível: quanto creme ela usa em 100 g de chocolate importado nas receitas clássicas de bico
+   (1: meio amargo 54,5% = 60 g de creme 25% · 2: ao leite 33,6% = 40 g · 3: branco 28% = 28 g).
+   A diferença entre os TIPOS de chocolate vem dessas três receitas dela.
+   Dentro do mesmo tipo (outro % de cacau, nacional ou importado, gordura do rótulo) e entre texturas,
+   a diferença vem da manteiga de cacau e da tabela Ganache Perfeita (função Wt). */
+var BASE_AGUA={escuro:60*0.68, leite:40*0.68, branco:28*0.68}; // g de água por 100 g de chocolate (receitas 1, 2 e 3, creme UHT 25%)
+function aguaRef(t){
+  if(BASE_AGUA[t]) return BASE_AGUA[t];
+  if(t==='blend') return (BASE_AGUA.escuro+BASE_AGUA.leite)/2;      // sem receita dela: meio a meio
+  var a={caramelo:'branco', ruby:'leite'}[t];                        // sem receita dela: pela tabela, a partir do parente
+  return BASE_AGUA[a]*Wt(a,'importado','cremosa')/Wt(t,'importado','cremosa');
+}
+function W(tipo,origem,tex,cacau,gord){ // g de chocolate por g de água, para o mesmo ponto
+  var agua=aguaRef(tipo)*Wt(tipo,'importado','cremosa')/Wt(tipo,origem,tex,cacau,gord);
+  return 100/agua;
+}
+/* Troca de creme (regra da Tatiana, 26/09): a mesma água, e a gordura que o creme mais magro não tem entra como MANTEIGA.
+   Ex.: 60 g de creme 35% (34,8 g de água, 21 g de gordura) → 46 g de caixinha 17% (7,8 g de gordura) + 16 g de manteiga (82% de gordura). */
+function trocarCreme(itens,i,novo){
+  var x=itens[i], a=ING[x[0]], b=ING[novo], agua=x[1]*a.w, gord=x[1]*a.f;
+  x[0]=novo; x[1]=agua/b.w; x.length=2;
+  var falta=gord-x[1]*b.f; if(falta<=0.05) return;
+  var m=itens.filter(function(y){return y[0]==='manteiga'})[0];
+  if(m) m[1]+=falta/0.82; else itens.push(['manteiga',falta/0.82,'repõe a gordura que o creme mais magro não tem']);
+}
+// Rendimento: o peso total da ganache
+function rendimento(g,tex){
+  return '<div class="total"><b>Rendimento: '+g+' g de ganache</b></div>';
+}
+function tipoConta(r,tipo){ return (r.tambem||[]).indexOf(tipo)>=0?r.tipo:tipo; } // a receita vale igual para esse tipo
+function nomeChoc(tipo,origem,cacau){
+  if(origem==='fracionada') return 'Cobertura fracionada '+TIPOS[tipo].n.toLowerCase();
+  var c=TIPOS[tipo].cacau?(cacau||cacauPadrao(tipo,origem)):null;
+  return 'Chocolate '+(tipo==='escuro'?'':TIPOS[tipo].n.toLowerCase()+' ')+(c?fmtR2(c)+'% cacau ':'')+ORIGENS[origem].toLowerCase();
+}
+function fmtR2(x){ return (Math.round(x*10)/10).toString().replace('.',','); }
 function agua(itens){ var a=0; itens.forEach(function(it){ var i=ING[it[0]]; if(i.w) a+=it[1]*i.w; }); return a; }
 function fmtG(g){ return g<3 ? (Math.round(g*10)/10).toString().replace('.',',') : Math.round(g).toString(); }
 
@@ -449,7 +597,8 @@ function preparo(tipo,tex,itens,falsa){
   if(has('queijo')||has('geleia')){
     return ['Misture bem '+[nome('queijo'),nome('geleia'),nome('seco'),nome('raspas')].filter(Boolean).join(', ')+'.','Derreta o chocolate (até '+maxT+' °C).','Junte a mistura ao chocolate aos poucos, mexendo até ficar liso. Não precisa temperar.',pontoTxt(tex)];
   }
-  if(ids.indexOf('acucar')>=0) st.push('Derreta o açúcar em fogo baixo até ficar cor de âmbar. Junte o creme morno aos poucos (cuidado com o vapor) e mexa até dissolver.');
+  var caramFruta=ids.indexOf('acucar')>=0&&has('fruta');
+  if(ids.indexOf('acucar')>=0) st.push('Derreta o açúcar em fogo baixo até ficar cor de âmbar. Junte '+(caramFruta?'o creme e a '+nome('fruta')+', mornos,':'o creme morno')+' aos poucos (cuidado com o vapor) e mexa até dissolver.'+(ids.indexOf('glucose')>=0?' Junte a glucose.':'')+(caramFruta&&itens.some(function(x){return ING[x[0]].enzima})?' Deixe ferver 2 minutos: isso desliga uma enzima da fruta que talha o creme.':''));
   st.push('Derreta o chocolate (até '+maxT+' °C).'+(has('pasta')?' Misture '+nome('pasta')+' ao chocolate derretido.':'')+(ids.indexOf('mcacau')>=0?' Junte a manteiga de cacau.':''));
   var inf=itens.filter(function(x){var c=ING[x[0]].cat;return c==='cha'||c==='erva'||c==='especiaria'||c==='raspas'}).map(function(x){return ING[x[0]].n.toLowerCase()});
   var cremes=itens.filter(function(x){return ING[x[0]].cat==='creme'});
@@ -462,7 +611,7 @@ function preparo(tipo,tex,itens,falsa){
     if(ids.indexOf('cafe')>=0) t+=' Dissolva o café no líquido quente.';
     st.push(t);
   }
-  if(has('fruta')){
+  if(has('fruta')&&!caramFruta){
     var fr=itens.filter(function(x){return ING[x[0]].cat==='fruta'});
     var t2='Aqueça '+fr.map(function(x){return ING[x[0]].n.toLowerCase()}).join(' e ')+(acu?' com a '+acu:'')+(cremes.length?', separado do creme':'')+'.';
     if(fr.some(function(x){return ING[x[0]].enzima})) t2+=' Deixe ferver 2 minutos: isso desliga uma enzima da fruta que talha o creme.';
@@ -484,41 +633,42 @@ function pontoTxt(tex){
 }
 
 /* ---------- avisos ---------- */
-function avisos(tipo,origem,tex,itens,extra){
+function avisos(tipo,origem,tex,itens,extra,proprio){
   var a=[];
+  if(proprio){ (proprio.notas||[]).concat(extra||[]).forEach(function(e){a.push(e)}); a.push(['ok','Teste primeiro:','faça uma porção pequena antes da receita inteira.']); return '<div class="alerts">'+a.map(function(x){return '<div class="alert '+x[0]+'"><b>'+x[1]+'</b> '+x[2]+'</div>'}).join('')+'</div>'; }
   if(origem==='fracionada') a.push(['bad','Falsa Ganache:','cobertura fracionada não é chocolate. Serve só para blindagem, sem manteiga. Guarde o bolo fora da geladeira, com recheio que aguente temperatura ambiente.']);
   if(itens.some(function(x){return ING[x[0]].enzima})) a.push(['','Abacaxi e kiwi:','ferva a polpa antes. Crus, eles talham o creme.']);
-  else if(itens.some(function(x){return ING[x[0]].acida})) a.push(['','Fruta ácida:','aqueça separada do creme e junte aos poucos, senão o creme pode talhar.']);
-  if(tipo==='branco'&&origem==='nacional') a.push(['','Chocolate branco de barra','de supermercado costuma ser mais mole: use 10% a mais de chocolate.']);
+  else if(itens.some(function(x){return ING[x[0]].acida})&&!itens.some(function(x){return x[0]==='acucar'})) a.push(['','Fruta ácida:','aqueça separada do creme e junte aos poucos, senão o creme pode talhar.']);
+  if(itens.some(function(x){return ING[x[0]].cat==='fruta'})&&itens.some(function(x){return x[0]==='acucar'})) a.push(['','Polpa de fruta nunca vai crua:','ela entra no caramelo, como no caramelo salgado. Assim a água da fruta reduz e a ganache não desanda.']);
   (extra||[]).forEach(function(e){a.push(e)});
   a.push(['ok','Teste primeiro:','faça uma porção pequena. A calculadora faz a conta, mas o ponto final quem confirma é você.']);
   return '<div class="alerts">'+a.map(function(x){return '<div class="alert '+x[0]+'"><b>'+x[1]+'</b> '+x[2]+'</div>'}).join('')+'</div>';
 }
 
 /* ---------- desenho do resultado ---------- */
-function resultado(titulo,sub,tipo,origem,tex,itens,peso,extras,isFalsa,swapsHtml,fotoId){
+function resultado(titulo,sub,tipo,origem,tex,itens,peso,extras,isFalsa,swapsHtml,fotoId,proprio,cacau){
   var choc=100, tot=choc; itens.forEach(function(it){tot+=it[1]});
-  var k=peso?peso/tot:1;
-  var chocNome=(origem==='fracionada'?'Cobertura fracionada ':'Chocolate ')+TIPOS[tipo].n.toLowerCase()+(origem==='fracionada'?'':' '+ORIGENS[origem].toLowerCase());
+  var k=peso?peso/choc:1; // peso = gramas de chocolate que a pessoa vai usar
+  var chocNome=nomeChoc(tipo,origem,cacau);
   var li='<li><span class="sw" style="background:var(--i-choc)"></span><span>'+esc(chocNome)+'</span><span class="g">'+fmtG(choc*k)+' g</span></li>';
-  itens.forEach(function(it){ li+='<li><span class="sw" style="background:var('+FATIAS.filter(function(f){return f[0]===fatiaDe(it[0])})[0][2]+')"></span><span>'+esc(ING[it[0]].n)+'</span><span class="g">'+fmtG(it[1]*k)+' g</span></li>'; });
+  itens.forEach(function(it){ li+='<li><span class="sw" style="background:var('+FATIAS.filter(function(f){return f[0]===fatiaDe(it[0])})[0][2]+')"></span><span>'+esc(ING[it[0]].n)+(it[2]?'<small class="med">'+esc(it[2])+(Math.abs(k-1)>0.01?' (para cada 100 g de chocolate)':'')+'</small>':'')+'</span><span class="g">'+fmtG(it[1]*k)+' g</span></li>'; });
   var h='<div class="result">';
   if(fotoId){
     h+='<div class="rec-hero" style="--cor-tipo:var('+TIPOS[tipo].cor+')">'+(foto(fotoId,'',titulo)||'<span class="ilu">'+ILU[tex]+'</span>')+'<div class="tt"><div><span class="tag">'+TEXTURAS[tex].n+'</span></div><h2>'+esc(titulo)+'</h2></div></div>';
-    h+='<div class="stats"><div>'+ICS.uso+'<b>'+esc(sub)+'</b></div><div>'+ICS.peso+'<b>'+Math.round(tot*k)+' g</b>rendimento</div><div>'+ICS.choc+'<b>'+esc(TIPOS[tipo].n)+'</b>'+esc(ORIGENS[origem].toLowerCase())+'</div></div>';
+    h+='<div class="stats"><div>'+ICS.uso+'<b>'+esc(sub)+'</b></div><div>'+ICS.peso+'<b>'+Math.round(tot*k)+' g</b>rendimento</div><div>'+ICS.choc+'<b>'+(TIPOS[tipo].cacau?fmtR2(cacau||cacauPadrao(tipo,origem))+'% cacau':esc(TIPOS[tipo].n))+'</b>'+esc(ORIGENS[origem].toLowerCase())+'</div></div>';
   } else {
     h+='<div><span class="tag">'+TEXTURAS[tex].n+'</span> <span class="tag">'+esc(ORIGENS[origem])+'</span></div><h2>'+esc(titulo)+'</h2>'+(sub?'<p class="lede" style="margin:0">'+esc(sub)+'</p>':'');
   }
-  h+='<div class="res-top">'+pizza(choc,itens)+'<div><ul class="ingr">'+li+'</ul><p class="total">Rende cerca de '+Math.round(tot*k)+' g.</p><p class="dica-marcar">Toque no ingrediente para marcar o que já separou.</p></div></div>';
+  h+='<div class="res-top">'+pizza(choc,itens)+'<div><ul class="ingr">'+li+'</ul>'+rendimento(Math.round(tot*k),tex)+'<p class="dica-marcar">Toque no ingrediente para marcar o que já separou.</p></div></div>';
   if(swapsHtml) h+=swapsHtml;
-  h+='<div><h3>Como fazer</h3><ol class="steps">'+preparo(tipo,tex,itens,isFalsa).map(function(s){return '<li>'+esc(s)+'</li>'}).join('')+'</ol></div>';
-  h+=avisos(tipo,origem,tex,itens,extras);
+  h+='<div><h3>Como fazer</h3><ol class="steps">'+(proprio&&proprio.prep?proprio.prep:preparo(tipo,tex,itens,isFalsa)).map(function(s){return '<li>'+esc(s)+'</li>'}).join('')+'</ol></div>';
+  h+=avisos(tipo,origem,tex,itens,extras,proprio);
   h+='<div class="actions noprint"><button class="btn" type="button" data-print>Imprimir ou salvar em PDF</button></div></div>';
   return h;
 }
 
 /* ===================== MONTE A SUA GANACHE ===================== */
-var B={tex:'cremosa',tipo:'meio',origem:'nacional',creme:'creme20',fam:'classica',esc:null,peso:500};
+var B={tex:'cremosa',tipo:'escuro',origem:'nacional',cacau:null,gord:null,creme:'creme20',fam:'classica',esc:null,peso:400};
 function opts(el,list,key,onpick,dis){
   el.innerHTML='';
   list.forEach(function(o){
@@ -532,8 +682,11 @@ function opts(el,list,key,onpick,dis){
 function drawBuild(){
   opts($('q-tex'),Object.keys(TEXTURAS).map(function(k){return [k,'<span class="ti">'+(foto(k,'',TEXTURAS[k].n)||ILU[k])+'</span><b>'+TEXTURAS[k].n+'</b>']}),'tex');
   $('q-tex-uso').innerHTML='<b>'+TEXTURAS[B.tex].n+':</b> '+esc(TEXTURAS[B.tex].usos);
-  opts($('q-tipo'),Object.keys(TIPOS).map(function(k){return [k,'<span class="dot" style="background:var('+TIPOS[k].cor+')"></span>'+TIPOS[k].n]}),'tipo',function(){ if(!existe(B.tipo,B.origem)) B.origem='importado'; });
-  opts($('q-orig'),Object.keys(ORIGENS).map(function(k){return [k,ORIGENS[k]]}),'origem',null,function(o){return !existe(B.tipo,o)});
+  opts($('q-tipo'),Object.keys(TIPOS).map(function(k){return [k,'<span class="dot" style="background:var('+TIPOS[k].cor+')"></span>'+TIPOS[k].n]}),'tipo',function(){ if(!existe(B.tipo,B.origem)) B.origem='importado'; B.cacau=null; B.gord=null; });
+  opts($('q-orig'),Object.keys(ORIGENS).map(function(k){return [k,ORIGENS[k]]}),'origem',function(){ B.cacau=null; B.gord=null; },function(o){return !existe(B.tipo,o)});
+  var temCacau=TIPOS[B.tipo].cacau&&B.origem!=='fracionada';
+  $('q-comp').hidden=!temCacau;
+  if(temCacau){ var fx=TIPOS[B.tipo].faixa; $('q-cacau').min=fx[0]; $('q-cacau').max=fx[1]; $('q-cacau').value=B.cacau||cacauPadrao(B.tipo,B.origem); $('q-gord').value=B.gord||''; }
   opts($('q-creme'),['creme35','creme30','creme25','creme20','creme17'].map(function(k){return [k,ING[k].n.replace('Creme de leite ','').replace('de caixinha ','caixinha ')]}),'creme');
   var famDis=function(f){return B.origem==='fracionada'&&f!=='classica'};
   opts($('q-fam'),Object.keys(FAMILIAS).map(function(k){return [k,FAMILIAS[k].n]}),'fam',function(){B.esc=null;},famDis);
@@ -555,80 +708,99 @@ function buildRecipe(){
     var itF=[[B.creme, FALSA.creme*0.73/cr.w]];
     return resultado('Blindagem com cobertura fracionada','Falsa Ganache · proporção das marcas, 5 : 1',tipo,origem,tex,itF,B.peso,[['','Outras opções que funcionam:','3 : 1 com creme 17% + chantilly vegetal, ou 3,3 a 4 : 1 só com chantilly vegetal em temperatura ambiente, batido até ponto de pomada.'],['','Marcas:','use só cobertura que a própria marca indica para ganache (ex.: Selecta Supreme, Garoto Confeitaria, Harald Top).']],true);
   }
-  var agua=100/W(tipo,origem,tex), ex=EXTRAS[tex];
-  var r35=PROPORCAO[tipo][tex]*FIRME.importado[tipo]/FIRME[origem][tipo], chocPct=(100-ex[0]-ex[1])*r35/(r35+1);
-  var mant=ex[0]/chocPct*100, gli=ex[1]/chocPct*100;
-  var it=[], F=FAMILIAS[B.fam], extra=[], titulo='Ganache '+TIPOS[tipo].n.toLowerCase();
-  var aguaResto=agua;
-  if(B.fam==='fruta'){ var fw=agua*F.parteAgua; it.push([B.esc,fw/ING[B.esc].w]); aguaResto-=fw; titulo+=' com '+ING[B.esc].n.toLowerCase().replace('polpa de ','').replace('suco de ',''); }
-  if(B.fam==='alcool'){ it.push([B.esc,F.g]); aguaResto-=F.g*ING[B.esc].w; titulo+=' com '+ING[B.esc].n.toLowerCase(); }
-  if(B.fam==='coco'){ it.push(['leitecoco',22]); it.push(['coco',35]); aguaResto-=22*ING.leitecoco.w; titulo+=' com coco'; }
-  if(B.fam==='caramelo'){ it.unshift(['acucar',32]); titulo='Ganache de caramelo com chocolate '+TIPOS[tipo].n.toLowerCase(); }
-  it.unshift([B.creme,aguaResto/cr.w]);
-  if(B.fam==='infusao'){ var c=ING[B.esc].cat; it.push([B.esc,F.g[c]]); titulo+=' com '+ING[B.esc].n.toLowerCase(); }
-  if(B.fam==='pasta'){ it.push([B.esc,F.g]); titulo+=' de '+ING[B.esc].n.toLowerCase().replace('pasta saborizante de ','').replace('pasta de ',''); }
-  if(mant>0.1) it.push(['manteiga',mant]);
-  if(gli>0.1) it.push(['glucose',gli]);
-  if(F.aTestar) extra.push(['','Sabor ainda sem receita testada','neste ponto: comece com uma porção pequena.']);
+  var F=FAMILIAS[B.fam], id=MODELO[B.fam]; if(typeof id==='object') id=id[tipo];
+  var R0=RECEITAS.filter(function(r){return r.id===id})[0], extra=[];
+  var it=R0.itens.map(function(x){return [x[0],x[1]]}).filter(function(x){ return !(B.fam==='fruta'&&ING[x[0]].cat==='alcool'); });
+  // 1) chocolate e textura: a água acompanha o chocolate (a mesma conta das receitas prontas)
+  var tc=tipoConta(R0,tipo), f=W(R0.tipo,R0.origem,R0.tex,R0.cacau)/W(tc,origem,tex,tc===tipo?B.cacau:R0.cacau,tc===tipo?B.gord:null);
+  it.forEach(function(x){ if(ING[x[0]].w||x[0]==='acucar') x[1]*=f; }); // no caramelo, o açúcar acompanha o creme
+  // 2) o creme que a pessoa tem, com a mesma água
+  for(var ci=0;ci<it.length;ci++){ if(ING[it[ci][0]].cat==='creme'&&it[ci][0]!==B.creme) trocarCreme(it,ci,B.creme); }
+  // 3) o sabor escolhido no lugar do sabor da receita base
+  var nomeSabor='';
+  if(F.lista&&B.esc){
+    var cats=B.fam==='infusao'?['cha','erva','especiaria','raspas']:[ING[B.esc].cat];
+    it.forEach(function(x){ var a=ING[x[0]];
+      if(cats.indexOf(a.cat)<0||x[0]===B.esc) return;
+      if(a.w&&ING[B.esc].w) x[1]=x[1]*a.w/ING[B.esc].w; else if(B.fam==='infusao'&&a.cat!==ING[B.esc].cat) x[1]=F.g[ING[B.esc].cat];
+      x[0]=B.esc; });
+    nomeSabor=ING[B.esc].n.toLowerCase().replace('polpa de ','').replace('suco de ','').replace('pasta saborizante de ','').replace('pasta de ','');
+  }
+  var titulo=B.fam==='caramelo'?'Ganache de caramelo':'Ganache '+(tipo==='escuro'?'de chocolate':TIPOS[tipo].n.toLowerCase())+(nomeSabor?' com '+nomeSabor:(B.fam==='coco'?' com coco':''));
+  extra.push(['','Base:','a receita "'+R0.nome+'" da autora, balanceada para o seu chocolate'+(tex!==R0.tex?', a textura '+TEXTURAS[tex].n.toLowerCase():'')+' e o seu creme.']);
   if(tex!=='cremosa'&&B.fam!=='classica') extra.push(['','Para '+TEXTURAS[tex].n.toLowerCase()+',','o sabor clássico é o mais seguro: sabor com muito líquido pode deixar mole.']);
-  return resultado(titulo, TEXTURAS[tex].usos, tipo, origem, tex, it, B.peso, extra, false);
+  return resultado(titulo, TEXTURAS[tex].usos, tipo, origem, tex, it, B.peso, extra, false, null, null, null, B.cacau);
 }
 
 /* ===================== RECEITAS PRONTAS ===================== */
 var M={filtro:'todas', rec:null};
 function drawMenu(){
-  var fs=[['todas','Todas'],['meio','Meio amargo'],['leite','Ao leite'],['branco','Branco']], f=$('m-filtro'); f.innerHTML='';
+  var fs=[['todas','Todas'],['escuro','Amargo / meio amargo'],['leite','Ao leite'],['branco','Branco'],['ruby','Ruby']], f=$('m-filtro'); f.innerHTML='';
   fs.forEach(function(o){var b=document.createElement('button');b.type='button';b.textContent=o[1];b.setAttribute('aria-pressed',M.filtro===o[0]?'true':'false');b.addEventListener('click',function(){M.filtro=o[0];drawMenu();});f.appendChild(b);});
   var l=$('m-list'); l.innerHTML='';
-  RECEITAS.filter(function(r){return M.filtro==='todas'||r.tipo===M.filtro}).forEach(function(r){
+  RECEITAS.filter(function(r){return !r.oculta&&(M.filtro==='todas'||r.tipo===M.filtro)}).forEach(function(r){
     var b=document.createElement('button'); b.type='button'; b.className='rc';
     var img=foto(r.foto,'',r.nome);
-    b.innerHTML='<div class="band'+(TIPOS[r.tipo].claro&&!img?' light':'')+'" style="background:linear-gradient(160deg,var('+TIPOS[r.tipo].cor+'),#16243E)">'+(img||'<span class="ilu">'+ILU[r.tex]+'</span>')+'<span class="lbl">'+TIPOS[r.tipo].n+'</span></div><div class="bd"><b>'+esc(r.nome)+'</b><span>'+esc(r.uso)+'</span></div>';
+    b.innerHTML='<div class="band'+(TIPOS[r.tipo].claro&&!img?' light':'')+'" style="background:linear-gradient(160deg,var('+TIPOS[r.tipo].cor+'),#16243E)">'+(img||'<span class="ilu">'+ILU[r.tex]+'</span>')+'<span class="lbl">'+(r.tipo==='escuro'?fmtR2(r.cacau)+'% cacau':TIPOS[r.tipo].n)+'</span></div><div class="bd"><b>'+esc(r.nome)+'</b><span>'+esc(r.uso)+'</span></div>';
     b.addEventListener('click',function(){abrir(r)});
     l.appendChild(b);
   });
 }
 function abrir(r){
-  M.rec={base:r, tipo:r.tipo, origem:r.origem, itens:r.itens.map(function(x){return [x[0],x[1]]}), peso:null, msg:null};
+  M.rec={base:r, tipo:r.tipo, origem:r.origem, cacau:r.cacau||cacauPadrao(r.tipo,r.origem), gord:null, itens:r.itens.map(function(x){return x.slice()}), peso:null, msg:null};
   show('rec'); drawRec(); window.scrollTo(0,0);
 }
-function trocarChocolate(tipo,origem){
+function trocarChocolate(tipo,origem,cacau,gord){
   var R=M.rec;
+  if(TIPOS[tipo].cacau&&!cacau) cacau=(tipo===R.tipo&&origem===R.origem)?R.cacau:cacauPadrao(tipo,origem);
   if(origem==='fracionada'){ R.msg='Cobertura fracionada não serve para '+R.base.uso.toLowerCase()+': fica mole, puxenta e com gosto de gordura. Use chocolate de verdade.'; return; }
   if(!existe(tipo,origem)){ R.msg=TIPOS[tipo].n+' '+ORIGENS[origem].toLowerCase()+' não existe. Escolha importado.'; return; }
-  var f=W(R.tipo,R.origem,R.base.tex)/W(tipo,origem,R.base.tex); // mais firme → mais líquido
+  var ta=tipoConta(R.base,R.tipo), tb=tipoConta(R.base,tipo);
+  var f=W(ta,R.origem,R.base.tex,ta===R.tipo?R.cacau:R.base.cacau,ta===R.tipo?R.gord:null)/W(tb,origem,R.base.tex,tb===tipo?cacau:R.base.cacau,tb===tipo?gord:null); // mais manteiga de cacau → mais líquido
   R.itens.forEach(function(it){ if(ING[it[0]].w) it[1]*=f; });
-  R.tipo=tipo; R.origem=origem; R.msg=null;
+  R.tipo=tipo; R.origem=origem; R.cacau=TIPOS[tipo].cacau?cacau:null; R.gord=gord||null; R.msg=null;
 }
 function trocarItem(i,novo){
   var R=M.rec, it=R.itens[i];
   if(novo==='__tirar'){ R.itens.splice(i,1); return; }
   var a=ING[it[0]], b=ING[novo];
+  if(a.cat==='creme'&&b.cat==='creme'){ trocarCreme(R.itens,i,novo); return; }
   if(a.w&&b.w) it[1]=it[1]*a.w/b.w; // mantém a mesma água
-  it[0]=novo;
+  it[0]=novo; it.length=2; // a medida da Tatiana era do ingrediente antigo
 }
 function drawRec(){
   var R=M.rec, sw='<div class="swaps-wrap noprint"><h3>Não tem algum ingrediente? Troque aqui</h3><div class="swaps">';
   sw+='<div class="sw-row"><span>Chocolate</span><span class="row"><select id="rc-tipo" aria-label="Tipo de chocolate">'+Object.keys(TIPOS).map(function(k){return '<option value="'+k+'"'+(k===R.tipo?' selected':'')+'>'+TIPOS[k].n+'</option>'}).join('')+'</select><select id="rc-orig" aria-label="Origem do chocolate">'+Object.keys(ORIGENS).map(function(k){return '<option value="'+k+'"'+(k===R.origem?' selected':'')+'>'+ORIGENS[k]+'</option>'}).join('')+'</select></span></div>';
+  if(TIPOS[R.tipo].cacau) sw+='<div class="sw-row"><span>% de cacau do seu chocolate</span><span class="row"><input type="number" id="rc-cacau" step="0.5" inputmode="decimal" value="'+R.cacau+'" aria-label="Porcentagem de cacau"> %</span><span class="row opc">Gordura em 100 g, se souber: <input type="number" id="rc-gord" step="0.5" inputmode="decimal" placeholder="opcional" value="'+(R.gord||'')+'" aria-label="Gordura total em 100 gramas"> g</span></div>';
   R.itens.forEach(function(it,i){
     var cat=ING[it[0]].cat, g=grupoDe(cat), ops=Object.keys(ING).filter(function(id){return GRUPOS[g].indexOf(ING[id].cat)>=0});
     if(ops.length<2 && PODE_TIRAR.indexOf(cat)<0) return;
+    if((R.base.trava||[]).indexOf(it[0])>=0) return; // a Tatiana pediu para não trocar
     sw+='<div class="sw-row"><span>'+esc(ING[it[0]].n)+'</span><select data-i="'+i+'" aria-label="Trocar '+esc(ING[it[0]].n)+'">'+ops.map(function(id){return '<option value="'+id+'"'+(id===it[0]?' selected':'')+'>'+(id===it[0]?'manter: ':'trocar por: ')+esc(ING[id].n)+'</option>'}).join('')+(PODE_TIRAR.indexOf(cat)>=0?'<option value="__tirar">tirar este ingrediente</option>':'')+'</select></div>';
   });
-  sw+='<div class="sw-row"><span>Quanto quer fazer?</span><span class="row"><input type="number" id="rc-peso" min="100" max="10000" step="50" placeholder="gramas" value="'+(R.peso||'')+'" aria-label="Peso final em gramas"> g</span></div>';
+  sw+='<div class="sw-row"><span>Quantos gramas de chocolate você vai usar?</span><span class="row"><input type="number" id="rc-peso" min="10" max="10000" step="50" placeholder="100" value="'+(R.peso||100)+'" aria-label="Gramas de chocolate"> g de chocolate</span></div>';
   sw+='</div><div class="actions" style="margin-top:8px"><button class="btn ghost" type="button" id="rc-reset">Voltar à receita original</button></div></div>';
   var extra=[]; if(R.msg) extra.unshift(['bad','Atenção:',R.msg]);
-  var mudou = R.tipo!==R.base.tipo||R.origem!==R.base.origem||JSON.stringify(R.itens)!==JSON.stringify(R.base.itens);
-  if(mudou) extra.push(['','Receita recalculada:','mantive a mesma quantidade de água para o ponto continuar igual.']);
-  $('rec-out').innerHTML=resultado(R.base.nome,R.base.uso,R.tipo,R.origem,R.base.tex,R.itens,R.peso,extra,false,sw,R.base.foto);
+  var mudouChoc = R.tipo!==R.base.tipo||R.origem!==R.base.origem||R.cacau!==(R.base.cacau||cacauPadrao(R.base.tipo,R.base.origem))||!!R.gord;
+  var mudou = mudouChoc||JSON.stringify(R.itens)!==JSON.stringify(R.base.itens);
+  if(mudouChoc) extra.push(['','Receita balanceada para o seu chocolate:','a original é com '+nomeChoc(R.base.tipo,R.base.origem,R.base.cacau).toLowerCase()+'. O seu tem '+fmtR2(mc(R.tipo,R.origem,R.cacau,R.gord))+'% de gordura que firma (manteiga de cacau), contra '+fmtR2(mc(R.base.tipo,R.base.origem,R.base.cacau))+'% da original. '+(mc(R.tipo,R.origem,R.cacau,R.gord)<mc(R.base.tipo,R.base.origem,R.base.cacau)?'Menos manteiga de cacau deixa a ganache mais mole, então a calculadora diminuiu o líquido.':'Mais manteiga de cacau deixa a ganache mais firme, então a calculadora aumentou o líquido.')+' O ponto continua o mesmo.']);
+  else if(mudou) extra.push(['','Receita recalculada:','mantive a mesma quantidade de água para o ponto continuar igual.']);
+  // preparo da Tatiana enquanto os ingredientes e o tipo de chocolate forem os dela; se trocar, o preparo é montado pela calculadora
+  var ids=function(l){return l.map(function(x){return x[0]}).join()};
+  var dela=R.tipo===R.base.tipo&&ids(R.itens)===ids(R.base.itens);
+  if(R.base.prep&&!dela) extra.push(['','Modo de preparo refeito:','como você trocou ingredientes, o passo a passo foi montado pela calculadora. Volte à receita original para ver o preparo da autora.']);
+  $('rec-out').innerHTML=resultado(R.base.nome,R.base.uso,R.tipo,R.origem,R.base.tex,R.itens,R.peso,extra,false,sw,R.base.foto,dela?{prep:R.base.prep,notas:R.base.notas}:null,R.cacau);
   $('rc-tipo').addEventListener('change',function(){trocarChocolate(this.value,R.origem);drawRec();});
-  $('rc-orig').addEventListener('change',function(){trocarChocolate(R.tipo,this.value);drawRec();});
+  $('rc-orig').addEventListener('change',function(){trocarChocolate(R.tipo,this.value,cacauPadrao(R.tipo,this.value));drawRec();});
+  if($('rc-cacau')) $('rc-cacau').addEventListener('change',function(){ var v=lerComp(this,TIPOS[R.tipo].faixa); if(v){trocarChocolate(R.tipo,R.origem,v,R.gord);} drawRec(); });
+  if($('rc-gord')) $('rc-gord').addEventListener('change',function(){ var v=lerComp(this,[15,60]); trocarChocolate(R.tipo,R.origem,R.cacau,v); drawRec(); });
   Array.prototype.forEach.call(document.querySelectorAll('#rec-out select[data-i]'),function(s){s.addEventListener('change',function(){trocarItem(+s.dataset.i,s.value);drawRec();});});
-  $('rc-peso').addEventListener('change',function(){var v=+this.value; R.peso=v>=50?v:null; drawRec();});
+  $('rc-peso').addEventListener('change',function(){var v=+this.value; R.peso=v>=10?v:null; drawRec();});
   $('rc-reset').addEventListener('click',function(){abrir(R.base);});
 }
 
 /* ===================== início ===================== */
+$('n-rec').textContent=RECEITAS.filter(function(r){return !r.oculta}).length;
 if(FOTOS.capa){ $('capa').innerHTML=foto('capa','capa','Ganache'); $('whisk').hidden=true; }
 $('quatro').innerHTML=[['chocolate','Chocolate','Dá sabor e firmeza'],['liquido','Líquido','Deixa cremosa'],['manteiga','Manteiga','Deixa macia e aveludada'],['glucose','Glucose','Dá brilho e conserva']]
   .map(function(x){return '<div>'+ILU[x[0]]+'<span><b>'+x[1]+'</b><span>'+x[2]+'</span></span></div>'}).join('');
@@ -648,6 +820,9 @@ document.addEventListener('click',function(e){
   var fx=e.target.closest('[data-fix]'); if(fx){ if(fx.dataset.fix==='estrutura') B.tex='estrutura'; else B.origem='nacional'; if(!existe(B.tipo,B.origem)) B.origem='importado'; drawBuild(); }
 });
 show('home');
-$('q-peso').addEventListener('input',function(){ var v=+this.value; B.peso=v>=50?v:500; $('build-out').innerHTML=buildRecipe(); });
+$('q-peso').addEventListener('input',function(){ var v=+this.value; B.peso=v>=10?v:400; $('build-out').innerHTML=buildRecipe(); });
+function lerComp(el,fx){ var v=parseFloat(String(el.value).replace(',','.')); return v>=fx[0]&&v<=fx[1]?v:null; }
+$('q-cacau').addEventListener('input',function(){ B.cacau=lerComp(this,TIPOS[B.tipo].faixa); $('build-out').innerHTML=buildRecipe(); });
+$('q-gord').addEventListener('input',function(){ B.gord=lerComp(this,[15,60]); $('build-out').innerHTML=buildRecipe(); });
 })();
 </script>
