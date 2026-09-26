@@ -60,7 +60,7 @@ for src, dst in PARES:
         s = s.replace('var FOTOS = {};', 'var FOTOS = ' + json.dumps(fotos, separators=(',', ':')) + ';')
     partes = re.split(r'(<script>.*?</script>)', s, flags=re.S)
     corpo = ''.join(esc_js(p) if p.startswith('<script>') else esc_html(p) for p in partes)
-    i = corpo.index('<div class="wrap">')
+    i = corpo.index('<div', corpo.index('</style>'))  # o corpo começa no primeiro <div> depois do CSS (a barra do topo, se houver)
     out = CAB + corpo[:i] + '</head>\n<body>\n' + corpo[i:] + '\n</body>\n</html>\n'
     io.open(os.path.join(SAIDA, dst), 'w', encoding='utf-8', newline='\n').write(out)
     mb = len(out.encode('utf-8')) / 1048576

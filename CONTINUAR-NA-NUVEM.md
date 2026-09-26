@@ -13,8 +13,13 @@ Edite só `capitulo ganaches/fontes/calculadora-src.html` e gere as versões fin
    - receita com foto grande e título por cima, linha de informações e ingredientes com bolinha de marcar;
    - aba Guia: tabela de proporções (creme 35%, nacional/importado, mesma fórmula da tabela Ganache Perfeita) + "Deu errado? Veja como consertar" (6 casos, base na Fase 2).
 
+## Feito em 26/09/2026
+1. **Conferido no celular (360 e 400 px):** Início, Monte, Receitas (cardápio e receita) e Guia. Sem rolagem lateral e sem erro de script. A barra de abas fica no rodapé em todas as telas. O "meio da tela" era efeito da captura de página inteira, que desenha elementos fixos na altura da primeira tela. No celular de verdade isso não acontece.
+2. **Guia:** as proporções da tabela ("2,8 : 1") quebravam em duas linhas em 360 px. Agora ficam numa linha só.
+3. **`montar.py`:** a barra do topo ia parar dentro do `<head>` do arquivo final. Agora o `<body>` começa nela. O navegador já corrigia sozinho, mas o arquivo fica certo.
+4. **SKILL.md:** a seção "Visual aprovado" foi atualizada para o tema escuro.
+
 ## Falta
-1. Conferir no celular (360–400 px) a receita, o cardápio e o Guia no tema escuro. Num teste, a barra de abas apareceu no meio da tela: verificar.
-2. Mostrar para a Tatiana aprovar.
-3. Atualizar a seção "Visual aprovado" do SKILL.md para o tema escuro.
-4. Depois: item 2 da skill, revisar os textos com ela (inclusive os do "Deu errado?").
+1. Mostrar para a Tatiana aprovar (capturas de 360 px em anexo na conversa de 26/09).
+2. Pôr as fotos em `capitulo ganaches/fotos-receitas/` e rodar o `montar.py` de novo (ele avisa se passar de 5 MB).
+3. Depois: item 2 da skill, revisar os textos com ela (inclusive os do "Deu errado?").
