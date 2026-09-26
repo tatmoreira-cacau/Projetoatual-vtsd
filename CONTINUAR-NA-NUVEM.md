@@ -5,8 +5,10 @@ A seção **ESTADO ATUAL (25/09/2026)** diz o que já está pronto e o que falta
 
 Edite só `capitulo ganaches/fontes/calculadora-src.html` e gere as versões finais com:
 
-    pip install pillow
+    pip install pillow playwright
+    python "capitulo ganaches/fontes/receitas-md.py"
     python "capitulo ganaches/fontes/montar.py"
+    python "capitulo ganaches/fontes/testar.py"
 
 - Branch: `main-p86j61` · PR #1 (rascunho).
 - Prévia para a Tatiana (artifact privado): https://claude.ai/artifact/HFEk7pv8KywwcEAN8e8124
