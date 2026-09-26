@@ -5,22 +5,20 @@ Coloque aqui as fotos, com estes nomes:
   1.jpg      -> Ganache de Chocolate Amargo 54% – Ponto de Bico
   2.jpg      -> Ganache de Chocolate ao Leite 33% – Ponto de Bico
   3.jpg      -> Ganache de Chocolate Branco 28% – Ponto de Bico
-  4.jpg      -> Ganache de Chocolate Branco 28% com Coco
-  5.jpg      -> Ganache de Chocolate Branco 28% com Cream Cheese e Frutas Vermelhas
-  6.jpg      -> Ganache de Chocolate Branco 28% com Limão Siciliano e Lavanda
+  4.jpg      -> Ganache de Coco (doce de leite, creme de abóbora e nozes)
+  5.jpg      -> Ganache de Cheesecake de Frutas Vermelhas
+  6.jpg      -> Ganache de Limão com Lavanda
   7.jpg      -> Ganache de Chocolate Branco 28% com Earl Grey
   8.jpg      -> Ganache de Chocolate ao Leite 33% com Conhaque
-  9.jpg      -> Ganache de Chocolate Branco 33% com Pistache
-  10.jpg     -> Ganache de Chocolate Branco 32% com Cajá e Cachaça
-  11.jpg     -> Ganache de Chocolate Branco 25% com Limão e Manjericão
-  12.jpg     -> Ganache de Chocolate Branco 32% com Hojichá
-  13.jpg     -> Ganache de Chocolate Amargo 54% – Trufa
-  14.jpg     -> Ganache de Chocolate ao Leite 33% – Trufa
-  15.jpg     -> Ganache de Chocolate ao Leite 33% com Caramelo Salgado
-  16.jpg     -> Ganache de Chocolate Ruby com Framboesa e Vinho do Porto
-  17.jpg     -> Ganache de Chocolate ao Leite 33% com Cumaru e Mel
-  18.jpg     -> Ganache de Chocolate Branco 33% com Matcha
-  19.jpg     -> Ganache de Chocolate ao Leite 33% – Bombom
+  9.jpg      -> Ganache de Chocolate de Pistache (pasta saborizante)
+  10.jpg     -> Ganache de Chocolate Branco com Caipirinha de Cupuaçu
+  11.jpg     -> Ganache de Chocolate Branco com Manjericão
+  12.jpg     -> Ganache de Chocolate Branco de Chá Verde
+  13.jpg     -> Ganache de Chocolate Amargo – Trufa
+  14.jpg     -> Ganache de Chocolate ao Leite – Trufa
+  15.jpg     -> Ganache de Caramelo Salgado
+  16.jpg     -> Ganache de Chocolate Ruby com Amora e Vinho
+  17.jpg     -> Ganache de Mel com Especiarias
   cremosa.jpg, estrutura.jpg, cobertura.jpg -> uma foto de cada textura
 
 Dicas:

@@ -348,7 +348,7 @@ var ING = {
   abacaxi:{n:'Polpa de abacaxi',cat:'fruta',w:.86,acida:1,enzima:1}, morango:{n:'Polpa de morango',cat:'fruta',w:.91},
   manga:{n:'Polpa de manga',cat:'fruta',w:.83}, caja:{n:'Polpa de cajá',cat:'fruta',w:.88,acida:1},
   cupuacu:{n:'Polpa de cupuaçu',cat:'fruta',w:.86,acida:1}, laranja:{n:'Suco de laranja',cat:'fruta',w:.88,acida:1},
-  framboesa:{n:'Polpa de framboesa',cat:'fruta',w:.86,acida:1}, goiaba:{n:'Polpa de goiaba',cat:'fruta',w:.86},
+  framboesa:{n:'Polpa de framboesa',cat:'fruta',w:.86,acida:1}, amora:{n:'Polpa de amora',cat:'fruta',w:.88,acida:1}, goiaba:{n:'Polpa de goiaba',cat:'fruta',w:.86},
   kiwi:{n:'Polpa de kiwi',cat:'fruta',w:.84,acida:1,enzima:1},
   cachaca:{n:'Cachaça',cat:'alcool',w:.6}, rum:{n:'Rum',cat:'alcool',w:.6}, conhaque:{n:'Conhaque',cat:'alcool',w:.6},
   licorcafe:{n:'Licor de café',cat:'alcool',w:.55}, vinhoporto:{n:'Vinho do Porto',cat:'alcool',w:.7}, licorlaranja:{n:'Licor de laranja',cat:'alcool',w:.55},
@@ -375,6 +375,7 @@ var GRUPOS = {creme:['creme'], fruta:['fruta'], alcool:['alcool'], infusao:['cha
 var PODE_TIRAR = ['cha','erva','raspas','especiaria','final','seco','alcool','manteiga'];
 
 // Sabores do "Monte a sua ganache": quantidade por 100 g de chocolate
+// oculta: receita que não aparece no cardápio (a 19 é só a base do Monte a sua ganache)
 // tambem: tipos de chocolate que a própria receita aceita com as MESMAS quantidades (ex.: pistache = branco ou ao leite)
 // Receita da autora que serve de base para cada sabor no "Monte a sua ganache" (id das RECEITAS)
 // clássica = receita 19 (400 g de ao leite + 164 g de creme UHT 25% + 32 g de glucose + 10 g de manteiga), a base que a Tatiana deu
@@ -407,15 +408,15 @@ var RECEITAS = [
   itens:[['creme25',28],['glucose',4]],
   prep:['Derreta o chocolate (até 40 °C) até ficar liso e sem grumos.','Junte o creme e misture com a espátula, raspando bem a lateral e o fundo. Se sobrar grumo, passe o fouet.','Junte a glucose.','Para colorir, junte umas gotinhas de corante líquido.','Dê o ponto na pedra, ou na geladeira mexendo a cada 10 minutos, até o ponto de bico.','Coloque no saco de confeitar com o bico que preferir.'],
   notas:[['','Corante:','umas gotinhas de corante líquido, a gosto.']]},
- {id:4, foto:'4', nome:'Ganache de Chocolate Branco 28% com Coco', tipo:'branco', origem:'importado', cacau:28, tex:'cremosa', uso:'Recheio de casca e bombom',
+ {id:4, foto:'4', nome:'Ganache de Coco (doce de leite, creme de abóbora e nozes)', tipo:'branco', origem:'importado', cacau:28, tex:'cremosa', uso:'Recheio de casca e bombom',
   itens:[['creme25',50,'a receita original não diz o %; a apostila usa creme UHT 25%'],['leitecoco',22.2],['cocoseco',38.9]],
   prep:['Derreta o chocolate.','Junte o creme e misture com a espátula, raspando bem as beiradas. Termine com o fouet até ficar liso.','Junte o coco e o leite de coco e deixe descansar uns 10 minutos para o coco hidratar.','Recheie as casquinhas, tampe com chocolate e leve à geladeira para firmar.'],
   notas:[['','Variações (a mesma receita):','no lugar do coco, doce de leite com nozes moídas, doce de leite com coco, amendoim ou purê de compota de abóbora. No lugar do leite de coco, suco concentrado de maracujá, a gosto.']]},
- {id:5, foto:'5', nome:'Ganache de Chocolate Branco 28% com Cream Cheese e Frutas Vermelhas', tipo:'branco', origem:'importado', cacau:28, tex:'cremosa', uso:'Recheio de casca',
+ {id:5, foto:'5', nome:'Ganache de Cheesecake de Frutas Vermelhas', tipo:'branco', origem:'importado', cacau:28, tex:'cremosa', uso:'Recheio de casca',
   itens:[['creamcheese',30],['geleiavermelha',43.5],['biscoito',10,'2 bolachas trituradas']],
   prep:['Derreta o chocolate.','Numa vasilha, misture bem com o fouet o cream cheese, a geleia e as bolachas trituradas.','Junte essa mistura ao chocolate derretido. Não precisa temperar.','Misture com a espátula raspando as bordas e termine com o fouet para tirar os grumos.'],
   notas:[['','Geleia:','pode ser de framboesa, morango, damasco ou goiabada mole.'],['','Corante:','se quiser realçar a cor.']]},
- {id:6, foto:'6', nome:'Ganache de Chocolate Branco 28% com Limão Siciliano e Lavanda', tipo:'branco', origem:'importado', cacau:28, tex:'cremosa', uso:'Trufa ou recheio de casca',
+ {id:6, foto:'6', nome:'Ganache de Limão com Lavanda', tipo:'branco', origem:'importado', cacau:28, tex:'cremosa', uso:'Trufa ou recheio de casca',
   trava:['limao','rasplimao'],
   itens:[['creme25',17.5,'de 16 a 19 g'],['lavanda',0.6,'cerca de ½ colher (chá)'],['manteiga',10.6,'derretida'],['glucose',6.4],['limao',12.8,'limão siciliano'],['rasplimao',0.6,'um pouco de raspas']],
   prep:['Faça a infusão: aqueça o creme com a lavanda por 1 minuto no micro-ondas (potência média) e deixe esfriar.','Junte a manteiga derretida, a glucose, o suco e as raspas de limão e misture bem.','Derreta o chocolate e junte a mistura de lavanda e limão, mexendo bem até ficar liso.','Deixe firmar na geladeira ou na pedra.','Boleie e banhe no chocolate branco, ou use para rechear cascas. Decore com raspas de limão e lavanda.'],
@@ -426,45 +427,41 @@ var RECEITAS = [
  {id:8, foto:'8', nome:'Ganache de Chocolate ao Leite 33% com Conhaque', tipo:'leite', origem:'importado', cacau:33.6, tex:'cremosa', uso:'Recheio de bombom',
   itens:[['creme25',60],['conhaque',6]],
   prep:['Derreta o chocolate até ficar fluido e sem grumos.','Junte o creme e misture até ficar homogêneo.','Junte o conhaque e misture.','Deixe firmar 1 hora em temperatura ambiente.','Recheie as casquinhas com a ganache e a cereja com cabo e feche o bombom.']},
- {id:9, foto:'9', nome:'Ganache de Chocolate Branco 33% com Pistache', tipo:'branco', tambem:['leite'], origem:'importado', cacau:33, tex:'cremosa', uso:'Bombom moldado',
+ {id:9, foto:'9', nome:'Ganache de Chocolate de Pistache (pasta saborizante)', tipo:'branco', tambem:['leite'], origem:'importado', cacau:33, tex:'cremosa', uso:'Bombom moldado',
   itens:[['creme25',70,'creme de leite UHT'],['glucose',10],['mcacau',5],['pastapistache',17.5]],
   prep:['Aqueça o creme com a glucose.','Despeje sobre o chocolate, a manteiga de cacau e a pasta de pistache.','Passe o mixer até ficar liso.','Recheie as casquinhas a 30 °C, feche e leve à geladeira até firmar. Desenforme.'],
   notas:[['','Chocolate:','branco ou ao leite.'],['','Validade:','15 dias (não tem conservante). Congelada e bem embalada, até 2 meses.']]},
- {id:10, foto:'10', nome:'Ganache de Chocolate Branco 32% com Cajá e Cachaça', tipo:'branco', origem:'importado', cacau:32, tex:'cremosa', uso:'Bombom moldado',
-  itens:[['caja',43.5],['glucose',6.5],['manteiga',17.4],['cachaca',5]],
+ {id:10, foto:'10', nome:'Ganache de Chocolate Branco com Caipirinha de Cupuaçu', tipo:'branco', origem:'importado', cacau:32, tex:'cremosa', uso:'Bombom moldado',
+  itens:[['cupuacu',43.5],['glucose',6.5],['manteiga',17.4],['cachaca',5]],
   prep:['Numa panela, junte a polpa, a glucose e a manteiga e aqueça até ferver.','Despeje sobre o chocolate e misture até emulsionar.','Junte a cachaça e misture até ficar um creme liso.','Deixe chegar a 28–30 °C antes de rechear.'],
-  notas:[['','Gel de cajá (camada do bombom):','1 parte de polpa de cajá para 2 de glucose. Aqueça até 105 °C e use a 28–30 °C.'],['','Durabilidade:','7 a 10 dias, em ambiente de 18 a 21 °C.']]},
- {id:11, foto:'11', nome:'Ganache de Chocolate Branco 25% com Limão e Manjericão', tipo:'branco', origem:'importado', cacau:25.9, tex:'cremosa', uso:'Recheio de trufa oca',
+  notas:[['','Gel de cupuaçu (camada do bombom):','1 parte de polpa de cupuaçu para 2 de glucose. Aqueça até 105 °C e use a 28–30 °C.'],['','Durabilidade:','7 a 10 dias, em ambiente de 18 a 21 °C.']]},
+ {id:11, foto:'11', nome:'Ganache de Chocolate Branco com Manjericão', tipo:'branco', origem:'importado', cacau:25.9, tex:'cremosa', uso:'Recheio de trufa oca',
   itens:[['creme35',14],['limao',20],['manteiga',7],['manjericao',0.6],['glucose',5]],
   prep:['Derreta o chocolate a 40 °C.','Aqueça o suco de limão com a glucose a 70 °C e, separado, o creme a 70 °C.','Junte tudo ao chocolate e misture bem.','Junte o manjericão e a manteiga e passe o mixer.','Recheie as trufas ocas a 28 °C e feche com chocolate ao leite.'],
   notas:[['','Validade:','7 dias, embalado e na geladeira.']]},
- {id:12, foto:'12', nome:'Ganache de Chocolate Branco 32% com Hojichá', tipo:'branco', origem:'importado', cacau:32, tex:'cremosa', uso:'Bombom moldado',
+ {id:12, foto:'12', nome:'Ganache de Chocolate Branco de Chá Verde', tipo:'branco', origem:'importado', cacau:32, tex:'cremosa', uso:'Bombom moldado',
   itens:[['agua',14.7],['hojicha',4.2],['creme35',52.6],['glucose',5.3],['dextrose',4.2],['manteiga',8.4]],
   prep:['Ferva a água, junte o hojichá, tampe e deixe 5 minutos.','Na mesma panela, junte o creme, a glucose e a dextrose e ferva de novo.','Despeje sobre o chocolate, junte a manteiga e passe o mixer.','Descanse 12 horas antes de usar.'],
   notas:[['','Casca:','fica lindo com casca de chocolate ruby.'],['','Validade:','15 dias em temperatura ambiente (até 25 °C).']]},
- {id:13, foto:'13', nome:'Ganache de Chocolate Amargo 54% – Trufa', tipo:'escuro', origem:'importado', cacau:54.5, tex:'cremosa', uso:'Trufa',
+ {id:13, foto:'13', nome:'Ganache de Chocolate Amargo – Trufa', tipo:'escuro', origem:'importado', cacau:54.5, tex:'cremosa', uso:'Trufa',
   itens:[['creme35',50],['glucose',15],['manteiga',15]],
   notas:[['','Chocolate:','Callebaut 811 (54,5%), que é meio amargo.'],['','Modo de preparo:','a receita original veio sem ele; o passo a passo é o da calculadora.']]},
- {id:14, foto:'14', nome:'Ganache de Chocolate ao Leite 33% – Trufa', tipo:'leite', origem:'importado', cacau:33.6, tex:'cremosa', uso:'Trufa',
+ {id:14, foto:'14', nome:'Ganache de Chocolate ao Leite – Trufa', tipo:'leite', origem:'importado', cacau:33.6, tex:'cremosa', uso:'Trufa',
   itens:[['creme35',42.9]],
   notas:[['','Chocolate:','Callebaut 823 (33,6%).'],['','Modo de preparo:','a receita original veio sem ele; o passo a passo é o da calculadora.']]},
- {id:15, foto:'15', nome:'Ganache de Chocolate ao Leite 33% com Caramelo Salgado', tipo:'leite', origem:'importado', cacau:33.6, tex:'cremosa', uso:'Recheio de barra e bombom',
+ {id:15, foto:'15', nome:'Ganache de Caramelo Salgado', tipo:'leite', origem:'importado', cacau:33.6, tex:'cremosa', uso:'Recheio de barra e bombom',
   itens:[['acucar',31.8],['creme35',101.8,'morno'],['manteiga',10,'a confirmar: a receita original não dizia a quantidade'],['flordesal',1,'1 boa pitada']],
   prep:['Derreta o açúcar em fogo baixo até ficar cor de âmbar.','Junte o creme morno aos poucos (cuidado com o vapor) e mexa até ficar liso, sem grumos.','Despeje sobre o chocolate, junte a manteiga e passe o mixer até ficar liso e brilhante.','Quando esfriar, junte a flor de sal.','Cubra com filme encostado e descanse pelo menos 8 horas.'],
   notas:[['','Chocolate:','Callebaut 823, que tem notas de caramelo.']]},
- {id:16, foto:'16', nome:'Ganache de Chocolate Ruby com Framboesa e Vinho do Porto', tipo:'ruby', origem:'importado', tex:'cremosa', uso:'Trufa oca',
-  itens:[['framboesa',26],['glucose',8],['manteiga',20],['vinhoporto',26]],
+ {id:16, foto:'16', nome:'Ganache de Chocolate Ruby com Amora e Vinho', tipo:'ruby', origem:'importado', tex:'cremosa', uso:'Trufa oca',
+  itens:[['amora',26],['glucose',8],['manteiga',20],['vinhoporto',26]],
   prep:['Numa panela, junte a polpa, a glucose e a manteiga e aqueça até ferver.','Despeje sobre o chocolate ruby e misture até emulsionar.','Junte o vinho do Porto e misture até ficar homogêneo.','Deixe esfriar até 28 °C.'],
   notas:[['','Montagem:','com o saco de confeitar, recheie trufas ocas de chocolate branco. Depois de 1 hora, cubra o recheio com ruby temperado, banhe as trufas no ruby e deixe secar em temperatura ambiente. Se quiser, pincele pó metalizado cor ruby.'],['','Durabilidade:','7 a 10 dias, em ambiente de 18 a 21 °C.']]},
- {id:17, foto:'17', nome:'Ganache de Chocolate ao Leite 33% com Cumaru e Mel', tipo:'leite', origem:'importado', cacau:33.6, tex:'cremosa', uso:'Bombom moldado',
+ {id:17, foto:'17', nome:'Ganache de Mel com Especiarias', tipo:'leite', origem:'importado', cacau:33.6, tex:'cremosa', uso:'Bombom moldado',
   itens:[['creme35',69.6],['mel',13],['cumaru',0.9,'cerca de 1 fava ralada'],['manteiga',13]],
   prep:['Derreta o chocolate aos poucos, mexendo sempre.','Leve o creme e o mel ao fogo com o cumaru ralado. Quando ferver, desligue e deixe em infusão por 30 minutos.','Coe o cumaru e volte ao fogo até ferver.','Despeje um terço da mistura quente sobre o chocolate e mexa rápido, em pequenos círculos, até formar um centro liso e brilhante.','Junte mais um terço e mexa do mesmo jeito. Depois junte o resto, sempre mexendo.','Com a ganache entre 35 e 40 °C, junte a manteiga em cubos e passe o mixer.','Recheie as casquinhas a 28–30 °C, deixe firmar e feche com chocolate amargo.'],
   notas:[['','Durabilidade:','7 a 10 dias, em ambiente de 18 a 21 °C.']]},
- {id:18, foto:'18', nome:'Ganache de Chocolate Branco 33% com Matcha', tipo:'branco', origem:'importado', cacau:33, tex:'cremosa', uso:'Bombom moldado',
-  itens:[['creme25',55.6,'creme de leite UHT'],['glucose',11.1],['matcha',4.4],['mcacau',14.4]],
-  prep:['Aqueça o creme com a glucose e o matcha, mexendo bem.','Despeje sobre o chocolate e misture até ficar homogêneo.','Quando chegar a 35 °C, junte a manteiga de cacau e passe o mixer.','Recheie as casquinhas, feche e leve à geladeira até firmar. Desenforme.'],
-  notas:[['','Validade:','15 dias (não tem conservante). Congelada e bem embalada, até 2 meses.']]},
- {id:19, foto:'19', nome:'Ganache de Chocolate ao Leite 33% – Bombom', tipo:'leite', origem:'importado', cacau:33.6, tex:'cremosa', uso:'Bombom moldado',
+ {id:19, foto:'19', oculta:1, nome:'Ganache de Chocolate ao Leite 33% (base do Monte a sua ganache)', tipo:'leite', origem:'importado', cacau:33.6, tex:'cremosa', uso:'Bombom moldado',
   itens:[['creme25',41,'creme de leite UHT'],['glucose',8],['manteiga',2.5]],
   prep:['Aqueça o creme com a glucose.','Despeje sobre o chocolate ao leite.','Junte a manteiga.','Passe o mixer para emulsionar.','Recheie as casquinhas, feche e leve à geladeira até firmar. Desenforme.'],
   notas:[['','Validade:','15 dias (não tem conservante). Congelada e bem embalada, até 2 meses.']]}
@@ -741,7 +738,7 @@ function drawMenu(){
   var fs=[['todas','Todas'],['escuro','Amargo / meio amargo'],['leite','Ao leite'],['branco','Branco'],['ruby','Ruby']], f=$('m-filtro'); f.innerHTML='';
   fs.forEach(function(o){var b=document.createElement('button');b.type='button';b.textContent=o[1];b.setAttribute('aria-pressed',M.filtro===o[0]?'true':'false');b.addEventListener('click',function(){M.filtro=o[0];drawMenu();});f.appendChild(b);});
   var l=$('m-list'); l.innerHTML='';
-  RECEITAS.filter(function(r){return M.filtro==='todas'||r.tipo===M.filtro}).forEach(function(r){
+  RECEITAS.filter(function(r){return !r.oculta&&(M.filtro==='todas'||r.tipo===M.filtro)}).forEach(function(r){
     var b=document.createElement('button'); b.type='button'; b.className='rc';
     var img=foto(r.foto,'',r.nome);
     b.innerHTML='<div class="band'+(TIPOS[r.tipo].claro&&!img?' light':'')+'" style="background:linear-gradient(160deg,var('+TIPOS[r.tipo].cor+'),#16243E)">'+(img||'<span class="ilu">'+ILU[r.tex]+'</span>')+'<span class="lbl">'+(r.tipo==='escuro'?fmtR2(r.cacau)+'% cacau':TIPOS[r.tipo].n)+'</span></div><div class="bd"><b>'+esc(r.nome)+'</b><span>'+esc(r.uso)+'</span></div>';
@@ -803,7 +800,7 @@ function drawRec(){
 }
 
 /* ===================== início ===================== */
-$('n-rec').textContent=RECEITAS.length;
+$('n-rec').textContent=RECEITAS.filter(function(r){return !r.oculta}).length;
 if(FOTOS.capa){ $('capa').innerHTML=foto('capa','capa','Ganache'); $('whisk').hidden=true; }
 $('quatro').innerHTML=[['chocolate','Chocolate','Dá sabor e firmeza'],['liquido','Líquido','Deixa cremosa'],['manteiga','Manteiga','Deixa macia e aveludada'],['glucose','Glucose','Dá brilho e conserva']]
   .map(function(x){return '<div>'+ILU[x[0]]+'<span><b>'+x[1]+'</b><span>'+x[2]+'</span></span></div>'}).join('');

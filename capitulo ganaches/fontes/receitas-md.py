@@ -16,6 +16,7 @@ out = ['# Receitas da Tatiana · base de 100 g de chocolate',
        'Com outro chocolate a proporção muda: a calculadora refaz a conta pela manteiga de cacau do chocolate (% de cacau do rótulo), para dar o mesmo ponto.', '',
        '**Como ler:** toda receita está escrita para **100 g de chocolate**. Para fazer mais, multiplique tudo, ou use a calculadora.', '', '---', '']
 for r in REC:
+    if r.get('oculta'): out.append('*(A receita abaixo não aparece no cardápio: é a base do "Monte a sua ganache".)*')
     out.append('## %d. %s' % (r['id'], r['nome']))
     nome = (TIPOS[r['tipo']]['n'].lower() + ' ' if r['tipo'] != 'escuro' else '') + ('%s%% cacau ' % g(r['cacau']) if r.get('cacau') else '')
     out.append('**Uso:** %s · **Chocolate:** %simportado' % (r['uso'], nome))

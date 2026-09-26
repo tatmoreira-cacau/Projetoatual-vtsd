@@ -34,7 +34,7 @@
 **Preparo:** Derreta o chocolate (até 40 °C) até ficar liso e sem grumos. Junte o creme e misture com a espátula, raspando bem a lateral e o fundo. Se sobrar grumo, passe o fouet. Junte a glucose. Para colorir, junte umas gotinhas de corante líquido. Dê o ponto na pedra, ou na geladeira mexendo a cada 10 minutos, até o ponto de bico. Coloque no saco de confeitar com o bico que preferir.
 **Corante:** umas gotinhas de corante líquido, a gosto.
 
-## 4. Ganache de Chocolate Branco 28% com Coco
+## 4. Ganache de Coco (doce de leite, creme de abóbora e nozes)
 **Uso:** Recheio de casca e bombom · **Chocolate:** branco 28% cacau importado
 - 100 g de chocolate branco 28% cacau importado
 - 50 g de creme de leite 25% (a receita original não diz o %; a apostila usa creme UHT 25%)
@@ -44,7 +44,7 @@
 **Preparo:** Derreta o chocolate. Junte o creme e misture com a espátula, raspando bem as beiradas. Termine com o fouet até ficar liso. Junte o coco e o leite de coco e deixe descansar uns 10 minutos para o coco hidratar. Recheie as casquinhas, tampe com chocolate e leve à geladeira para firmar.
 **Variações (a mesma receita):** no lugar do coco, doce de leite com nozes moídas, doce de leite com coco, amendoim ou purê de compota de abóbora. No lugar do leite de coco, suco concentrado de maracujá, a gosto.
 
-## 5. Ganache de Chocolate Branco 28% com Cream Cheese e Frutas Vermelhas
+## 5. Ganache de Cheesecake de Frutas Vermelhas
 **Uso:** Recheio de casca · **Chocolate:** branco 28% cacau importado
 - 100 g de chocolate branco 28% cacau importado
 - 30 g de cream cheese
@@ -55,7 +55,7 @@
 **Geleia:** pode ser de framboesa, morango, damasco ou goiabada mole.
 **Corante:** se quiser realçar a cor.
 
-## 6. Ganache de Chocolate Branco 28% com Limão Siciliano e Lavanda
+## 6. Ganache de Limão com Lavanda
 **Uso:** Trufa ou recheio de casca · **Chocolate:** branco 28% cacau importado
 - 100 g de chocolate branco 28% cacau importado
 - 17,5 g de creme de leite 25% (de 16 a 19 g)
@@ -86,7 +86,7 @@
 
 **Preparo:** Derreta o chocolate até ficar fluido e sem grumos. Junte o creme e misture até ficar homogêneo. Junte o conhaque e misture. Deixe firmar 1 hora em temperatura ambiente. Recheie as casquinhas com a ganache e a cereja com cabo e feche o bombom.
 
-## 9. Ganache de Chocolate Branco 33% com Pistache
+## 9. Ganache de Chocolate de Pistache (pasta saborizante)
 **Uso:** Bombom moldado · **Chocolate:** branco 33% cacau importado
 - 100 g de chocolate branco 33% cacau importado
 - 70 g de creme de leite 25% (creme de leite UHT)
@@ -98,19 +98,19 @@
 **Chocolate:** branco ou ao leite.
 **Validade:** 15 dias (não tem conservante). Congelada e bem embalada, até 2 meses.
 
-## 10. Ganache de Chocolate Branco 32% com Cajá e Cachaça
+## 10. Ganache de Chocolate Branco com Caipirinha de Cupuaçu
 **Uso:** Bombom moldado · **Chocolate:** branco 32% cacau importado
 - 100 g de chocolate branco 32% cacau importado
-- 43,5 g de polpa de cajá
+- 43,5 g de polpa de cupuaçu
 - 6,5 g de glucose
 - 17,4 g de manteiga sem sal
 - 5 g de cachaça
 
 **Preparo:** Numa panela, junte a polpa, a glucose e a manteiga e aqueça até ferver. Despeje sobre o chocolate e misture até emulsionar. Junte a cachaça e misture até ficar um creme liso. Deixe chegar a 28–30 °C antes de rechear.
-**Gel de cajá (camada do bombom):** 1 parte de polpa de cajá para 2 de glucose. Aqueça até 105 °C e use a 28–30 °C.
+**Gel de cupuaçu (camada do bombom):** 1 parte de polpa de cupuaçu para 2 de glucose. Aqueça até 105 °C e use a 28–30 °C.
 **Durabilidade:** 7 a 10 dias, em ambiente de 18 a 21 °C.
 
-## 11. Ganache de Chocolate Branco 25% com Limão e Manjericão
+## 11. Ganache de Chocolate Branco com Manjericão
 **Uso:** Recheio de trufa oca · **Chocolate:** branco 25,9% cacau importado
 - 100 g de chocolate branco 25,9% cacau importado
 - 14 g de creme de leite fresco 35%
@@ -122,7 +122,7 @@
 **Preparo:** Derreta o chocolate a 40 °C. Aqueça o suco de limão com a glucose a 70 °C e, separado, o creme a 70 °C. Junte tudo ao chocolate e misture bem. Junte o manjericão e a manteiga e passe o mixer. Recheie as trufas ocas a 28 °C e feche com chocolate ao leite.
 **Validade:** 7 dias, embalado e na geladeira.
 
-## 12. Ganache de Chocolate Branco 32% com Hojichá
+## 12. Ganache de Chocolate Branco de Chá Verde
 **Uso:** Bombom moldado · **Chocolate:** branco 32% cacau importado
 - 100 g de chocolate branco 32% cacau importado
 - 14,7 g de água
@@ -136,7 +136,7 @@
 **Casca:** fica lindo com casca de chocolate ruby.
 **Validade:** 15 dias em temperatura ambiente (até 25 °C).
 
-## 13. Ganache de Chocolate Amargo 54% – Trufa
+## 13. Ganache de Chocolate Amargo – Trufa
 **Uso:** Trufa · **Chocolate:** 54,5% cacau importado
 - 100 g de chocolate 54,5% cacau importado
 - 50 g de creme de leite fresco 35%
@@ -146,7 +146,7 @@
 **Chocolate:** Callebaut 811 (54,5%), que é meio amargo.
 **Modo de preparo:** a receita original veio sem ele; o passo a passo é o da calculadora.
 
-## 14. Ganache de Chocolate ao Leite 33% – Trufa
+## 14. Ganache de Chocolate ao Leite – Trufa
 **Uso:** Trufa · **Chocolate:** ao leite 33,6% cacau importado
 - 100 g de chocolate ao leite 33,6% cacau importado
 - 42,9 g de creme de leite fresco 35%
@@ -154,7 +154,7 @@
 **Chocolate:** Callebaut 823 (33,6%).
 **Modo de preparo:** a receita original veio sem ele; o passo a passo é o da calculadora.
 
-## 15. Ganache de Chocolate ao Leite 33% com Caramelo Salgado
+## 15. Ganache de Caramelo Salgado
 **Uso:** Recheio de barra e bombom · **Chocolate:** ao leite 33,6% cacau importado
 - 100 g de chocolate ao leite 33,6% cacau importado
 - 31,8 g de açúcar (para o caramelo)
@@ -165,10 +165,10 @@
 **Preparo:** Derreta o açúcar em fogo baixo até ficar cor de âmbar. Junte o creme morno aos poucos (cuidado com o vapor) e mexa até ficar liso, sem grumos. Despeje sobre o chocolate, junte a manteiga e passe o mixer até ficar liso e brilhante. Quando esfriar, junte a flor de sal. Cubra com filme encostado e descanse pelo menos 8 horas.
 **Chocolate:** Callebaut 823, que tem notas de caramelo.
 
-## 16. Ganache de Chocolate Ruby com Framboesa e Vinho do Porto
+## 16. Ganache de Chocolate Ruby com Amora e Vinho
 **Uso:** Trufa oca · **Chocolate:** ruby importado
 - 100 g de chocolate ruby importado
-- 26 g de polpa de framboesa
+- 26 g de polpa de amora
 - 8 g de glucose
 - 20 g de manteiga sem sal
 - 26 g de vinho do Porto
@@ -177,7 +177,7 @@
 **Montagem:** com o saco de confeitar, recheie trufas ocas de chocolate branco. Depois de 1 hora, cubra o recheio com ruby temperado, banhe as trufas no ruby e deixe secar em temperatura ambiente. Se quiser, pincele pó metalizado cor ruby.
 **Durabilidade:** 7 a 10 dias, em ambiente de 18 a 21 °C.
 
-## 17. Ganache de Chocolate ao Leite 33% com Cumaru e Mel
+## 17. Ganache de Mel com Especiarias
 **Uso:** Bombom moldado · **Chocolate:** ao leite 33,6% cacau importado
 - 100 g de chocolate ao leite 33,6% cacau importado
 - 69,6 g de creme de leite fresco 35%
@@ -188,18 +188,8 @@
 **Preparo:** Derreta o chocolate aos poucos, mexendo sempre. Leve o creme e o mel ao fogo com o cumaru ralado. Quando ferver, desligue e deixe em infusão por 30 minutos. Coe o cumaru e volte ao fogo até ferver. Despeje um terço da mistura quente sobre o chocolate e mexa rápido, em pequenos círculos, até formar um centro liso e brilhante. Junte mais um terço e mexa do mesmo jeito. Depois junte o resto, sempre mexendo. Com a ganache entre 35 e 40 °C, junte a manteiga em cubos e passe o mixer. Recheie as casquinhas a 28–30 °C, deixe firmar e feche com chocolate amargo.
 **Durabilidade:** 7 a 10 dias, em ambiente de 18 a 21 °C.
 
-## 18. Ganache de Chocolate Branco 33% com Matcha
-**Uso:** Bombom moldado · **Chocolate:** branco 33% cacau importado
-- 100 g de chocolate branco 33% cacau importado
-- 55,6 g de creme de leite 25% (creme de leite UHT)
-- 11,1 g de glucose
-- 4,4 g de matcha (chá verde em pó)
-- 14,4 g de manteiga de cacau
-
-**Preparo:** Aqueça o creme com a glucose e o matcha, mexendo bem. Despeje sobre o chocolate e misture até ficar homogêneo. Quando chegar a 35 °C, junte a manteiga de cacau e passe o mixer. Recheie as casquinhas, feche e leve à geladeira até firmar. Desenforme.
-**Validade:** 15 dias (não tem conservante). Congelada e bem embalada, até 2 meses.
-
-## 19. Ganache de Chocolate ao Leite 33% – Bombom
+*(A receita abaixo não aparece no cardápio: é a base do "Monte a sua ganache".)*
+## 19. Ganache de Chocolate ao Leite 33% (base do Monte a sua ganache)
 **Uso:** Bombom moldado · **Chocolate:** ao leite 33,6% cacau importado
 - 100 g de chocolate ao leite 33,6% cacau importado
 - 41 g de creme de leite 25% (creme de leite UHT)
