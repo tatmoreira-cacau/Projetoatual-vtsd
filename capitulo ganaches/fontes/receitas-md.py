@@ -13,12 +13,13 @@ g = lambda x: ('%g' % x).replace('.', ',')
 out = ['# Receitas da Tatiana · base de 100 g de chocolate',
        '*Volume 3 · Faça a Sua Própria Ganache · Tatiana Duarte Moreira · gerado a partir da calculadora (fontes/receitas-md.py)*', '',
        '**Base de todas as receitas:** chocolate **importado** e **creme de leite fresco 35%**, com as quantidades das receitas originais da Tatiana. '
-       'Com chocolate nacional a proporção muda (ele tem menos manteiga de cacau e fica mais mole): a calculadora refaz a conta sozinha.', '',
+       'Com outro chocolate a proporção muda: a calculadora refaz a conta pela manteiga de cacau do chocolate (% de cacau do rótulo), para dar o mesmo ponto.', '',
        '**Como ler:** toda receita está escrita para **100 g de chocolate**. Para fazer mais, multiplique tudo, ou use a calculadora.', '', '---', '']
 for r in REC:
     out.append('## %d. %s' % (r['id'], r['nome']))
-    out.append('**Uso:** %s · **Chocolate:** %s importado' % (r['uso'], TIPOS[r['tipo']]['n'].lower()))
-    out.append('- 100 g de chocolate %s' % TIPOS[r['tipo']]['n'].lower())
+    nome = (TIPOS[r['tipo']]['n'].lower() + ' ' if r['tipo'] != 'escuro' else '') + ('%s%% cacau ' % g(r['cacau']) if r.get('cacau') else '')
+    out.append('**Uso:** %s · **Chocolate:** %simportado' % (r['uso'], nome))
+    out.append('- 100 g de chocolate %simportado' % nome)
     for it in r['itens']:
         nome = ING[it[0]]['n']; nome = nome[0].lower() + nome[1:]
         out.append('- %s g de %s%s' % (g(it[1]), nome, (' (%s)' % it[2]) if len(it) > 2 else ''))

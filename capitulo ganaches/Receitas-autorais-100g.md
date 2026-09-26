@@ -1,15 +1,15 @@
 # Receitas da Tatiana · base de 100 g de chocolate
 *Volume 3 · Faça a Sua Própria Ganache · Tatiana Duarte Moreira · gerado a partir da calculadora (fontes/receitas-md.py)*
 
-**Base de todas as receitas:** chocolate **importado** e **creme de leite fresco 35%**, com as quantidades das receitas originais da Tatiana. Com chocolate nacional a proporção muda (ele tem menos manteiga de cacau e fica mais mole): a calculadora refaz a conta sozinha.
+**Base de todas as receitas:** chocolate **importado** e **creme de leite fresco 35%**, com as quantidades das receitas originais da Tatiana. Com outro chocolate a proporção muda: a calculadora refaz a conta pela manteiga de cacau do chocolate (% de cacau do rótulo), para dar o mesmo ponto.
 
 **Como ler:** toda receita está escrita para **100 g de chocolate**. Para fazer mais, multiplique tudo, ou use a calculadora.
 
 ---
 
 ## 1. Ganache de Bico Meio Amargo
-**Uso:** Ponto de bico · **Chocolate:** meio amargo importado
-- 100 g de chocolate meio amargo
+**Uso:** Ponto de bico · **Chocolate:** 54,5% cacau importado
+- 100 g de chocolate 54,5% cacau importado
 - 60 g de creme de leite fresco 35%
 - 4 g de glucose (1 colher (sopa) rasa para cada 500 g de chocolate)
 
@@ -17,8 +17,8 @@
 **Para doce aberto:** fica durinha por fora e cremosa por dentro, e não mela no transporte.
 
 ## 2. Ganache de Bico ao Leite
-**Uso:** Ponto de bico · **Chocolate:** ao leite importado
-- 100 g de chocolate ao leite
+**Uso:** Ponto de bico · **Chocolate:** ao leite 33,6% cacau importado
+- 100 g de chocolate ao leite 33,6% cacau importado
 - 40 g de creme de leite fresco 35%
 - 4 g de glucose (1 colher (sopa) rasa para cada 500 g de chocolate)
 
@@ -26,8 +26,8 @@
 **Para doce aberto:** fica durinha por fora e cremosa por dentro, e não mela no transporte.
 
 ## 3. Ganache de Bico Branca ou Colorida
-**Uso:** Ponto de bico · **Chocolate:** branco importado
-- 100 g de chocolate branco
+**Uso:** Ponto de bico · **Chocolate:** branco 28% cacau importado
+- 100 g de chocolate branco 28% cacau importado
 - 28 g de creme de leite fresco 35%
 - 4 g de glucose (1 colher (sopa) rasa para cada 500 g de chocolate)
 
@@ -35,8 +35,8 @@
 **Corante:** cerca de 2 gotinhas de corante líquido para cada 500 g de chocolate, ou a gosto.
 
 ## 4. Ganache de Coco
-**Uso:** Recheio de casca e bombom · **Chocolate:** branco importado
-- 100 g de chocolate branco
+**Uso:** Recheio de casca e bombom · **Chocolate:** branco 28% cacau importado
+- 100 g de chocolate branco 28% cacau importado
 - 50 g de creme de leite fresco 35% (a confirmar: a receita original não dizia o % do creme)
 - 22,2 g de leite de coco
 - 38,9 g de coco desidratado
@@ -45,8 +45,8 @@
 **Variações (a mesma receita):** no lugar do coco, doce de leite com nozes moídas, doce de leite com coco, amendoim ou purê de compota de abóbora. No lugar do leite de coco, suco concentrado de maracujá, a gosto.
 
 ## 5. Cheesecake de Frutas Vermelhas
-**Uso:** Recheio de casca · **Chocolate:** branco importado
-- 100 g de chocolate branco
+**Uso:** Recheio de casca · **Chocolate:** branco 28% cacau importado
+- 100 g de chocolate branco 28% cacau importado
 - 30 g de cream cheese
 - 43,5 g de geleia de frutas vermelhas
 - 10 g de biscoito de maisena triturado (2 bolachas trituradas)
@@ -56,8 +56,8 @@
 **Corante:** se quiser realçar a cor.
 
 ## 6. Trufa de Limão Siciliano e Lavanda
-**Uso:** Trufa ou recheio de casca · **Chocolate:** branco importado
-- 100 g de chocolate branco
+**Uso:** Trufa ou recheio de casca · **Chocolate:** branco 28% cacau importado
+- 100 g de chocolate branco 28% cacau importado
 - 17,5 g de creme de leite fresco 35% (de 16 a 19 g: teste o ponto)
 - 0,6 g de lavanda seca (6 colheres (chá) para cada 940 g de chocolate)
 - 10,6 g de manteiga sem sal (derretida)
@@ -69,8 +69,8 @@
 **Troque o sabor, não a fruta:** no lugar da lavanda, use chá Earl Grey ou hortelã bem picada (faça a infusão igual, mas não coe), ou ervas e temperos como alecrim e manjericão. O limão pode ser siciliano ou tahiti.
 
 ## 7. Trufa de Earl Grey
-**Uso:** Trufa de modelar · **Chocolate:** branco importado
-- 100 g de chocolate branco
+**Uso:** Trufa de modelar · **Chocolate:** branco 28% cacau importado
+- 100 g de chocolate branco 28% cacau importado
 - 20 g de creme de leite fresco 35% (a confirmar: a receita original não dizia o % do creme)
 - 1,2 g de chá Earl Grey (3 sachês para cada 500 g de chocolate)
 - 3 g de glucose (é o que dá efeito de modelagem)
@@ -79,16 +79,16 @@
 **Preparo:** Derreta o chocolate até ficar liso. Reserve. Faça a infusão: misture o chá no creme, aqueça 30 segundos no micro-ondas (potência alta) e deixe esfriar. Misture a infusão com a glucose e a manteiga derretida. Junte ao chocolate e envolva até incorporar. Deixe firmar por 1 hora. No ponto de modelar, faça as porções e guarde na geladeira até envolver as physalis.
 
 ## 8. Ganache ao Leite com Conhaque
-**Uso:** Recheio de bombom · **Chocolate:** ao leite importado
-- 100 g de chocolate ao leite
+**Uso:** Recheio de bombom · **Chocolate:** ao leite 33,6% cacau importado
+- 100 g de chocolate ao leite 33,6% cacau importado
 - 60 g de creme de leite fresco 35%
 - 6 g de conhaque (2 colheres (sopa) para cada 500 g de chocolate)
 
 **Preparo:** Derreta o chocolate até ficar fluido e sem grumos. Junte o creme e misture até ficar homogêneo. Junte o conhaque e misture. Deixe firmar 1 hora em temperatura ambiente. Recheie as casquinhas com a ganache e a cereja com cabo e feche o bombom.
 
 ## 9. Ganache de Pistache
-**Uso:** Bombom moldado · **Chocolate:** branco importado
-- 100 g de chocolate branco
+**Uso:** Bombom moldado · **Chocolate:** branco 33% cacau importado
+- 100 g de chocolate branco 33% cacau importado
 - 70 g de creme de leite fresco 35%
 - 10 g de glucose
 - 5 g de manteiga de cacau
@@ -99,8 +99,8 @@
 **Validade:** 15 dias (não tem conservante). Congelada e bem embalada, até 2 meses.
 
 ## 10. Bombom de Cajá com Cachaça
-**Uso:** Bombom moldado · **Chocolate:** branco importado
-- 100 g de chocolate branco
+**Uso:** Bombom moldado · **Chocolate:** branco 32% cacau importado
+- 100 g de chocolate branco 32% cacau importado
 - 43,5 g de polpa de cajá
 - 6,5 g de glucose
 - 17,4 g de manteiga sem sal
@@ -112,8 +112,8 @@
 **Rende:** cerca de 50 bombons com 230 g de chocolate.
 
 ## 11. Trufa de Limão com Manjericão
-**Uso:** Recheio de trufa oca · **Chocolate:** branco importado
-- 100 g de chocolate branco
+**Uso:** Recheio de trufa oca · **Chocolate:** branco 25,9% cacau importado
+- 100 g de chocolate branco 25,9% cacau importado
 - 14 g de creme de leite fresco 35%
 - 20 g de suco de limão
 - 7 g de manteiga sem sal
@@ -124,8 +124,8 @@
 **Validade:** 7 dias, embalado e na geladeira.
 
 ## 12. Bombom de Hojichá
-**Uso:** Bombom moldado · **Chocolate:** branco importado
-- 100 g de chocolate branco
+**Uso:** Bombom moldado · **Chocolate:** branco 32% cacau importado
+- 100 g de chocolate branco 32% cacau importado
 - 14,7 g de água
 - 4,2 g de hojichá
 - 52,6 g de creme de leite fresco 35%
@@ -138,8 +138,8 @@
 **Validade:** 15 dias em temperatura ambiente (até 25 °C).
 
 ## 13. Trufa Meio Amargo
-**Uso:** Trufa · **Chocolate:** meio amargo importado
-- 100 g de chocolate meio amargo
+**Uso:** Trufa · **Chocolate:** 54,5% cacau importado
+- 100 g de chocolate 54,5% cacau importado
 - 50 g de creme de leite fresco 35%
 - 15 g de glucose
 - 15 g de manteiga sem sal
@@ -148,16 +148,16 @@
 **Modo de preparo:** a receita original veio sem ele; o passo a passo é o da calculadora.
 
 ## 14. Trufa ao Leite
-**Uso:** Trufa · **Chocolate:** ao leite importado
-- 100 g de chocolate ao leite
+**Uso:** Trufa · **Chocolate:** ao leite 33,6% cacau importado
+- 100 g de chocolate ao leite 33,6% cacau importado
 - 42,9 g de creme de leite fresco 35%
 
 **Chocolate:** Callebaut 823 (33,6%).
 **Modo de preparo:** a receita original veio sem ele; o passo a passo é o da calculadora.
 
 ## 15. Ganache de Caramelo Salgado
-**Uso:** Recheio de barra e bombom · **Chocolate:** ao leite importado
-- 100 g de chocolate ao leite
+**Uso:** Recheio de barra e bombom · **Chocolate:** ao leite 33,6% cacau importado
+- 100 g de chocolate ao leite 33,6% cacau importado
 - 31,8 g de açúcar (para o caramelo)
 - 101,8 g de creme de leite fresco 35% (morno)
 - 10 g de manteiga sem sal (a confirmar: a receita original não dizia a quantidade)
@@ -168,7 +168,7 @@
 
 ## 16. Trufa de Framboesa e Vinho do Porto
 **Uso:** Trufa oca · **Chocolate:** ruby importado
-- 100 g de chocolate ruby
+- 100 g de chocolate ruby importado
 - 26 g de polpa de framboesa
 - 8 g de glucose
 - 20 g de manteiga sem sal
@@ -180,8 +180,8 @@
 **Rende:** cerca de 40 trufas com 250 g de chocolate.
 
 ## 17. Bombom de Cumaru e Mel
-**Uso:** Bombom moldado · **Chocolate:** ao leite importado
-- 100 g de chocolate ao leite
+**Uso:** Bombom moldado · **Chocolate:** ao leite 33,6% cacau importado
+- 100 g de chocolate ao leite 33,6% cacau importado
 - 69,6 g de creme de leite fresco 35%
 - 13 g de mel
 - 0,9 g de cumaru (2 favas raladas para cada 230 g de chocolate)
@@ -192,8 +192,8 @@
 **Rende:** cerca de 50 bombons com 230 g de chocolate.
 
 ## 18. Ganache de Chá Verde (Matcha)
-**Uso:** Bombom moldado · **Chocolate:** branco importado
-- 100 g de chocolate branco
+**Uso:** Bombom moldado · **Chocolate:** branco 33% cacau importado
+- 100 g de chocolate branco 33% cacau importado
 - 55,6 g de creme de leite fresco 35%
 - 11,1 g de glucose
 - 4,4 g de matcha (chá verde em pó)
@@ -204,8 +204,8 @@
 **Rende:** cerca de 45 bombons de 12 g com 180 g de chocolate.
 
 ## 19. Ganache de Chocolate ao Leite
-**Uso:** Bombom moldado · **Chocolate:** ao leite importado
-- 100 g de chocolate ao leite
+**Uso:** Bombom moldado · **Chocolate:** ao leite 33,6% cacau importado
+- 100 g de chocolate ao leite 33,6% cacau importado
 - 41 g de creme de leite fresco 35%
 - 8 g de glucose
 - 2,5 g de manteiga sem sal

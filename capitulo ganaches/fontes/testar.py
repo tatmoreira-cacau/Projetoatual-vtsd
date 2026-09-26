@@ -9,8 +9,26 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 HTML = os.path.join(os.path.dirname(AQUI), 'calculadora-ganache.html')
 CHROME = '/opt/pw-browsers/chromium-1194/chrome-linux/chrome'
 JS=r"""()=>{
+function ruim(h){return /NaN|undefined|Infinity|>-\d|null g|null%/.test(h);}
 var out={monte:0,monteErr:[],rec:[],swapErr:[],recN:0};
-function ruim(h){return /NaN|undefined|Infinity|>-\d|null g/.test(h);}
+// motor: com o % de cacau padrão, tem que dar a tabela Ganache Perfeita (nacional e importado)
+var GP={importado:{e70:[1.6,2.0,0.9],e55:[2.0,2.5,1.0],leite:[2.5,3.1,1.5],branco:[3.2,4.0,2.5]},
+        nacional:{e70:[1.77,2.21,1.0],e40:[2.85,3.56,1.42],leite:[2.78,3.44,1.67],branco:[3.37,4.21,2.63]}};
+['cremosa','estrutura','cobertura'].forEach(function(tx,i){
+  var chk=function(nome,v,esp){ if(Math.abs(v-esp)>0.02*esp) out.monteErr.push('tabela '+nome+' '+tx+': '+v.toFixed(2)+' em vez de '+esp); };
+  chk('imp 70%',W('escuro','importado',tx,70)*0.58,GP.importado.e70[i]); chk('imp 54,5%',W('escuro','importado',tx,54.5)*0.58,GP.importado.e55[i]);
+  chk('imp leite',W('leite','importado',tx)*0.58,GP.importado.leite[i]); chk('imp branco',W('branco','importado',tx)*0.58,GP.importado.branco[i]);
+  chk('nac 70%',W('escuro','nacional',tx,70)*0.58,GP.nacional.e70[i]); chk('nac 40%',W('escuro','nacional',tx,40)*0.58,GP.nacional.e40[i]);
+  chk('nac leite',W('leite','nacional',tx)*0.58,GP.nacional.leite[i]); chk('nac branco',W('branco','nacional',tx)*0.58,GP.nacional.branco[i]);
+  // mais cacau → menos chocolate por creme (mais perto de 1 : 1)
+  ['importado','nacional'].forEach(function(o){ for(var c=36;c<=89;c++){ if(W('escuro',o,tx,c+1)>W('escuro',o,tx,c)) out.monteErr.push('escuro '+o+' '+c+'% '+tx+' não diminui'); } });
+});
+// todos os % de cacau no Monte
+['escuro','leite','branco'].forEach(function(t){ var fx=TIPOS[t].faixa; ['importado','nacional'].forEach(function(o){ for(var c=fx[0];c<=fx[1];c+=2.5){ Object.keys(TEXTURAS).forEach(function(tex){
+  B={tex:tex,tipo:t,origem:o,cacau:c,gord:null,creme:'creme35',fam:'classica',esc:null,peso:500}; var h=buildRecipe(); out.monte++;
+  if(ruim(h)) out.monteErr.push('cacau '+[t,o,c,tex].join('/'));
+});}});});
+
 var creme=['creme35','creme30','creme25','creme20','creme17'];
 Object.keys(TEXTURAS).forEach(function(tex){Object.keys(TIPOS).forEach(function(tipo){Object.keys(ORIGENS).forEach(function(o){
  if(!existe(tipo,o)&&o!=='fracionada') return;
@@ -25,6 +43,7 @@ RECEITAS.forEach(function(r){
   out.rec.push([r.id,r.nome,r.tipo,r.origem,Math.round(a*10)/10,Math.round(alvo*10)/10,Math.round(a/alvo*100)]);
   Object.keys(TIPOS).forEach(function(t){['nacional','importado'].forEach(function(o){
     abrir(r); trocarChocolate(t,o); drawRec(); out.recN++;
+    abrir(r); if(TIPOS[t].cacau){ trocarChocolate(t,o,TIPOS[t].faixa[1]); drawRec(); out.recN++; if(ruim(document.getElementById('rec-out').innerHTML)) out.swapErr.push(r.id+' cacau max '+t+'/'+o); }
     if(ruim(document.getElementById('rec-out').innerHTML)) out.swapErr.push(r.id+' choc '+t+'/'+o);
   });});
   r.itens.forEach(function(it,i){
