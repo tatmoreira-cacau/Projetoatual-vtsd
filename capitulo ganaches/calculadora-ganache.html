@@ -103,7 +103,8 @@ select,input[type=number]{font:inherit;font-size:16px;padding:10px 12px;border-r
 .ingr .sw{width:10px;height:10px;border-radius:50%}
 .ingr .med{display:block;font-size:12px;color:var(--muted);font-weight:500;margin-top:1px}
 .ingr .g{font-weight:700;white-space:nowrap;color:var(--ouro2)}
-.total{font-size:14px;color:var(--muted)}
+.total{display:flex;flex-direction:column;gap:2px;background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:14px;color:var(--muted)}
+.total b{color:var(--ouro2);font-size:16px}
 .dica-marcar{font-size:12px;color:var(--muted);margin:0}
 .steps{margin:0;padding-left:0;list-style:none;counter-reset:p;display:flex;flex-direction:column;gap:10px}
 .steps li{counter-increment:p;display:grid;grid-template-columns:28px 1fr;gap:10px}
@@ -565,6 +566,11 @@ function trocarCreme(itens,i,novo){
   var m=itens.filter(function(y){return y[0]==='manteiga'})[0];
   if(m) m[1]+=falta/0.82; else itens.push(['manteiga',falta/0.82,'rep\u00f5e a gordura que o creme mais magro n\u00e3o tem']);
 }
+// Rendimento: o peso da ganache e quantas unidades d\u00e1 (bombom de 12 g e trufa de 15 g, as medidas das receitas da Tatiana)
+function rendimento(g,tex){
+  var u=tex==='cremosa'?'<span>\u2248 '+Math.floor(g/12)+' bombons de 12 g \u00b7 ou '+Math.floor(g/15)+' trufas de 15 g</span>':'';
+  return '<div class="total"><b>Rendimento: '+g+' g de ganache</b>'+u+'</div>';
+}
 function tipoConta(r,tipo){ return (r.tambem||[]).indexOf(tipo)>=0?r.tipo:tipo; } // a receita vale igual para esse tipo
 function nomeChoc(tipo,origem,cacau){
   if(origem==='fracionada') return 'Cobertura fracionada '+TIPOS[tipo].n.toLowerCase();
@@ -666,7 +672,7 @@ function resultado(titulo,sub,tipo,origem,tex,itens,peso,extras,isFalsa,swapsHtm
   } else {
     h+='<div><span class="tag">'+TEXTURAS[tex].n+'</span> <span class="tag">'+esc(ORIGENS[origem])+'</span></div><h2>'+esc(titulo)+'</h2>'+(sub?'<p class="lede" style="margin:0">'+esc(sub)+'</p>':'');
   }
-  h+='<div class="res-top">'+pizza(choc,itens)+'<div><ul class="ingr">'+li+'</ul><p class="total">Rende cerca de '+Math.round(tot*k)+' g.</p><p class="dica-marcar">Toque no ingrediente para marcar o que j\u00e1 separou.</p></div></div>';
+  h+='<div class="res-top">'+pizza(choc,itens)+'<div><ul class="ingr">'+li+'</ul>'+rendimento(Math.round(tot*k),tex)+'<p class="dica-marcar">Toque no ingrediente para marcar o que j\u00e1 separou.</p></div></div>';
   if(swapsHtml) h+=swapsHtml;
   h+='<div><h3>Como fazer</h3><ol class="steps">'+(proprio&&proprio.prep?proprio.prep:preparo(tipo,tex,itens,isFalsa)).map(function(s){return '<li>'+esc(s)+'</li>'}).join('')+'</ol></div>';
   h+=avisos(tipo,origem,tex,itens,extras,proprio);
