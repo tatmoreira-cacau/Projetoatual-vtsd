@@ -245,7 +245,7 @@ footer{color:var(--muted);font-size:12px;text-align:center;border-top:1px solid 
   <section id="v-guia" hidden style="display:flex;flex-direction:column;gap:16px">
     <div><div class="eyebrow">Guia</div><h2 style="margin-top:4px">Proporções e como consertar</h2></div>
     <div class="q">
-      <h3><span class="n">1</span><span>Quanto chocolate para cada 1 g de creme<small>Com creme de leite fresco 35%. Os mesmos números da tabela Ganache Perfeita.</small></span></h3>
+      <h3><span class="n">1</span><span>Quanto chocolate para cada 1 g de creme<small>Com creme de leite fresco 35%, a partir das receitas de bico da autora.</small></span></h3>
       <div class="opts" id="g-orig"></div>
       <div id="g-matriz"></div>
       <p class="tex-uso">Cobertura fracionada (Falsa Ganache): só <b>blindagem</b>, 5 : 1, sem manteiga. Branca fracionada: ainda sem receita segura.</p>
@@ -333,8 +333,6 @@ function propImp(t,tex,c){ // proporção de referência do importado com c% de 
   if(t==='leite'||t==='branco') return PROPORCAO[t][tex]*mcImp(t,TIPOS[t].cacau.importado)/mcImp(t,c);
   return PROPORCAO[t][tex];
 }
-// Manteiga e glucose em % do total da ganache [manteiga, glucose]
-var EXTRAS = {cremosa:[5,5], estrutura:[0,3], cobertura:[0,5]};
 
 // Falsa Ganache (cobertura fracionada): só blindagem, sem manteiga
 var FALSA = {tipos:['escuro','blend'], creme:20}; // 100 g de cobertura : 20 g de creme (5 : 1)
@@ -375,14 +373,17 @@ var GRUPOS = {creme:['creme'], fruta:['fruta'], alcool:['alcool'], infusao:['cha
 var PODE_TIRAR = ['cha','erva','raspas','especiaria','final','seco','alcool','manteiga'];
 
 // Sabores do "Monte a sua ganache": quantidade por 100 g de chocolate
+// tambem: tipos de chocolate que a própria receita aceita com as MESMAS quantidades (ex.: pistache = branco ou ao leite)
+// Receita da autora que serve de base para cada sabor no "Monte a sua ganache" (id das RECEITAS)
+var MODELO = {classica:{escuro:1, leite:2, branco:3, blend:1, caramelo:3, ruby:2}, fruta:10, infusao:7, alcool:8, pasta:9, coco:4, caramelo:15};
 var FAMILIAS = {
   classica:{n:'Clássica (só chocolate)'},
-  fruta:{n:'Fruta', lista:['maracuja','limao','abacaxi','morango','manga','caja','cupuacu','laranja','framboesa','goiaba'], parteAgua:.5, acucar:32/94, aTestar:1}, // polpa vai no caramelo, como no caramelo salgado (regra da Tatiana): 32 g de açúcar para 94 g de líquido
+  fruta:{n:'Fruta', lista:['maracuja','limao','abacaxi','morango','manga','caja','cupuacu','laranja','framboesa','goiaba']},
   infusao:{n:'Chá, erva ou especiaria', lista:['earlgrey','chapreto','mate','hibisco','camomila','alecrim','hortela','manjericao','lavanda','canela','cardamomo','rasplimao','rasplaranja'], g:{cha:2,erva:1,especiaria:1,raspas:2}},
   alcool:{n:'Licor ou destilado', lista:['licorcafe','licorlaranja','rum','cachaca','conhaque'], g:6},
-  pasta:{n:'Pasta saborizante', lista:['pastapistache','pastaavela','pastaamendoim','pastamaracuja'], g:18, aTestar:1},
-  coco:{n:'Coco', aTestar:1},
-  caramelo:{n:'Caramelo', aTestar:1}
+  pasta:{n:'Pasta saborizante', lista:['pastapistache','pastaavela','pastaamendoim','pastamaracuja']},
+  coco:{n:'Coco'},
+  caramelo:{n:'Caramelo'}
 };
 
 // Receitas prontas da Tatiana (por 100 g de chocolate). BASE: chocolate importado + creme de leite fresco 35%,
@@ -421,7 +422,7 @@ var RECEITAS = [
  {id:8, foto:'8', nome:'Ganache ao Leite com Conhaque', tipo:'leite', origem:'importado', cacau:33.6, tex:'cremosa', uso:'Recheio de bombom',
   itens:[['creme35',60],['conhaque',6,'2 colheres (sopa) para cada 500 g de chocolate']],
   prep:['Derreta o chocolate até ficar fluido e sem grumos.','Junte o creme e misture até ficar homogêneo.','Junte o conhaque e misture.','Deixe firmar 1 hora em temperatura ambiente.','Recheie as casquinhas com a ganache e a cereja com cabo e feche o bombom.']},
- {id:9, foto:'9', nome:'Ganache de Pistache', tipo:'branco', origem:'importado', cacau:33, tex:'cremosa', uso:'Bombom moldado',
+ {id:9, foto:'9', nome:'Ganache de Pistache', tipo:'branco', tambem:['leite'], origem:'importado', cacau:33, tex:'cremosa', uso:'Bombom moldado',
   itens:[['creme35',70],['glucose',10],['mcacau',5],['pastapistache',17.5]],
   prep:['Aqueça o creme com a glucose.','Despeje sobre o chocolate, a manteiga de cacau e a pasta de pistache.','Passe o mixer até ficar liso.','Recheie as casquinhas a 30 °C, feche e leve à geladeira até firmar. Desenforme.'],
   notas:[['','Chocolate:','branco ou ao leite.'],['','Validade:','15 dias (não tem conservante). Congelada e bem embalada, até 2 meses.']]},
@@ -520,12 +521,30 @@ function mc(tipo,origem,cacau,gord){
   return (origem==='importado'?mcImp:mcNac)(tipo,c);
 }
 // chocolate por grama de ÁGUA para tipo/origem/textura (mesma régua da tabela Ganache Perfeita)
-function W(tipo,origem,tex,cacau,gord){ // g de chocolate por g de água, para o mesmo ponto
+function Wt(tipo,origem,tex,cacau,gord){ // RELATIVO (tabela Ganache Perfeita + manteiga de cacau): só serve para comparar chocolates e texturas
   var c=cacau||cacauPadrao(tipo,origem);
   // referência = chocolate importado com ficha técnica: abaixo de 54,5% não existe ficha, então a referência é o 811
   var cr=tipo==='escuro'?Math.max(c,54.5):c;
   return propImp(tipo,tex,cr)*mcImp(tipo,cr)/mc(tipo,origem,c,gord)/0.58;
 }
+/* ===== MOTOR (26/09, pedido da Tatiana): as RECEITAS DELA são a base =====
+   Nível: quanto creme ela usa em 100 g de chocolate importado nas receitas clássicas de bico
+   (1: meio amargo 54,5% = 60 g de creme fresco · 2: ao leite 33,6% = 40 g · 3: branco 28% = 28 g).
+   A diferença entre os TIPOS de chocolate vem dessas três receitas dela.
+   Dentro do mesmo tipo (outro % de cacau, nacional ou importado, gordura do rótulo) e entre texturas,
+   a diferença vem da manteiga de cacau e da tabela Ganache Perfeita (função Wt). */
+var BASE_AGUA={escuro:60*0.58, leite:40*0.58, branco:28*0.58}; // g de água por 100 g de chocolate (receitas 1, 2 e 3)
+function aguaRef(t){
+  if(BASE_AGUA[t]) return BASE_AGUA[t];
+  if(t==='blend') return (BASE_AGUA.escuro+BASE_AGUA.leite)/2;      // sem receita dela: meio a meio
+  var a={caramelo:'branco', ruby:'leite'}[t];                        // sem receita dela: pela tabela, a partir do parente
+  return BASE_AGUA[a]*Wt(a,'importado','cremosa')/Wt(t,'importado','cremosa');
+}
+function W(tipo,origem,tex,cacau,gord){ // g de chocolate por g de água, para o mesmo ponto
+  var agua=aguaRef(tipo)*Wt(tipo,'importado','cremosa')/Wt(tipo,origem,tex,cacau,gord);
+  return 100/agua;
+}
+function tipoConta(r,tipo){ return (r.tambem||[]).indexOf(tipo)>=0?r.tipo:tipo; } // a receita vale igual para esse tipo
 function nomeChoc(tipo,origem,cacau){
   if(origem==='fracionada') return 'Cobertura fracionada '+TIPOS[tipo].n.toLowerCase();
   var c=TIPOS[tipo].cacau?(cacau||cacauPadrao(tipo,origem)):null;
@@ -675,23 +694,26 @@ function buildRecipe(){
     var itF=[[B.creme, FALSA.creme*0.73/cr.w]];
     return resultado('Blindagem com cobertura fracionada','Falsa Ganache · proporção das marcas, 5 : 1',tipo,origem,tex,itF,B.peso,[['','Outras opções que funcionam:','3 : 1 com creme 17% + chantilly vegetal, ou 3,3 a 4 : 1 só com chantilly vegetal em temperatura ambiente, batido até ponto de pomada.'],['','Marcas:','use só cobertura que a própria marca indica para ganache (ex.: Selecta Supreme, Garoto Confeitaria, Harald Top).']],true);
   }
-  var agua=100/W(tipo,origem,tex,B.cacau,B.gord), ex=EXTRAS[tex];
-  var r35=W(tipo,origem,tex,B.cacau,B.gord)*0.58, chocPct=(100-ex[0]-ex[1])*r35/(r35+1);
-  var mant=ex[0]/chocPct*100, gli=ex[1]/chocPct*100;
-  var it=[], F=FAMILIAS[B.fam], extra=[], titulo='Ganache '+TIPOS[tipo].n.toLowerCase();
-  var aguaResto=agua;
-  if(B.fam==='fruta'){ var fw=agua*F.parteAgua; it.push([B.esc,fw/ING[B.esc].w]); aguaResto-=fw; titulo+=' com '+ING[B.esc].n.toLowerCase().replace('polpa de ','').replace('suco de ',''); }
-  if(B.fam==='alcool'){ it.push([B.esc,F.g]); aguaResto-=F.g*ING[B.esc].w; titulo+=' com '+ING[B.esc].n.toLowerCase(); }
-  if(B.fam==='coco'){ it.push(['leitecoco',22]); it.push(['cocoseco',39]); aguaResto-=22*ING.leitecoco.w; titulo+=' com coco'; }
-  if(B.fam==='caramelo'){ it.unshift(['acucar',32]); titulo='Ganache de caramelo com chocolate '+TIPOS[tipo].n.toLowerCase(); }
-  if(aguaResto<=0) return '<div class="result blocked"><h2>Não cabe nessa textura</h2><p>O sabor '+esc(F.n.toLowerCase())+' já traz todo o líquido que a textura '+TEXTURAS[tex].n+' aguenta com chocolate '+TIPOS[tipo].n.toLowerCase()+'. Não sobra lugar para o creme e a ganache fica mole. Escolha a textura <b>Cremosa</b> ou o sabor <b>Clássica</b>.</p></div>';
-  it.unshift([B.creme,aguaResto/cr.w]);
-  if(B.fam==='fruta') it.unshift(['acucar',(it[0][1]+it[1][1])*F.acucar]); // creme + polpa
-  if(B.fam==='infusao'){ var c=ING[B.esc].cat; it.push([B.esc,F.g[c]]); titulo+=' com '+ING[B.esc].n.toLowerCase(); }
-  if(B.fam==='pasta'){ it.push([B.esc,F.g]); titulo+=' de '+ING[B.esc].n.toLowerCase().replace('pasta saborizante de ','').replace('pasta de ',''); }
-  if(mant>0.1) it.push(['manteiga',mant]);
-  if(gli>0.1) it.push(['glucose',gli]);
-  if(F.aTestar) extra.push(['','Sabor ainda sem receita testada','neste ponto: comece com uma porção pequena.']);
+  var F=FAMILIAS[B.fam], id=MODELO[B.fam]; if(typeof id==='object') id=id[tipo];
+  var R0=RECEITAS.filter(function(r){return r.id===id})[0], extra=[];
+  var it=R0.itens.map(function(x){return [x[0],x[1]]}).filter(function(x){ return !(B.fam==='fruta'&&ING[x[0]].cat==='alcool'); });
+  // 1) chocolate e textura: a água acompanha o chocolate (a mesma conta das receitas prontas)
+  var tc=tipoConta(R0,tipo), f=W(R0.tipo,R0.origem,R0.tex,R0.cacau)/W(tc,origem,tex,tc===tipo?B.cacau:R0.cacau,tc===tipo?B.gord:null);
+  it.forEach(function(x){ if(ING[x[0]].w||x[0]==='acucar') x[1]*=f; }); // no caramelo, o açúcar acompanha o creme
+  // 2) o creme que a pessoa tem, com a mesma água
+  it.forEach(function(x){ if(ING[x[0]].cat==='creme'&&x[0]!==B.creme){ x[1]=x[1]*ING[x[0]].w/ING[B.creme].w; x[0]=B.creme; } });
+  // 3) o sabor escolhido no lugar do sabor da receita base
+  var nomeSabor='';
+  if(F.lista&&B.esc){
+    var cats=B.fam==='infusao'?['cha','erva','especiaria','raspas']:[ING[B.esc].cat];
+    it.forEach(function(x){ var a=ING[x[0]];
+      if(cats.indexOf(a.cat)<0||x[0]===B.esc) return;
+      if(a.w&&ING[B.esc].w) x[1]=x[1]*a.w/ING[B.esc].w; else if(B.fam==='infusao'&&a.cat!==ING[B.esc].cat) x[1]=F.g[ING[B.esc].cat];
+      x[0]=B.esc; });
+    nomeSabor=ING[B.esc].n.toLowerCase().replace('polpa de ','').replace('suco de ','').replace('pasta saborizante de ','').replace('pasta de ','');
+  }
+  var titulo=B.fam==='caramelo'?'Ganache de caramelo':'Ganache '+(tipo==='escuro'?'de chocolate':TIPOS[tipo].n.toLowerCase())+(nomeSabor?' com '+nomeSabor:(B.fam==='coco'?' com coco':''));
+  extra.push(['','Base:','a receita "'+R0.nome+'" da autora, balanceada para o seu chocolate'+(tex!==R0.tex?', a textura '+TEXTURAS[tex].n.toLowerCase():'')+' e o seu creme.']);
   if(tex!=='cremosa'&&B.fam!=='classica') extra.push(['','Para '+TEXTURAS[tex].n.toLowerCase()+',','o sabor clássico é o mais seguro: sabor com muito líquido pode deixar mole.']);
   return resultado(titulo, TEXTURAS[tex].usos, tipo, origem, tex, it, B.peso, extra, false, null, null, null, B.cacau);
 }
@@ -719,7 +741,8 @@ function trocarChocolate(tipo,origem,cacau,gord){
   if(TIPOS[tipo].cacau&&!cacau) cacau=(tipo===R.tipo&&origem===R.origem)?R.cacau:cacauPadrao(tipo,origem);
   if(origem==='fracionada'){ R.msg='Cobertura fracionada não serve para '+R.base.uso.toLowerCase()+': fica mole, puxenta e com gosto de gordura. Use chocolate de verdade.'; return; }
   if(!existe(tipo,origem)){ R.msg=TIPOS[tipo].n+' '+ORIGENS[origem].toLowerCase()+' não existe. Escolha importado.'; return; }
-  var f=W(R.tipo,R.origem,R.base.tex,R.cacau,R.gord)/W(tipo,origem,R.base.tex,cacau,gord); // mais manteiga de cacau → mais líquido
+  var ta=tipoConta(R.base,R.tipo), tb=tipoConta(R.base,tipo);
+  var f=W(ta,R.origem,R.base.tex,ta===R.tipo?R.cacau:R.base.cacau,ta===R.tipo?R.gord:null)/W(tb,origem,R.base.tex,tb===tipo?cacau:R.base.cacau,tb===tipo?gord:null); // mais manteiga de cacau → mais líquido
   R.itens.forEach(function(it){ if(ING[it[0]].w) it[1]*=f; });
   R.tipo=tipo; R.origem=origem; R.cacau=TIPOS[tipo].cacau?cacau:null; R.gord=gord||null; R.msg=null;
 }
