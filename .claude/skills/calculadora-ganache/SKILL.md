@@ -45,6 +45,12 @@ Leia também: `capitulo ganaches/Conclusão para a calculadora de ganache.pdf` e
 **Conferido no celular (25/09), 360 e 400 px, Chromium:** barra de abas sempre no rodapé (a vez em que "apareceu no meio" era só a captura de tela da página inteira), sem rolagem para o lado, sem erro de script. Corrigidos: setinha do "Deu errado?" que aparecia como `&#` (o `montar.py` não escapava o CSS) e proporção "2,8 : 1" quebrando em duas linhas na tabela do Guia.
 - Para testar de novo: `pip install playwright` (não rode `playwright install`; use `executable_path='/opt/pw-browsers/chromium-1194/chrome-linux/chrome'`), viewport 360×740, `is_mobile=True`, e tire capturas da **tela visível** (não `full_page`, que desenha a barra fixa no meio).
 
+**Correções da Tatiana (26/09, depois do v3):**
+- **Creme UHT das apostilas = creme 25%** ("profissionalmente é o de 25%"). As receitas usam o creme que a original diz: 25% nas de aula e nas UHT (1, 2, 3, 4, 6, 7, 8, 9, 18, 19), fresco 35% nas que dizem fresco (11 a 15, 17). O nível do motor (`BASE_AGUA`) é 60/40/28 g de creme **25%**.
+- **A base do "Monte a sua ganache" clássica é a receita 19**: 400 g de ao leite importado + 164 g de creme UHT 25% + 32 g de glucose + 10 g de manteiga. O `testar.py` confere que o Monte devolve exatamente isso.
+- **A pessoa informa quantos gramas de CHOCOLATE vai usar** (não o peso da ganache), e a calculadora devolve creme, glucose, manteiga e rendimento. Vale no Monte e nas receitas prontas.
+- Com creme 35% como base, a troca para caixinha 17% dava 45 g de manteiga em 400 g de chocolate ("muito"). Com a base certa (25%), dá ~28 g.
+
 **MOTOR v3 (26/09): AS RECEITAS DA TATIANA SÃO A BASE** (o v2, que partia da tabela e da literatura, foi reprovado por ela: "a ganache ao leite saiu diferente da receita que eu dei")
 - **Nível:** as receitas clássicas de bico dela, com chocolate importado e creme fresco 35%, por 100 g de chocolate: **meio amargo 54,5% = 60 g de creme · ao leite 33,6% = 40 g · branco 28% = 28 g** (`BASE_AGUA`). **A diferença entre TIPOS de chocolate vem daí** (meio amargo → ao leite: creme × 0,67; ao leite → branco: × 0,7). Blend = meio a meio; caramelo e ruby = pela tabela, a partir do branco e do ao leite.
 - **Mesmo tipo, outro chocolate** (outro % de cacau, nacional, gordura do rótulo) e **outra textura**: a diferença vem da manteiga de cacau e da tabela Ganache Perfeita (`Wt`, relativo). A pessoa informa o **% de cacau do rótulo** (não o nome amargo/meio amargo) e, se quiser, a gordura em 100 g.

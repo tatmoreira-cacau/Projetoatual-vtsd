@@ -11,12 +11,14 @@ CHROME = '/opt/pw-browsers/chromium-1194/chrome-linux/chrome'
 JS=r"""()=>{
 function ruim(h){return /NaN|undefined|Infinity|>-\d|null g|null%/.test(h);}
 var out={monte:0,monteErr:[],rec:[],swapErr:[],recN:0};
-// motor: a base são as receitas de bico da Tatiana (1, 2 e 3): clássica, cremosa, importado, creme fresco → a receita dela
-[['escuro',60],['leite',40],['branco',28]].forEach(function(e){
-  B={tex:'cremosa',tipo:e[0],origem:'importado',cacau:null,gord:null,creme:'creme35',fam:'classica',esc:null,peso:null};
-  var d=document.createElement('div'); d.innerHTML=buildRecipe(); var g=[].map.call(d.querySelectorAll('.ingr .g'),function(x){return x.textContent});
-  if(g[0]!=='100 g'||g[1]!==e[1]+' g') out.monteErr.push('base '+e[0]+': '+g.join(' '));
-});
+// clássica + cremosa + ao leite importado + creme 25% + 400 g de chocolate = a receita base da Tatiana (164 g de creme, 32 g de glucose, 10 g de manteiga)
+(function(){
+  B={tex:'cremosa',tipo:'leite',origem:'importado',cacau:null,gord:null,creme:'creme25',fam:'classica',esc:null,peso:400};
+  var d=document.createElement('div'); d.innerHTML=buildRecipe(); var g=[].map.call(d.querySelectorAll('.ingr .g'),function(x){return x.textContent}).join(' ');
+  if(g!=='400 g 164 g 32 g 10 g') out.monteErr.push('base ao leite: '+g);
+})();
+// a diferença entre tipos segue as receitas de bico dela (60 / 40 / 28 g de creme 25%)
+if(Math.abs(W('escuro','importado','cremosa')/W('leite','importado','cremosa')-40/60)>1e-9||Math.abs(W('branco','importado','cremosa')/W('leite','importado','cremosa')-40/28)>1e-9) out.monteErr.push('escada de tipos');
 // as diferenças entre texturas e entre nacional/importado seguem a tabela Ganache Perfeita (Wt)
 ['escuro','leite','branco'].forEach(function(t){ ['cremosa','estrutura','cobertura'].forEach(function(tx){ ['importado','nacional'].forEach(function(o){
   var a=W(t,o,tx)/W(t,'importado','cremosa'), b=Wt(t,o,tx)/Wt(t,'importado','cremosa');
@@ -36,7 +38,7 @@ Object.keys(TEXTURAS).forEach(function(tex){Object.keys(TIPOS).forEach(function(
  creme.forEach(function(c){Object.keys(FAMILIAS).forEach(function(f){(FAMILIAS[f].lista||[null]).forEach(function(e){
   B={tex:tex,tipo:tipo,origem:o,creme:c,fam:f,esc:e,peso:500}; var h=buildRecipe(); out.monte++;
   if(ruim(h)) out.monteErr.push([tex,tipo,o,c,f,e].join('/'));
-  var m=h.match(/Rende cerca de (\d+) g/); if(m&&Math.abs(+m[1]-500)>1) out.monteErr.push('peso '+m[1]+' '+[tex,tipo,o,c,f,e].join('/'));
+  var m=h.match(/<span class="g">([0-9,]+) g/); if(m&&m[1]!=='500') out.monteErr.push('chocolate '+m[1]+' '+[tex,tipo,o,c,f,e].join('/'));
  });});});
 });});});
 RECEITAS.forEach(function(r){
@@ -53,7 +55,7 @@ RECEITAS.forEach(function(r){
       abrir(r); trocarItem(i,n); M.rec.peso=1000; drawRec(); out.recN++;
       var h=document.getElementById('rec-out').innerHTML;
       if(ruim(h)) out.swapErr.push(r.id+' '+it[0]+'->'+n);
-      var m=h.match(/Rende cerca de (\d+) g/); if(!m||Math.abs(+m[1]-1000)>1) out.swapErr.push('peso '+r.id+' '+n);
+      var m=h.match(/<span class="g">([0-9,]+) g/); if(!m||m[1]!=='1000') out.swapErr.push('chocolate '+r.id+' '+n);
       if(n!=='__tirar'&&ING[it[0]].w&&ING[n].w&&Math.abs(agua(M.rec.itens)-agua(r.itens))>0.01) out.swapErr.push('agua '+r.id+' '+n);
     });
   });

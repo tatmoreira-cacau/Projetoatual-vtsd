@@ -233,7 +233,7 @@ footer{color:var(--muted);font-size:12px;text-align:center;border-top:1px solid 
       <label class="row opc">Gordura em 100 g (tabela nutricional, se souber) <span class="row"><input type="number" id="q-gord" step="0.5" inputmode="decimal" placeholder="opcional" aria-label="Gordura total em 100 gramas"> g</span></label></div></div>
     <div class="q"><h3><span class="n">3</span><span>Qual creme de leite voc&#234; tem?</span></h3><div class="opts" id="q-creme"></div></div>
     <div class="q"><h3><span class="n">4</span><span>Qual sabor?</span></h3><div class="opts two" id="q-fam"></div><div class="row" id="q-escolha"></div></div>
-    <div class="q"><h3><span class="n">5</span><span>Quanto quer fazer?</span></h3><div class="row"><input type="number" id="q-peso" min="100" max="10000" step="50" value="500" aria-label="Peso final em gramas"> <span>gramas de ganache</span></div></div>
+    <div class="q"><h3><span class="n">5</span><span>Quantos gramas de chocolate voc&#234; vai usar?</span></h3><div class="row"><input type="number" id="q-peso" min="50" max="10000" step="50" value="400" aria-label="Gramas de chocolate"> <span>gramas de chocolate</span></div></div>
     <div id="build-out"></div>
   </section>
 
@@ -385,7 +385,8 @@ var PODE_TIRAR = ['cha','erva','raspas','especiaria','final','seco','alcool','ma
 // Sabores do "Monte a sua ganache": quantidade por 100 g de chocolate
 // tambem: tipos de chocolate que a pr\u00f3pria receita aceita com as MESMAS quantidades (ex.: pistache = branco ou ao leite)
 // Receita da autora que serve de base para cada sabor no "Monte a sua ganache" (id das RECEITAS)
-var MODELO = {classica:{escuro:1, leite:2, branco:3, blend:1, caramelo:3, ruby:2}, fruta:10, infusao:7, alcool:8, pasta:9, coco:4, caramelo:15};
+// cl\u00e1ssica = receita 19 (400 g de ao leite + 164 g de creme UHT 25% + 32 g de glucose + 10 g de manteiga), a base que a Tatiana deu
+var MODELO = {classica:19, fruta:10, infusao:7, alcool:8, pasta:9, coco:4, caramelo:15};
 var FAMILIAS = {
   classica:{n:'Cl\u00e1ssica (s\u00f3 chocolate)'},
   fruta:{n:'Fruta', lista:['maracuja','limao','abacaxi','morango','manga','caja','cupuacu','laranja','framboesa','goiaba']},
@@ -396,25 +397,26 @@ var FAMILIAS = {
   caramelo:{n:'Caramelo'}
 };
 
-// Receitas prontas da Tatiana (por 100 g de chocolate). BASE: chocolate importado + creme de leite fresco 35%,
+// Receitas prontas da Tatiana (por 100 g de chocolate). BASE: chocolate importado + o creme que a receita original diz
+// (creme UHT das apostilas = 25%, como a Tatiana explicou; creme fresco = 35%),
 // com as quantidades das receitas originais dela. Nacional: a calculadora refaz a propor\u00e7\u00e3o (trocarChocolate).
 // Receitas-autorais-100g.md \u00e9 gerado daqui por receitas-md.py.
 // itens: [ingrediente, gramas, medida da Tatiana (opcional)] \u00b7 prep: preparo \u00b7 notas: dica, varia\u00e7\u00f5es, validade \u00b7 trava: n\u00e3o deixar trocar
 var RECEITAS = [
  {id:1, foto:'1', nome:'Ganache de Bico Meio Amargo', tipo:'escuro', origem:'importado', cacau:54.5, tex:'cremosa', uso:'Ponto de bico',
-  itens:[['creme35',60],['glucose',4,'1 colher (sopa) rasa para cada 500 g de chocolate']],
+  itens:[['creme25',60],['glucose',4,'1 colher (sopa) rasa para cada 500 g de chocolate']],
   prep:['Derreta o chocolate (at\u00e9 45 \u00b0C) at\u00e9 ficar liso e sem grumos.','Junte o creme e misture com a esp\u00e1tula, raspando bem a lateral e o fundo. Se sobrar grumo, passe o fouet.','Junte a glucose.','D\u00ea o ponto na pedra, ou na geladeira mexendo a cada 10 minutos, at\u00e9 o ponto de bico.','Coloque no saco de confeitar com o bico que preferir.'],
   notas:[['','Para doce aberto:','fica durinha por fora e cremosa por dentro, e n\u00e3o mela no transporte.']]},
  {id:2, foto:'2', nome:'Ganache de Bico ao Leite', tipo:'leite', origem:'importado', cacau:33.6, tex:'cremosa', uso:'Ponto de bico',
-  itens:[['creme35',40],['glucose',4,'1 colher (sopa) rasa para cada 500 g de chocolate']],
+  itens:[['creme25',40],['glucose',4,'1 colher (sopa) rasa para cada 500 g de chocolate']],
   prep:['Derreta o chocolate (at\u00e9 40 \u00b0C) at\u00e9 ficar liso e sem grumos.','Junte o creme e misture com a esp\u00e1tula, raspando bem a lateral e o fundo. Se sobrar grumo, passe o fouet.','Junte a glucose.','D\u00ea o ponto na pedra, ou na geladeira mexendo a cada 10 minutos, at\u00e9 o ponto de bico.','Coloque no saco de confeitar com o bico que preferir.'],
   notas:[['','Para doce aberto:','fica durinha por fora e cremosa por dentro, e n\u00e3o mela no transporte.']]},
  {id:3, foto:'3', nome:'Ganache de Bico Branca ou Colorida', tipo:'branco', origem:'importado', cacau:28, tex:'cremosa', uso:'Ponto de bico',
-  itens:[['creme35',28],['glucose',4,'1 colher (sopa) rasa para cada 500 g de chocolate']],
+  itens:[['creme25',28],['glucose',4,'1 colher (sopa) rasa para cada 500 g de chocolate']],
   prep:['Derreta o chocolate (at\u00e9 40 \u00b0C) at\u00e9 ficar liso e sem grumos.','Junte o creme e misture com a esp\u00e1tula, raspando bem a lateral e o fundo. Se sobrar grumo, passe o fouet.','Junte a glucose.','Para colorir, junte umas gotinhas de corante l\u00edquido.','D\u00ea o ponto na pedra, ou na geladeira mexendo a cada 10 minutos, at\u00e9 o ponto de bico.','Coloque no saco de confeitar com o bico que preferir.'],
   notas:[['','Corante:','cerca de 2 gotinhas de corante l\u00edquido para cada 500 g de chocolate, ou a gosto.']]},
  {id:4, foto:'4', nome:'Ganache de Coco', tipo:'branco', origem:'importado', cacau:28, tex:'cremosa', uso:'Recheio de casca e bombom',
-  itens:[['creme35',50,'a confirmar: a receita original n\u00e3o dizia o % do creme'],['leitecoco',22.2],['cocoseco',38.9]],
+  itens:[['creme25',50,'a receita original n\u00e3o diz o %; a apostila usa creme UHT 25%'],['leitecoco',22.2],['cocoseco',38.9]],
   prep:['Derreta o chocolate.','Junte o creme e misture com a esp\u00e1tula, raspando bem as beiradas. Termine com o fouet at\u00e9 ficar liso.','Junte o coco e o leite de coco e deixe descansar uns 10 minutos para o coco hidratar.','Recheie as casquinhas, tampe com chocolate e leve \u00e0 geladeira para firmar.'],
   notas:[['','Varia\u00e7\u00f5es (a mesma receita):','no lugar do coco, doce de leite com nozes mo\u00eddas, doce de leite com coco, amendoim ou pur\u00ea de compota de ab\u00f3bora. No lugar do leite de coco, suco concentrado de maracuj\u00e1, a gosto.']]},
  {id:5, foto:'5', nome:'Cheesecake de Frutas Vermelhas', tipo:'branco', origem:'importado', cacau:28, tex:'cremosa', uso:'Recheio de casca',
@@ -423,17 +425,17 @@ var RECEITAS = [
   notas:[['','Geleia:','pode ser de framboesa, morango, damasco ou goiabada mole.'],['','Corante:','se quiser real\u00e7ar a cor.']]},
  {id:6, foto:'6', nome:'Trufa de Lim\u00e3o Siciliano e Lavanda', tipo:'branco', origem:'importado', cacau:28, tex:'cremosa', uso:'Trufa ou recheio de casca',
   trava:['limao','rasplimao'],
-  itens:[['creme35',17.5,'de 16 a 19 g: teste o ponto'],['lavanda',0.6,'6 colheres (ch\u00e1) para cada 940 g de chocolate'],['manteiga',10.6,'derretida'],['glucose',6.4],['limao',12.8,'lim\u00e3o siciliano'],['rasplimao',0.6,'raspas de 1 lim\u00e3o siciliano para cada 940 g de chocolate']],
+  itens:[['creme25',17.5,'de 16 a 19 g: teste o ponto'],['lavanda',0.6,'6 colheres (ch\u00e1) para cada 940 g de chocolate'],['manteiga',10.6,'derretida'],['glucose',6.4],['limao',12.8,'lim\u00e3o siciliano'],['rasplimao',0.6,'raspas de 1 lim\u00e3o siciliano para cada 940 g de chocolate']],
   prep:['Fa\u00e7a a infus\u00e3o: aque\u00e7a o creme com a lavanda por 1 minuto no micro-ondas (pot\u00eancia m\u00e9dia) e deixe esfriar.','Junte a manteiga derretida, a glucose, o suco e as raspas de lim\u00e3o e misture bem.','Derreta o chocolate e junte a mistura de lavanda e lim\u00e3o, mexendo bem at\u00e9 ficar liso.','Deixe firmar na geladeira ou na pedra.','Boleie e banhe no chocolate branco, ou use para rechear cascas. Decore com raspas de lim\u00e3o e lavanda.'],
   notas:[['','Troque o sabor, n\u00e3o a fruta:','no lugar da lavanda, use ch\u00e1 Earl Grey ou hortel\u00e3 bem picada (fa\u00e7a a infus\u00e3o igual, mas n\u00e3o coe), ou ervas e temperos como alecrim e manjeric\u00e3o. O lim\u00e3o pode ser siciliano ou tahiti.']]},
  {id:7, foto:'7', nome:'Trufa de Earl Grey', tipo:'branco', origem:'importado', cacau:28, tex:'cremosa', uso:'Trufa de modelar',
-  itens:[['creme35',20,'a confirmar: a receita original n\u00e3o dizia o % do creme'],['earlgrey',1.2,'3 sach\u00eas para cada 500 g de chocolate'],['glucose',3,'\u00e9 o que d\u00e1 efeito de modelagem'],['manteiga',5,'derretida']],
+  itens:[['creme25',20,'a receita original n\u00e3o diz o %; a apostila usa creme UHT 25%'],['earlgrey',1.2,'3 sach\u00eas para cada 500 g de chocolate'],['glucose',3,'\u00e9 o que d\u00e1 efeito de modelagem'],['manteiga',5,'derretida']],
   prep:['Derreta o chocolate at\u00e9 ficar liso. Reserve.','Fa\u00e7a a infus\u00e3o: misture o ch\u00e1 no creme, aque\u00e7a 30 segundos no micro-ondas (pot\u00eancia alta) e deixe esfriar.','Misture a infus\u00e3o com a glucose e a manteiga derretida.','Junte ao chocolate e envolva at\u00e9 incorporar.','Deixe firmar por 1 hora.','No ponto de modelar, fa\u00e7a as por\u00e7\u00f5es e guarde na geladeira at\u00e9 envolver as physalis.']},
  {id:8, foto:'8', nome:'Ganache ao Leite com Conhaque', tipo:'leite', origem:'importado', cacau:33.6, tex:'cremosa', uso:'Recheio de bombom',
-  itens:[['creme35',60],['conhaque',6,'2 colheres (sopa) para cada 500 g de chocolate']],
+  itens:[['creme25',60],['conhaque',6,'2 colheres (sopa) para cada 500 g de chocolate']],
   prep:['Derreta o chocolate at\u00e9 ficar fluido e sem grumos.','Junte o creme e misture at\u00e9 ficar homog\u00eaneo.','Junte o conhaque e misture.','Deixe firmar 1 hora em temperatura ambiente.','Recheie as casquinhas com a ganache e a cereja com cabo e feche o bombom.']},
  {id:9, foto:'9', nome:'Ganache de Pistache', tipo:'branco', tambem:['leite'], origem:'importado', cacau:33, tex:'cremosa', uso:'Bombom moldado',
-  itens:[['creme35',70],['glucose',10],['mcacau',5],['pastapistache',17.5]],
+  itens:[['creme25',70,'creme de leite UHT'],['glucose',10],['mcacau',5],['pastapistache',17.5]],
   prep:['Aque\u00e7a o creme com a glucose.','Despeje sobre o chocolate, a manteiga de cacau e a pasta de pistache.','Passe o mixer at\u00e9 ficar liso.','Recheie as casquinhas a 30 \u00b0C, feche e leve \u00e0 geladeira at\u00e9 firmar. Desenforme.'],
   notas:[['','Chocolate:','branco ou ao leite.'],['','Validade:','15 dias (n\u00e3o tem conservante). Congelada e bem embalada, at\u00e9 2 meses.']]},
  {id:10, foto:'10', nome:'Bombom de Caj\u00e1 com Cacha\u00e7a', tipo:'branco', origem:'importado', cacau:32, tex:'cremosa', uso:'Bombom moldado',
@@ -467,11 +469,11 @@ var RECEITAS = [
   prep:['Derreta o chocolate aos poucos, mexendo sempre.','Leve o creme e o mel ao fogo com o cumaru ralado. Quando ferver, desligue e deixe em infus\u00e3o por 30 minutos.','Coe o cumaru e volte ao fogo at\u00e9 ferver.','Despeje um ter\u00e7o da mistura quente sobre o chocolate e mexa r\u00e1pido, em pequenos c\u00edrculos, at\u00e9 formar um centro liso e brilhante.','Junte mais um ter\u00e7o e mexa do mesmo jeito. Depois junte o resto, sempre mexendo.','Com a ganache entre 35 e 40 \u00b0C, junte a manteiga em cubos e passe o mixer.','Recheie as casquinhas a 28\u201330 \u00b0C, deixe firmar e feche com chocolate amargo.'],
   notas:[['','Durabilidade:','7 a 10 dias, em ambiente de 18 a 21 \u00b0C.'],['','Rende:','cerca de 50 bombons com 230 g de chocolate.']]},
  {id:18, foto:'18', nome:'Ganache de Ch\u00e1 Verde (Matcha)', tipo:'branco', origem:'importado', cacau:33, tex:'cremosa', uso:'Bombom moldado',
-  itens:[['creme35',55.6],['glucose',11.1],['matcha',4.4],['mcacau',14.4]],
+  itens:[['creme25',55.6,'creme de leite UHT'],['glucose',11.1],['matcha',4.4],['mcacau',14.4]],
   prep:['Aque\u00e7a o creme com a glucose e o matcha, mexendo bem.','Despeje sobre o chocolate e misture at\u00e9 ficar homog\u00eaneo.','Quando chegar a 35 \u00b0C, junte a manteiga de cacau e passe o mixer.','Recheie as casquinhas, feche e leve \u00e0 geladeira at\u00e9 firmar. Desenforme.'],
   notas:[['','Validade:','15 dias (n\u00e3o tem conservante). Congelada e bem embalada, at\u00e9 2 meses.'],['','Rende:','cerca de 45 bombons de 12 g com 180 g de chocolate.']]},
  {id:19, foto:'19', nome:'Ganache de Chocolate ao Leite', tipo:'leite', origem:'importado', cacau:33.6, tex:'cremosa', uso:'Bombom moldado',
-  itens:[['creme35',41],['glucose',8],['manteiga',2.5]],
+  itens:[['creme25',41,'creme de leite UHT'],['glucose',8],['manteiga',2.5]],
   prep:['Aque\u00e7a o creme com a glucose.','Despeje sobre o chocolate ao leite.','Junte a manteiga.','Passe o mixer para emulsionar.','Recheie as casquinhas, feche e leve \u00e0 geladeira at\u00e9 firmar. Desenforme.'],
   notas:[['','Validade:','15 dias (n\u00e3o tem conservante). Congelada e bem embalada, at\u00e9 2 meses.'],['','Rende:','cerca de 58 bombons de 12 g com 400 g de chocolate.']]}
 ];
@@ -539,11 +541,11 @@ function Wt(tipo,origem,tex,cacau,gord){ // RELATIVO (tabela Ganache Perfeita + 
 }
 /* ===== MOTOR (26/09, pedido da Tatiana): as RECEITAS DELA s\u00e3o a base =====
    N\u00edvel: quanto creme ela usa em 100 g de chocolate importado nas receitas cl\u00e1ssicas de bico
-   (1: meio amargo 54,5% = 60 g de creme fresco \u00b7 2: ao leite 33,6% = 40 g \u00b7 3: branco 28% = 28 g).
+   (1: meio amargo 54,5% = 60 g de creme 25% \u00b7 2: ao leite 33,6% = 40 g \u00b7 3: branco 28% = 28 g).
    A diferen\u00e7a entre os TIPOS de chocolate vem dessas tr\u00eas receitas dela.
    Dentro do mesmo tipo (outro % de cacau, nacional ou importado, gordura do r\u00f3tulo) e entre texturas,
    a diferen\u00e7a vem da manteiga de cacau e da tabela Ganache Perfeita (fun\u00e7\u00e3o Wt). */
-var BASE_AGUA={escuro:60*0.58, leite:40*0.58, branco:28*0.58}; // g de \u00e1gua por 100 g de chocolate (receitas 1, 2 e 3)
+var BASE_AGUA={escuro:60*0.68, leite:40*0.68, branco:28*0.68}; // g de \u00e1gua por 100 g de chocolate (receitas 1, 2 e 3, creme UHT 25%)
 function aguaRef(t){
   if(BASE_AGUA[t]) return BASE_AGUA[t];
   if(t==='blend') return (BASE_AGUA.escuro+BASE_AGUA.leite)/2;      // sem receita dela: meio a meio
@@ -653,7 +655,7 @@ function avisos(tipo,origem,tex,itens,extra,proprio){
 /* ---------- desenho do resultado ---------- */
 function resultado(titulo,sub,tipo,origem,tex,itens,peso,extras,isFalsa,swapsHtml,fotoId,proprio,cacau){
   var choc=100, tot=choc; itens.forEach(function(it){tot+=it[1]});
-  var k=peso?peso/tot:1;
+  var k=peso?peso/choc:1; // peso = gramas de chocolate que a pessoa vai usar
   var chocNome=nomeChoc(tipo,origem,cacau);
   var li='<li><span class="sw" style="background:var(--i-choc)"></span><span>'+esc(chocNome)+'</span><span class="g">'+fmtG(choc*k)+' g</span></li>';
   itens.forEach(function(it){ li+='<li><span class="sw" style="background:var('+FATIAS.filter(function(f){return f[0]===fatiaDe(it[0])})[0][2]+')"></span><span>'+esc(ING[it[0]].n)+(it[2]?'<small class="med">'+esc(it[2])+(Math.abs(k-1)>0.01?' (para cada 100 g de chocolate)':'')+'</small>':'')+'</span><span class="g">'+fmtG(it[1]*k)+' g</span></li>'; });
@@ -673,7 +675,7 @@ function resultado(titulo,sub,tipo,origem,tex,itens,peso,extras,isFalsa,swapsHtm
 }
 
 /* ===================== MONTE A SUA GANACHE ===================== */
-var B={tex:'cremosa',tipo:'escuro',origem:'nacional',cacau:null,gord:null,creme:'creme20',fam:'classica',esc:null,peso:500};
+var B={tex:'cremosa',tipo:'escuro',origem:'nacional',cacau:null,gord:null,creme:'creme20',fam:'classica',esc:null,peso:400};
 function opts(el,list,key,onpick,dis){
   el.innerHTML='';
   list.forEach(function(o){
@@ -783,7 +785,7 @@ function drawRec(){
     if((R.base.trava||[]).indexOf(it[0])>=0) return; // a Tatiana pediu para n\u00e3o trocar
     sw+='<div class="sw-row"><span>'+esc(ING[it[0]].n)+'</span><select data-i="'+i+'" aria-label="Trocar '+esc(ING[it[0]].n)+'">'+ops.map(function(id){return '<option value="'+id+'"'+(id===it[0]?' selected':'')+'>'+(id===it[0]?'manter: ':'trocar por: ')+esc(ING[id].n)+'</option>'}).join('')+(PODE_TIRAR.indexOf(cat)>=0?'<option value="__tirar">tirar este ingrediente</option>':'')+'</select></div>';
   });
-  sw+='<div class="sw-row"><span>Quanto quer fazer?</span><span class="row"><input type="number" id="rc-peso" min="100" max="10000" step="50" placeholder="gramas" value="'+(R.peso||'')+'" aria-label="Peso final em gramas"> g</span></div>';
+  sw+='<div class="sw-row"><span>Quantos gramas de chocolate voc\u00ea vai usar?</span><span class="row"><input type="number" id="rc-peso" min="10" max="10000" step="50" placeholder="100" value="'+(R.peso||'')+'" aria-label="Gramas de chocolate"> g de chocolate</span></div>';
   sw+='</div><div class="actions" style="margin-top:8px"><button class="btn ghost" type="button" id="rc-reset">Voltar \u00e0 receita original</button></div></div>';
   var extra=[]; if(R.msg) extra.unshift(['bad','Aten\u00e7\u00e3o:',R.msg]);
   var mudouChoc = R.tipo!==R.base.tipo||R.origem!==R.base.origem||R.cacau!==(R.base.cacau||cacauPadrao(R.base.tipo,R.base.origem))||!!R.gord;
@@ -800,7 +802,7 @@ function drawRec(){
   if($('rc-cacau')) $('rc-cacau').addEventListener('change',function(){ var v=lerComp(this,TIPOS[R.tipo].faixa); if(v){trocarChocolate(R.tipo,R.origem,v,R.gord);} drawRec(); });
   if($('rc-gord')) $('rc-gord').addEventListener('change',function(){ var v=lerComp(this,[15,60]); trocarChocolate(R.tipo,R.origem,R.cacau,v); drawRec(); });
   Array.prototype.forEach.call(document.querySelectorAll('#rec-out select[data-i]'),function(s){s.addEventListener('change',function(){trocarItem(+s.dataset.i,s.value);drawRec();});});
-  $('rc-peso').addEventListener('change',function(){var v=+this.value; R.peso=v>=50?v:null; drawRec();});
+  $('rc-peso').addEventListener('change',function(){var v=+this.value; R.peso=v>=10?v:null; drawRec();});
   $('rc-reset').addEventListener('click',function(){abrir(R.base);});
 }
 
@@ -825,7 +827,7 @@ document.addEventListener('click',function(e){
   var fx=e.target.closest('[data-fix]'); if(fx){ if(fx.dataset.fix==='estrutura') B.tex='estrutura'; else B.origem='nacional'; if(!existe(B.tipo,B.origem)) B.origem='importado'; drawBuild(); }
 });
 show('home');
-$('q-peso').addEventListener('input',function(){ var v=+this.value; B.peso=v>=50?v:500; $('build-out').innerHTML=buildRecipe(); });
+$('q-peso').addEventListener('input',function(){ var v=+this.value; B.peso=v>=10?v:400; $('build-out').innerHTML=buildRecipe(); });
 function lerComp(el,fx){ var v=parseFloat(String(el.value).replace(',','.')); return v>=fx[0]&&v<=fx[1]?v:null; }
 $('q-cacau').addEventListener('input',function(){ B.cacau=lerComp(this,TIPOS[B.tipo].faixa); $('build-out').innerHTML=buildRecipe(); });
 $('q-gord').addEventListener('input',function(){ B.gord=lerComp(this,[15,60]); $('build-out').innerHTML=buildRecipe(); });

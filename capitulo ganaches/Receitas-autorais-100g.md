@@ -10,7 +10,7 @@
 ## 1. Ganache de Bico Meio Amargo
 **Uso:** Ponto de bico · **Chocolate:** 54,5% cacau importado
 - 100 g de chocolate 54,5% cacau importado
-- 60 g de creme de leite fresco 35%
+- 60 g de creme de leite 25%
 - 4 g de glucose (1 colher (sopa) rasa para cada 500 g de chocolate)
 
 **Preparo:** Derreta o chocolate (até 45 °C) até ficar liso e sem grumos. Junte o creme e misture com a espátula, raspando bem a lateral e o fundo. Se sobrar grumo, passe o fouet. Junte a glucose. Dê o ponto na pedra, ou na geladeira mexendo a cada 10 minutos, até o ponto de bico. Coloque no saco de confeitar com o bico que preferir.
@@ -19,7 +19,7 @@
 ## 2. Ganache de Bico ao Leite
 **Uso:** Ponto de bico · **Chocolate:** ao leite 33,6% cacau importado
 - 100 g de chocolate ao leite 33,6% cacau importado
-- 40 g de creme de leite fresco 35%
+- 40 g de creme de leite 25%
 - 4 g de glucose (1 colher (sopa) rasa para cada 500 g de chocolate)
 
 **Preparo:** Derreta o chocolate (até 40 °C) até ficar liso e sem grumos. Junte o creme e misture com a espátula, raspando bem a lateral e o fundo. Se sobrar grumo, passe o fouet. Junte a glucose. Dê o ponto na pedra, ou na geladeira mexendo a cada 10 minutos, até o ponto de bico. Coloque no saco de confeitar com o bico que preferir.
@@ -28,7 +28,7 @@
 ## 3. Ganache de Bico Branca ou Colorida
 **Uso:** Ponto de bico · **Chocolate:** branco 28% cacau importado
 - 100 g de chocolate branco 28% cacau importado
-- 28 g de creme de leite fresco 35%
+- 28 g de creme de leite 25%
 - 4 g de glucose (1 colher (sopa) rasa para cada 500 g de chocolate)
 
 **Preparo:** Derreta o chocolate (até 40 °C) até ficar liso e sem grumos. Junte o creme e misture com a espátula, raspando bem a lateral e o fundo. Se sobrar grumo, passe o fouet. Junte a glucose. Para colorir, junte umas gotinhas de corante líquido. Dê o ponto na pedra, ou na geladeira mexendo a cada 10 minutos, até o ponto de bico. Coloque no saco de confeitar com o bico que preferir.
@@ -37,7 +37,7 @@
 ## 4. Ganache de Coco
 **Uso:** Recheio de casca e bombom · **Chocolate:** branco 28% cacau importado
 - 100 g de chocolate branco 28% cacau importado
-- 50 g de creme de leite fresco 35% (a confirmar: a receita original não dizia o % do creme)
+- 50 g de creme de leite 25% (a receita original não diz o %; a apostila usa creme UHT 25%)
 - 22,2 g de leite de coco
 - 38,9 g de coco desidratado
 
@@ -58,7 +58,7 @@
 ## 6. Trufa de Limão Siciliano e Lavanda
 **Uso:** Trufa ou recheio de casca · **Chocolate:** branco 28% cacau importado
 - 100 g de chocolate branco 28% cacau importado
-- 17,5 g de creme de leite fresco 35% (de 16 a 19 g: teste o ponto)
+- 17,5 g de creme de leite 25% (de 16 a 19 g: teste o ponto)
 - 0,6 g de lavanda seca (6 colheres (chá) para cada 940 g de chocolate)
 - 10,6 g de manteiga sem sal (derretida)
 - 6,4 g de glucose
@@ -71,7 +71,7 @@
 ## 7. Trufa de Earl Grey
 **Uso:** Trufa de modelar · **Chocolate:** branco 28% cacau importado
 - 100 g de chocolate branco 28% cacau importado
-- 20 g de creme de leite fresco 35% (a confirmar: a receita original não dizia o % do creme)
+- 20 g de creme de leite 25% (a receita original não diz o %; a apostila usa creme UHT 25%)
 - 1,2 g de chá Earl Grey (3 sachês para cada 500 g de chocolate)
 - 3 g de glucose (é o que dá efeito de modelagem)
 - 5 g de manteiga sem sal (derretida)
@@ -81,7 +81,7 @@
 ## 8. Ganache ao Leite com Conhaque
 **Uso:** Recheio de bombom · **Chocolate:** ao leite 33,6% cacau importado
 - 100 g de chocolate ao leite 33,6% cacau importado
-- 60 g de creme de leite fresco 35%
+- 60 g de creme de leite 25%
 - 6 g de conhaque (2 colheres (sopa) para cada 500 g de chocolate)
 
 **Preparo:** Derreta o chocolate até ficar fluido e sem grumos. Junte o creme e misture até ficar homogêneo. Junte o conhaque e misture. Deixe firmar 1 hora em temperatura ambiente. Recheie as casquinhas com a ganache e a cereja com cabo e feche o bombom.
@@ -89,7 +89,7 @@
 ## 9. Ganache de Pistache
 **Uso:** Bombom moldado · **Chocolate:** branco 33% cacau importado
 - 100 g de chocolate branco 33% cacau importado
-- 70 g de creme de leite fresco 35%
+- 70 g de creme de leite 25% (creme de leite UHT)
 - 10 g de glucose
 - 5 g de manteiga de cacau
 - 17,5 g de pasta saborizante de pistache
@@ -194,7 +194,7 @@
 ## 18. Ganache de Chá Verde (Matcha)
 **Uso:** Bombom moldado · **Chocolate:** branco 33% cacau importado
 - 100 g de chocolate branco 33% cacau importado
-- 55,6 g de creme de leite fresco 35%
+- 55,6 g de creme de leite 25% (creme de leite UHT)
 - 11,1 g de glucose
 - 4,4 g de matcha (chá verde em pó)
 - 14,4 g de manteiga de cacau
@@ -206,7 +206,7 @@
 ## 19. Ganache de Chocolate ao Leite
 **Uso:** Bombom moldado · **Chocolate:** ao leite 33,6% cacau importado
 - 100 g de chocolate ao leite 33,6% cacau importado
-- 41 g de creme de leite fresco 35%
+- 41 g de creme de leite 25% (creme de leite UHT)
 - 8 g de glucose
 - 2,5 g de manteiga sem sal
 
