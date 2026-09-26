@@ -46,6 +46,9 @@ Leia também: `capitulo ganaches/Conclusão para a calculadora de ganache.pdf` e
 - Para testar de novo: `pip install playwright` (não rode `playwright install`; use `executable_path='/opt/pw-browsers/chromium-1194/chrome-linux/chrome'`), viewport 360×740, `is_mobile=True`, e tire capturas da **tela visível** (não `full_page`, que desenha a barra fixa no meio).
 
 **Correções da Tatiana (26/09, depois do v3):**
+- **Títulos padronizados** (para não usar os nomes das apostilas): "Ganache de Chocolate {Amargo|ao Leite|Branco|Ruby} {cacau}% – {uso}" ou "… com {sabor}". Nada de "rende X bombons" nem medidas "para cada X g" das apostilas: tudo por 100 g de chocolate.
+- **Rendimento: só o total em gramas de ganache** (sem unidades de bombom/trufa).
+- Receitas prontas abrem sempre com 100 g de chocolate.
 - **Creme UHT das apostilas = creme 25%** ("profissionalmente é o de 25%"). As receitas usam o creme que a original diz: 25% nas de aula e nas UHT (1, 2, 3, 4, 6, 7, 8, 9, 18, 19), fresco 35% nas que dizem fresco (11 a 15, 17). O nível do motor (`BASE_AGUA`) é 60/40/28 g de creme **25%**.
 - **A base do "Monte a sua ganache" clássica é a receita 19**: 400 g de ao leite importado + 164 g de creme UHT 25% + 32 g de glucose + 10 g de manteiga. O `testar.py` confere que o Monte devolve exatamente isso.
 - **A pessoa informa quantos gramas de CHOCOLATE vai usar** (não o peso da ganache), e a calculadora devolve creme, glucose, manteiga e rendimento. Vale no Monte e nas receitas prontas.
